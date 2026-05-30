@@ -1,0 +1,17 @@
+# Carpetas generadas por Visual Studio
+x64/
+Debug/
+Release/
+
+# Configuración personal de Visual Studio
+*.user
+
+# Archivos temporales
+*.obj
+*.pdb
+*.ilk
+*.log
+
+# Base de datos local de Visual Studio
+*.VC.db
+*.VC.opendb
