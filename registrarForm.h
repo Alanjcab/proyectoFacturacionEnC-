@@ -89,6 +89,14 @@ namespace proyectoFacturacion {
 
 
 
+
+
+
+
+
+
+
+
 	private:
 		/// <summary>
 		/// Variable del diseñador necesaria.
@@ -102,8 +110,8 @@ namespace proyectoFacturacion {
 		/// </summary>
 		void InitializeComponent(void)
 		{
-			System::Windows::Forms::DataGridViewCellStyle^ dataGridViewCellStyle3 = (gcnew System::Windows::Forms::DataGridViewCellStyle());
-			System::Windows::Forms::DataGridViewCellStyle^ dataGridViewCellStyle4 = (gcnew System::Windows::Forms::DataGridViewCellStyle());
+			System::Windows::Forms::DataGridViewCellStyle^ dataGridViewCellStyle1 = (gcnew System::Windows::Forms::DataGridViewCellStyle());
+			System::Windows::Forms::DataGridViewCellStyle^ dataGridViewCellStyle2 = (gcnew System::Windows::Forms::DataGridViewCellStyle());
 			this->label1 = (gcnew System::Windows::Forms::Label());
 			this->label2 = (gcnew System::Windows::Forms::Label());
 			this->label3 = (gcnew System::Windows::Forms::Label());
@@ -264,7 +272,7 @@ namespace proyectoFacturacion {
 			this->btnRegistrarse->Font = (gcnew System::Drawing::Font(L"Microsoft YaHei", 9, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
 			this->btnRegistrarse->ForeColor = System::Drawing::SystemColors::ButtonHighlight;
-			this->btnRegistrarse->Location = System::Drawing::Point(187, 405);
+			this->btnRegistrarse->Location = System::Drawing::Point(174, 405);
 			this->btnRegistrarse->Name = L"btnRegistrarse";
 			this->btnRegistrarse->Size = System::Drawing::Size(127, 35);
 			this->btnRegistrarse->TabIndex = 13;
@@ -376,15 +384,15 @@ namespace proyectoFacturacion {
 			this->tablaUsuarios->AutoSizeColumnsMode = System::Windows::Forms::DataGridViewAutoSizeColumnsMode::Fill;
 			this->tablaUsuarios->BackgroundColor = System::Drawing::SystemColors::ButtonHighlight;
 			this->tablaUsuarios->BorderStyle = System::Windows::Forms::BorderStyle::None;
-			dataGridViewCellStyle3->Alignment = System::Windows::Forms::DataGridViewContentAlignment::MiddleLeft;
-			dataGridViewCellStyle3->BackColor = System::Drawing::Color::Teal;
-			dataGridViewCellStyle3->Font = (gcnew System::Drawing::Font(L"Microsoft YaHei", 7.8F, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
+			dataGridViewCellStyle1->Alignment = System::Windows::Forms::DataGridViewContentAlignment::MiddleLeft;
+			dataGridViewCellStyle1->BackColor = System::Drawing::Color::Teal;
+			dataGridViewCellStyle1->Font = (gcnew System::Drawing::Font(L"Microsoft YaHei", 7.8F, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
-			dataGridViewCellStyle3->ForeColor = System::Drawing::Color::White;
-			dataGridViewCellStyle3->SelectionBackColor = System::Drawing::SystemColors::Highlight;
-			dataGridViewCellStyle3->SelectionForeColor = System::Drawing::SystemColors::HighlightText;
-			dataGridViewCellStyle3->WrapMode = System::Windows::Forms::DataGridViewTriState::True;
-			this->tablaUsuarios->ColumnHeadersDefaultCellStyle = dataGridViewCellStyle3;
+			dataGridViewCellStyle1->ForeColor = System::Drawing::Color::White;
+			dataGridViewCellStyle1->SelectionBackColor = System::Drawing::SystemColors::Highlight;
+			dataGridViewCellStyle1->SelectionForeColor = System::Drawing::SystemColors::HighlightText;
+			dataGridViewCellStyle1->WrapMode = System::Windows::Forms::DataGridViewTriState::True;
+			this->tablaUsuarios->ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
 			this->tablaUsuarios->ColumnHeadersHeightSizeMode = System::Windows::Forms::DataGridViewColumnHeadersHeightSizeMode::AutoSize;
 			this->tablaUsuarios->Columns->AddRange(gcnew cli::array< System::Windows::Forms::DataGridViewColumn^  >(8) {
 				this->colId,
@@ -395,11 +403,11 @@ namespace proyectoFacturacion {
 			this->tablaUsuarios->Location = System::Drawing::Point(174, 473);
 			this->tablaUsuarios->Name = L"tablaUsuarios";
 			this->tablaUsuarios->RowHeadersWidth = 51;
-			dataGridViewCellStyle4->BackColor = System::Drawing::Color::White;
-			dataGridViewCellStyle4->Font = (gcnew System::Drawing::Font(L"Microsoft YaHei", 7.8F, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
+			dataGridViewCellStyle2->BackColor = System::Drawing::Color::White;
+			dataGridViewCellStyle2->Font = (gcnew System::Drawing::Font(L"Microsoft YaHei", 7.8F, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
-			dataGridViewCellStyle4->ForeColor = System::Drawing::Color::Black;
-			this->tablaUsuarios->RowsDefaultCellStyle = dataGridViewCellStyle4;
+			dataGridViewCellStyle2->ForeColor = System::Drawing::Color::Black;
+			this->tablaUsuarios->RowsDefaultCellStyle = dataGridViewCellStyle2;
 			this->tablaUsuarios->RowTemplate->Height = 24;
 			this->tablaUsuarios->ScrollBars = System::Windows::Forms::ScrollBars::None;
 			this->tablaUsuarios->Size = System::Drawing::Size(881, 56);
@@ -425,9 +433,9 @@ namespace proyectoFacturacion {
 			this->btnActualizarUsuario->Font = (gcnew System::Drawing::Font(L"Microsoft YaHei", 9, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
 			this->btnActualizarUsuario->ForeColor = System::Drawing::SystemColors::ButtonHighlight;
-			this->btnActualizarUsuario->Location = System::Drawing::Point(320, 405);
+			this->btnActualizarUsuario->Location = System::Drawing::Point(307, 405);
 			this->btnActualizarUsuario->Name = L"btnActualizarUsuario";
-			this->btnActualizarUsuario->Size = System::Drawing::Size(115, 35);
+			this->btnActualizarUsuario->Size = System::Drawing::Size(129, 35);
 			this->btnActualizarUsuario->TabIndex = 41;
 			this->btnActualizarUsuario->Text = L"ACTUALIZAR";
 			this->btnActualizarUsuario->UseVisualStyleBackColor = false;
@@ -439,7 +447,7 @@ namespace proyectoFacturacion {
 			this->btnDeshabilitarUsuario->Font = (gcnew System::Drawing::Font(L"Microsoft YaHei", 9, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
 			this->btnDeshabilitarUsuario->ForeColor = System::Drawing::SystemColors::ButtonHighlight;
-			this->btnDeshabilitarUsuario->Location = System::Drawing::Point(174, 525);
+			this->btnDeshabilitarUsuario->Location = System::Drawing::Point(174, 535);
 			this->btnDeshabilitarUsuario->Name = L"btnDeshabilitarUsuario";
 			this->btnDeshabilitarUsuario->Size = System::Drawing::Size(138, 35);
 			this->btnDeshabilitarUsuario->TabIndex = 42;
@@ -498,7 +506,7 @@ namespace proyectoFacturacion {
 			// 
 			// colEstado
 			// 
-			this->colEstado->HeaderText = L"Estado";
+			this->colEstado->HeaderText = L"Activo";
 			this->colEstado->MinimumWidth = 6;
 			this->colEstado->Name = L"colEstado";
 			this->colEstado->ReadOnly = true;

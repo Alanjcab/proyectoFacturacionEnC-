@@ -121,27 +121,41 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="cliente.cpp" />
     <ClCompile Include="conectar.cpp" />
+    <ClCompile Include="factura.cpp" />
     <ClCompile Include="loginForm.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="menuPrincipalForm.cpp" />
+    <ClCompile Include="producto.cpp" />
+    <ClCompile Include="proveedor.cpp" />
     <ClCompile Include="registrarForm.cpp" />
     <ClCompile Include="usuario.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Cliente.h" />
+    <ClInclude Include="clienteForm.h">
+      <FileType>CppForm</FileType>
+    </ClInclude>
     <ClInclude Include="Conexion.h" />
+    <ClInclude Include="Factura.h" />
     <ClInclude Include="loginForm.h">
       <FileType>CppForm</FileType>
     </ClInclude>
     <ClInclude Include="menuPrincipalForm.h">
       <FileType>CppForm</FileType>
     </ClInclude>
+    <ClInclude Include="Producto.h" />
+    <ClInclude Include="Proveedor.h" />
     <ClInclude Include="registrarForm.h">
       <FileType>CppForm</FileType>
     </ClInclude>
     <ClInclude Include="Usuario.h" />
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="clienteForm.resx">
+      <DependentUpon>clienteForm.h</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="loginForm.resx">
       <DependentUpon>loginForm.h</DependentUpon>
     </EmbeddedResource>
