@@ -187,13 +187,7 @@ void Usuario::deshabilitarUsuario(int dni) {
 
 //actualizar usuario
 
-void Usuario::actualizarUsuario(int id,
-    std::string nombre,
-    std::string apellido,
-    int edad,
-    int dni,
-    std::string email,
-    std::string rol) {
+void Usuario::actualizarUsuario(int id,std::string nombre,std::string apellido,int edad,int dni,std::string email,std::string rol) {
     Conexion conexion;
     sql::Connection* con = conexion.getConexion();
     try {
