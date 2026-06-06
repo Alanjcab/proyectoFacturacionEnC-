@@ -128,7 +128,9 @@
     <ClCompile Include="main.cpp" />
     <ClCompile Include="menuPrincipalForm.cpp" />
     <ClCompile Include="producto.cpp" />
+    <ClCompile Include="ProductoForm.cpp" />
     <ClCompile Include="proveedor.cpp" />
+    <ClCompile Include="ProveedorForm.cpp" />
     <ClCompile Include="registrarForm.cpp" />
     <ClCompile Include="usuario.cpp" />
   </ItemGroup>
@@ -146,7 +148,13 @@
       <FileType>CppForm</FileType>
     </ClInclude>
     <ClInclude Include="Producto.h" />
+    <ClInclude Include="ProductoForm.h">
+      <FileType>CppForm</FileType>
+    </ClInclude>
     <ClInclude Include="Proveedor.h" />
+    <ClInclude Include="ProveedorForm.h">
+      <FileType>CppForm</FileType>
+    </ClInclude>
     <ClInclude Include="registrarForm.h">
       <FileType>CppForm</FileType>
     </ClInclude>
@@ -161,6 +169,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="menuPrincipalForm.resx">
       <DependentUpon>menuPrincipalForm.h</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ProductoForm.resx">
+      <DependentUpon>ProductoForm.h</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ProveedorForm.resx">
+      <DependentUpon>ProveedorForm.h</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="registrarForm.resx">
       <DependentUpon>registrarForm.h</DependentUpon>

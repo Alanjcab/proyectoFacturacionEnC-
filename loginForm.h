@@ -3,6 +3,7 @@
 #include "Usuario.h"
 #include <msclr/marshal_cppstd.h>
 #include "registrarForm.h"
+#include "clienteForm.h"
 
 namespace proyectoFacturacion {
 
@@ -165,7 +166,14 @@ namespace proyectoFacturacion {
 			std::cout << "ingreso exitoso" << std::endl;
 			//aca tengo que agregar todas las vistas que puede ver el administrador.
 		}
+		if (rol == "cajero") {
 
+			clienteForm^ vistaCliente = gcnew clienteForm();
+			vistaCliente->Show();
+			this->Hide();
+			std::cout << "ingreso exitoso" << std::endl;
+			//aca tengo que agregar todas las vistas que puede ver el administrador.
+		}
 		//aca tengo que hacer los demas if que dependiendo que tipo de usuario ingrese.
 		else if (rol == "inactivo") {
 

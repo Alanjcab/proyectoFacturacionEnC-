@@ -1,6 +1,7 @@
 #pragma once
 #include "Usuario.h"
 #include <msclr/marshal_cppstd.h>
+#include "clienteForm.h"
 
 
 namespace proyectoFacturacion {
@@ -136,9 +137,6 @@ namespace proyectoFacturacion {
 			this->txtBuscarDni = (gcnew System::Windows::Forms::TextBox());
 			this->label16 = (gcnew System::Windows::Forms::Label());
 			this->tablaUsuarios = (gcnew System::Windows::Forms::DataGridView());
-			this->btnBuscarUsuario = (gcnew System::Windows::Forms::Button());
-			this->btnActualizarUsuario = (gcnew System::Windows::Forms::Button());
-			this->btnDeshabilitarUsuario = (gcnew System::Windows::Forms::Button());
 			this->colId = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
 			this->colNombre = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
 			this->colApellido = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
@@ -147,6 +145,9 @@ namespace proyectoFacturacion {
 			this->colEmail = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
 			this->colRol = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
 			this->colEstado = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
+			this->btnBuscarUsuario = (gcnew System::Windows::Forms::Button());
+			this->btnActualizarUsuario = (gcnew System::Windows::Forms::Button());
+			this->btnDeshabilitarUsuario = (gcnew System::Windows::Forms::Button());
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->tablaUsuarios))->BeginInit();
 			this->SuspendLayout();
 			// 
@@ -292,6 +293,7 @@ namespace proyectoFacturacion {
 			this->btnVistaClientes->TabIndex = 18;
 			this->btnVistaClientes->Text = L"Clientes";
 			this->btnVistaClientes->UseVisualStyleBackColor = false;
+			this->btnVistaClientes->Click += gcnew System::EventHandler(this, &registrarForm::btnVistaClientes_Click);
 			// 
 			// btnVistaProducto
 			// 
@@ -413,48 +415,6 @@ namespace proyectoFacturacion {
 			this->tablaUsuarios->Size = System::Drawing::Size(881, 56);
 			this->tablaUsuarios->TabIndex = 39;
 			// 
-			// btnBuscarUsuario
-			// 
-			this->btnBuscarUsuario->BackColor = System::Drawing::Color::Teal;
-			this->btnBuscarUsuario->Font = (gcnew System::Drawing::Font(L"Microsoft YaHei", 9, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
-				static_cast<System::Byte>(0)));
-			this->btnBuscarUsuario->ForeColor = System::Drawing::SystemColors::ButtonHighlight;
-			this->btnBuscarUsuario->Location = System::Drawing::Point(730, 249);
-			this->btnBuscarUsuario->Name = L"btnBuscarUsuario";
-			this->btnBuscarUsuario->Size = System::Drawing::Size(96, 30);
-			this->btnBuscarUsuario->TabIndex = 40;
-			this->btnBuscarUsuario->Text = L"BUSCAR";
-			this->btnBuscarUsuario->UseVisualStyleBackColor = false;
-			this->btnBuscarUsuario->Click += gcnew System::EventHandler(this, &registrarForm::btnBuscarUsuario_Click);
-			// 
-			// btnActualizarUsuario
-			// 
-			this->btnActualizarUsuario->BackColor = System::Drawing::Color::Teal;
-			this->btnActualizarUsuario->Font = (gcnew System::Drawing::Font(L"Microsoft YaHei", 9, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
-				static_cast<System::Byte>(0)));
-			this->btnActualizarUsuario->ForeColor = System::Drawing::SystemColors::ButtonHighlight;
-			this->btnActualizarUsuario->Location = System::Drawing::Point(307, 405);
-			this->btnActualizarUsuario->Name = L"btnActualizarUsuario";
-			this->btnActualizarUsuario->Size = System::Drawing::Size(129, 35);
-			this->btnActualizarUsuario->TabIndex = 41;
-			this->btnActualizarUsuario->Text = L"ACTUALIZAR";
-			this->btnActualizarUsuario->UseVisualStyleBackColor = false;
-			this->btnActualizarUsuario->Click += gcnew System::EventHandler(this, &registrarForm::btnActualizarUsuario_Click);
-			// 
-			// btnDeshabilitarUsuario
-			// 
-			this->btnDeshabilitarUsuario->BackColor = System::Drawing::Color::Teal;
-			this->btnDeshabilitarUsuario->Font = (gcnew System::Drawing::Font(L"Microsoft YaHei", 9, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
-				static_cast<System::Byte>(0)));
-			this->btnDeshabilitarUsuario->ForeColor = System::Drawing::SystemColors::ButtonHighlight;
-			this->btnDeshabilitarUsuario->Location = System::Drawing::Point(174, 535);
-			this->btnDeshabilitarUsuario->Name = L"btnDeshabilitarUsuario";
-			this->btnDeshabilitarUsuario->Size = System::Drawing::Size(138, 35);
-			this->btnDeshabilitarUsuario->TabIndex = 42;
-			this->btnDeshabilitarUsuario->Text = L"DESHABILITAR";
-			this->btnDeshabilitarUsuario->UseVisualStyleBackColor = false;
-			this->btnDeshabilitarUsuario->Click += gcnew System::EventHandler(this, &registrarForm::btnDeshabilitarUsuario_Click);
-			// 
 			// colId
 			// 
 			this->colId->HeaderText = L"ID";
@@ -510,6 +470,48 @@ namespace proyectoFacturacion {
 			this->colEstado->MinimumWidth = 6;
 			this->colEstado->Name = L"colEstado";
 			this->colEstado->ReadOnly = true;
+			// 
+			// btnBuscarUsuario
+			// 
+			this->btnBuscarUsuario->BackColor = System::Drawing::Color::Teal;
+			this->btnBuscarUsuario->Font = (gcnew System::Drawing::Font(L"Microsoft YaHei", 9, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
+				static_cast<System::Byte>(0)));
+			this->btnBuscarUsuario->ForeColor = System::Drawing::SystemColors::ButtonHighlight;
+			this->btnBuscarUsuario->Location = System::Drawing::Point(730, 249);
+			this->btnBuscarUsuario->Name = L"btnBuscarUsuario";
+			this->btnBuscarUsuario->Size = System::Drawing::Size(96, 30);
+			this->btnBuscarUsuario->TabIndex = 40;
+			this->btnBuscarUsuario->Text = L"BUSCAR";
+			this->btnBuscarUsuario->UseVisualStyleBackColor = false;
+			this->btnBuscarUsuario->Click += gcnew System::EventHandler(this, &registrarForm::btnBuscarUsuario_Click);
+			// 
+			// btnActualizarUsuario
+			// 
+			this->btnActualizarUsuario->BackColor = System::Drawing::Color::Teal;
+			this->btnActualizarUsuario->Font = (gcnew System::Drawing::Font(L"Microsoft YaHei", 9, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
+				static_cast<System::Byte>(0)));
+			this->btnActualizarUsuario->ForeColor = System::Drawing::SystemColors::ButtonHighlight;
+			this->btnActualizarUsuario->Location = System::Drawing::Point(307, 405);
+			this->btnActualizarUsuario->Name = L"btnActualizarUsuario";
+			this->btnActualizarUsuario->Size = System::Drawing::Size(129, 35);
+			this->btnActualizarUsuario->TabIndex = 41;
+			this->btnActualizarUsuario->Text = L"ACTUALIZAR";
+			this->btnActualizarUsuario->UseVisualStyleBackColor = false;
+			this->btnActualizarUsuario->Click += gcnew System::EventHandler(this, &registrarForm::btnActualizarUsuario_Click);
+			// 
+			// btnDeshabilitarUsuario
+			// 
+			this->btnDeshabilitarUsuario->BackColor = System::Drawing::Color::Teal;
+			this->btnDeshabilitarUsuario->Font = (gcnew System::Drawing::Font(L"Microsoft YaHei", 9, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
+				static_cast<System::Byte>(0)));
+			this->btnDeshabilitarUsuario->ForeColor = System::Drawing::SystemColors::ButtonHighlight;
+			this->btnDeshabilitarUsuario->Location = System::Drawing::Point(174, 535);
+			this->btnDeshabilitarUsuario->Name = L"btnDeshabilitarUsuario";
+			this->btnDeshabilitarUsuario->Size = System::Drawing::Size(138, 35);
+			this->btnDeshabilitarUsuario->TabIndex = 42;
+			this->btnDeshabilitarUsuario->Text = L"DESHABILITAR";
+			this->btnDeshabilitarUsuario->UseVisualStyleBackColor = false;
+			this->btnDeshabilitarUsuario->Click += gcnew System::EventHandler(this, &registrarForm::btnDeshabilitarUsuario_Click);
 			// 
 			// registrarForm
 			// 
@@ -650,6 +652,11 @@ namespace proyectoFacturacion {
 		usuario.deshabilitarUsuario(dni);
 
 		tablaUsuarios->Rows->Clear();
+	}
+private: System::Void btnVistaClientes_Click(System::Object^ sender, System::EventArgs^ e) {
+	clienteForm^ vistaCliente = gcnew clienteForm();
+	vistaCliente->Show();
+	this->Hide();
 	}
 };
 }

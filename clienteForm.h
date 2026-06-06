@@ -5,6 +5,7 @@
 #include <jdbc/cppconn/prepared_statement.h>
 #include <jdbc/cppconn/resultset.h>
 
+
 namespace proyectoFacturacion {
 
 	using namespace System;
@@ -535,8 +536,10 @@ private: System::Void btnMostrarTodosClientes_Click(System::Object^ sender, Syst
 		delete ps;
 	}
 	catch (sql::SQLException& e) {
+		MessageBox::Show(gcnew String(e.what()));
 		MessageBox::Show("Error al mostrar clientes");
 	}
 	}
+
 };
 }
