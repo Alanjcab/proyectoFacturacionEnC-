@@ -34,11 +34,6 @@ namespace proyectoFacturacion {
 				delete components;
 			}
 		}
-	private: System::Windows::Forms::Button^ btnProveedorProd;
-	protected:
-
-	protected:
-
 
 	private:
 		/// <summary>
@@ -53,32 +48,11 @@ namespace proyectoFacturacion {
 		/// </summary>
 		void InitializeComponent(void)
 		{
-			this->btnProveedorProd = (gcnew System::Windows::Forms::Button());
-			this->SuspendLayout();
-			// 
-			// btnProveedorProd
-			// 
-			this->btnProveedorProd->BackColor = System::Drawing::Color::Teal;
-			this->btnProveedorProd->Font = (gcnew System::Drawing::Font(L"Microsoft YaHei", 10.2F, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
-				static_cast<System::Byte>(0)));
-			this->btnProveedorProd->ForeColor = System::Drawing::SystemColors::ButtonHighlight;
-			this->btnProveedorProd->Location = System::Drawing::Point(411, 50);
-			this->btnProveedorProd->Name = L"btnProveedorProd";
-			this->btnProveedorProd->Size = System::Drawing::Size(148, 59);
-			this->btnProveedorProd->TabIndex = 20;
-			this->btnProveedorProd->Text = L"Proveedor";
-			this->btnProveedorProd->UseVisualStyleBackColor = false;
-			// 
-			// ProductoForm
-			// 
-			this->AutoScaleDimensions = System::Drawing::SizeF(8, 16);
-			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
-			this->ClientSize = System::Drawing::Size(1113, 573);
-			this->Controls->Add(this->btnProveedorProd);
-			this->Name = L"ProductoForm";
+			this->components = gcnew System::ComponentModel::Container();
+			this->Size = System::Drawing::Size(300,300);
 			this->Text = L"ProductoForm";
-			this->ResumeLayout(false);
-
+			this->Padding = System::Windows::Forms::Padding(0);
+			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
 		}
 #pragma endregion
 	};

@@ -62,13 +62,20 @@ namespace proyectoFacturacion {
 	private: System::Windows::Forms::Label^ label8;
 
 	private: System::Windows::Forms::TextBox^ txtBuscarCliente;
-	private: System::Windows::Forms::DataGridView^ tablaClientes;
-	private: System::Windows::Forms::DataGridViewTextBoxColumn^ colId;
-	private: System::Windows::Forms::DataGridViewTextBoxColumn^ colNombre;
-	private: System::Windows::Forms::DataGridViewTextBoxColumn^ colApellido;
-	private: System::Windows::Forms::DataGridViewTextBoxColumn^ colDni;
-	private: System::Windows::Forms::DataGridViewTextBoxColumn^ colEmail;
 	private: System::Windows::Forms::DataGridViewTextBoxColumn^ colEstado;
+	private: System::Windows::Forms::DataGridViewTextBoxColumn^ colEmail;
+	private: System::Windows::Forms::DataGridViewTextBoxColumn^ colDni;
+	private: System::Windows::Forms::DataGridViewTextBoxColumn^ colApellido;
+	private: System::Windows::Forms::DataGridViewTextBoxColumn^ colNombre;
+	private: System::Windows::Forms::DataGridViewTextBoxColumn^ colId;
+	private: System::Windows::Forms::DataGridView^ tablaClientes;
+
+
+
+
+
+
+
 
 
 
@@ -112,13 +119,13 @@ namespace proyectoFacturacion {
 			this->label5 = (gcnew System::Windows::Forms::Label());
 			this->label8 = (gcnew System::Windows::Forms::Label());
 			this->txtBuscarCliente = (gcnew System::Windows::Forms::TextBox());
-			this->tablaClientes = (gcnew System::Windows::Forms::DataGridView());
-			this->colId = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
-			this->colNombre = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
-			this->colApellido = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
-			this->colDni = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
-			this->colEmail = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
 			this->colEstado = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
+			this->colEmail = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
+			this->colDni = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
+			this->colApellido = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
+			this->colNombre = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
+			this->colId = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
+			this->tablaClientes = (gcnew System::Windows::Forms::DataGridView());
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->tablaClientes))->BeginInit();
 			this->SuspendLayout();
 			// 
@@ -325,6 +332,48 @@ namespace proyectoFacturacion {
 			this->txtBuscarCliente->Size = System::Drawing::Size(157, 22);
 			this->txtBuscarCliente->TabIndex = 42;
 			// 
+			// colEstado
+			// 
+			this->colEstado->HeaderText = L"Activo";
+			this->colEstado->MinimumWidth = 6;
+			this->colEstado->Name = L"colEstado";
+			this->colEstado->ReadOnly = true;
+			// 
+			// colEmail
+			// 
+			this->colEmail->HeaderText = L"Email";
+			this->colEmail->MinimumWidth = 6;
+			this->colEmail->Name = L"colEmail";
+			this->colEmail->ReadOnly = true;
+			// 
+			// colDni
+			// 
+			this->colDni->HeaderText = L"DNI";
+			this->colDni->MinimumWidth = 6;
+			this->colDni->Name = L"colDni";
+			this->colDni->ReadOnly = true;
+			// 
+			// colApellido
+			// 
+			this->colApellido->HeaderText = L"Apellido";
+			this->colApellido->MinimumWidth = 6;
+			this->colApellido->Name = L"colApellido";
+			this->colApellido->ReadOnly = true;
+			// 
+			// colNombre
+			// 
+			this->colNombre->HeaderText = L"Nombre";
+			this->colNombre->MinimumWidth = 6;
+			this->colNombre->Name = L"colNombre";
+			this->colNombre->ReadOnly = true;
+			// 
+			// colId
+			// 
+			this->colId->HeaderText = L"ID";
+			this->colId->MinimumWidth = 6;
+			this->colId->Name = L"colId";
+			this->colId->ReadOnly = true;
+			// 
 			// tablaClientes
 			// 
 			this->tablaClientes->AutoSizeColumnsMode = System::Windows::Forms::DataGridViewAutoSizeColumnsMode::Fill;
@@ -358,48 +407,6 @@ namespace proyectoFacturacion {
 			this->tablaClientes->ScrollBars = System::Windows::Forms::ScrollBars::None;
 			this->tablaClientes->Size = System::Drawing::Size(881, 123);
 			this->tablaClientes->TabIndex = 43;
-			// 
-			// colId
-			// 
-			this->colId->HeaderText = L"ID";
-			this->colId->MinimumWidth = 6;
-			this->colId->Name = L"colId";
-			this->colId->ReadOnly = true;
-			// 
-			// colNombre
-			// 
-			this->colNombre->HeaderText = L"Nombre";
-			this->colNombre->MinimumWidth = 6;
-			this->colNombre->Name = L"colNombre";
-			this->colNombre->ReadOnly = true;
-			// 
-			// colApellido
-			// 
-			this->colApellido->HeaderText = L"Apellido";
-			this->colApellido->MinimumWidth = 6;
-			this->colApellido->Name = L"colApellido";
-			this->colApellido->ReadOnly = true;
-			// 
-			// colDni
-			// 
-			this->colDni->HeaderText = L"DNI";
-			this->colDni->MinimumWidth = 6;
-			this->colDni->Name = L"colDni";
-			this->colDni->ReadOnly = true;
-			// 
-			// colEmail
-			// 
-			this->colEmail->HeaderText = L"Email";
-			this->colEmail->MinimumWidth = 6;
-			this->colEmail->Name = L"colEmail";
-			this->colEmail->ReadOnly = true;
-			// 
-			// colEstado
-			// 
-			this->colEstado->HeaderText = L"Activo";
-			this->colEstado->MinimumWidth = 6;
-			this->colEstado->Name = L"colEstado";
-			this->colEstado->ReadOnly = true;
 			// 
 			// clienteForm
 			// 

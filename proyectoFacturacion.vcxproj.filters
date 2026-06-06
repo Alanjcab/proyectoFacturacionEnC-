@@ -48,10 +48,10 @@
     <ClCompile Include="factura.cpp">
       <Filter>Archivos de origen</Filter>
     </ClCompile>
-    <ClCompile Include="ProductoForm.cpp">
+    <ClCompile Include="ProveedorForm.cpp">
       <Filter>Archivos de origen</Filter>
     </ClCompile>
-    <ClCompile Include="ProveedorForm.cpp">
+    <ClCompile Include="ProductoForm.cpp">
       <Filter>Archivos de origen</Filter>
     </ClCompile>
   </ItemGroup>
@@ -86,10 +86,10 @@
     <ClInclude Include="clienteForm.h">
       <Filter>Archivos de encabezado</Filter>
     </ClInclude>
-    <ClInclude Include="ProductoForm.h">
+    <ClInclude Include="ProveedorForm.h">
       <Filter>Archivos de encabezado</Filter>
     </ClInclude>
-    <ClInclude Include="ProveedorForm.h">
+    <ClInclude Include="ProductoForm.h">
       <Filter>Archivos de encabezado</Filter>
     </ClInclude>
   </ItemGroup>

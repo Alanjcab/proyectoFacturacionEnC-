@@ -173,7 +173,6 @@ void Usuario::deshabilitarUsuario(int dni) {
     sql::Connection* con = conexion.getConexion();
     try {
         sql::PreparedStatement* ps;
-        sql::ResultSet* rs;
         ps = con->prepareStatement("update usuarios set activo = 0 where dni = ?");
         ps->setInt(1, dni);
         ps->executeUpdate();
