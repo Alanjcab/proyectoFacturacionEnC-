@@ -39,6 +39,7 @@ namespace proyectoFacturacion {
 	private: System::Windows::Forms::Button^ btnVistaProducto;
 	private: System::Windows::Forms::Button^ btnVistaProveedor;
 	private: System::Windows::Forms::Button^ btnVistaFacturacion;
+	private: System::Windows::Forms::Label^ label1;
 	protected:
 
 	protected:
@@ -67,6 +68,7 @@ namespace proyectoFacturacion {
 			this->btnVistaProducto = (gcnew System::Windows::Forms::Button());
 			this->btnVistaProveedor = (gcnew System::Windows::Forms::Button());
 			this->btnVistaFacturacion = (gcnew System::Windows::Forms::Button());
+			this->label1 = (gcnew System::Windows::Forms::Label());
 			this->SuspendLayout();
 			// 
 			// btnVistaUsuario
@@ -75,11 +77,11 @@ namespace proyectoFacturacion {
 			this->btnVistaUsuario->Font = (gcnew System::Drawing::Font(L"Microsoft YaHei", 10.2F, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
 			this->btnVistaUsuario->ForeColor = System::Drawing::SystemColors::ButtonHighlight;
-			this->btnVistaUsuario->Location = System::Drawing::Point(132, 14);
+			this->btnVistaUsuario->Location = System::Drawing::Point(434, 168);
 			this->btnVistaUsuario->Name = L"btnVistaUsuario";
-			this->btnVistaUsuario->Size = System::Drawing::Size(112, 34);
+			this->btnVistaUsuario->Size = System::Drawing::Size(137, 34);
 			this->btnVistaUsuario->TabIndex = 0;
-			this->btnVistaUsuario->Text = L"Usuario";
+			this->btnVistaUsuario->Text = L"REGISTRAR";
 			this->btnVistaUsuario->UseVisualStyleBackColor = false;
 			// 
 			// btnVistaClientes
@@ -88,11 +90,11 @@ namespace proyectoFacturacion {
 			this->btnVistaClientes->Font = (gcnew System::Drawing::Font(L"Microsoft YaHei", 10.2F, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
 			this->btnVistaClientes->ForeColor = System::Drawing::SystemColors::ButtonHighlight;
-			this->btnVistaClientes->Location = System::Drawing::Point(277, 14);
+			this->btnVistaClientes->Location = System::Drawing::Point(435, 217);
 			this->btnVistaClientes->Name = L"btnVistaClientes";
-			this->btnVistaClientes->Size = System::Drawing::Size(120, 34);
+			this->btnVistaClientes->Size = System::Drawing::Size(137, 34);
 			this->btnVistaClientes->TabIndex = 1;
-			this->btnVistaClientes->Text = L"Clientes";
+			this->btnVistaClientes->Text = L"CLIENTE";
 			this->btnVistaClientes->UseVisualStyleBackColor = false;
 			// 
 			// btnVistaProducto
@@ -101,11 +103,11 @@ namespace proyectoFacturacion {
 			this->btnVistaProducto->Font = (gcnew System::Drawing::Font(L"Microsoft YaHei", 10.2F, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
 			this->btnVistaProducto->ForeColor = System::Drawing::SystemColors::ButtonHighlight;
-			this->btnVistaProducto->Location = System::Drawing::Point(433, 16);
+			this->btnVistaProducto->Location = System::Drawing::Point(436, 266);
 			this->btnVistaProducto->Name = L"btnVistaProducto";
-			this->btnVistaProducto->Size = System::Drawing::Size(119, 32);
+			this->btnVistaProducto->Size = System::Drawing::Size(136, 32);
 			this->btnVistaProducto->TabIndex = 2;
-			this->btnVistaProducto->Text = L"Productos";
+			this->btnVistaProducto->Text = L"PRODUCTO";
 			this->btnVistaProducto->UseVisualStyleBackColor = false;
 			// 
 			// btnVistaProveedor
@@ -114,31 +116,45 @@ namespace proyectoFacturacion {
 			this->btnVistaProveedor->Font = (gcnew System::Drawing::Font(L"Microsoft YaHei", 10.2F, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
 			this->btnVistaProveedor->ForeColor = System::Drawing::SystemColors::ButtonHighlight;
-			this->btnVistaProveedor->Location = System::Drawing::Point(577, 16);
+			this->btnVistaProveedor->Location = System::Drawing::Point(436, 315);
 			this->btnVistaProveedor->Name = L"btnVistaProveedor";
-			this->btnVistaProveedor->Size = System::Drawing::Size(136, 32);
+			this->btnVistaProveedor->Size = System::Drawing::Size(136, 30);
 			this->btnVistaProveedor->TabIndex = 3;
-			this->btnVistaProveedor->Text = L"Proveedores";
+			this->btnVistaProveedor->Text = L"PROVEEDOR";
 			this->btnVistaProveedor->UseVisualStyleBackColor = false;
 			// 
 			// btnVistaFacturacion
 			// 
 			this->btnVistaFacturacion->BackColor = System::Drawing::Color::Teal;
-			this->btnVistaFacturacion->Font = (gcnew System::Drawing::Font(L"Microsoft YaHei", 10.2F, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
+			this->btnVistaFacturacion->Font = (gcnew System::Drawing::Font(L"Microsoft YaHei", 9, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
 			this->btnVistaFacturacion->ForeColor = System::Drawing::SystemColors::ButtonHighlight;
-			this->btnVistaFacturacion->Location = System::Drawing::Point(739, 16);
+			this->btnVistaFacturacion->Location = System::Drawing::Point(436, 363);
 			this->btnVistaFacturacion->Name = L"btnVistaFacturacion";
-			this->btnVistaFacturacion->Size = System::Drawing::Size(123, 32);
+			this->btnVistaFacturacion->Size = System::Drawing::Size(136, 32);
 			this->btnVistaFacturacion->TabIndex = 4;
-			this->btnVistaFacturacion->Text = L"Facturacion";
+			this->btnVistaFacturacion->Text = L"FACTURACION";
 			this->btnVistaFacturacion->UseVisualStyleBackColor = false;
+			// 
+			// label1
+			// 
+			this->label1->AutoSize = true;
+			this->label1->BackColor = System::Drawing::Color::Teal;
+			this->label1->Font = (gcnew System::Drawing::Font(L"Microsoft YaHei", 18, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
+				static_cast<System::Byte>(0)));
+			this->label1->ForeColor = System::Drawing::SystemColors::ButtonHighlight;
+			this->label1->Location = System::Drawing::Point(364, 92);
+			this->label1->Name = L"label1";
+			this->label1->Size = System::Drawing::Size(287, 40);
+			this->label1->TabIndex = 5;
+			this->label1->Text = L"MENU PRINCIPAL";
 			// 
 			// menuPrincipalForm
 			// 
 			this->AutoScaleDimensions = System::Drawing::SizeF(8, 16);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
 			this->ClientSize = System::Drawing::Size(1188, 713);
+			this->Controls->Add(this->label1);
 			this->Controls->Add(this->btnVistaFacturacion);
 			this->Controls->Add(this->btnVistaProveedor);
 			this->Controls->Add(this->btnVistaProducto);
@@ -147,6 +163,7 @@ namespace proyectoFacturacion {
 			this->Name = L"menuPrincipalForm";
 			this->Text = L"menuPrincipalForm";
 			this->ResumeLayout(false);
+			this->PerformLayout();
 
 		}
 

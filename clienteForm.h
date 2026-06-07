@@ -4,6 +4,8 @@
 #include "Conexion.h"
 #include <jdbc/cppconn/prepared_statement.h>
 #include <jdbc/cppconn/resultset.h>
+#include "ProductoForm.h"
+
 
 
 namespace proyectoFacturacion {
@@ -69,16 +71,6 @@ namespace proyectoFacturacion {
 	private: System::Windows::Forms::DataGridViewTextBoxColumn^ colNombre;
 	private: System::Windows::Forms::DataGridViewTextBoxColumn^ colId;
 	private: System::Windows::Forms::DataGridView^ tablaClientes;
-
-
-
-
-
-
-
-
-
-
 
 	protected:
 
@@ -154,6 +146,7 @@ namespace proyectoFacturacion {
 			this->btnVistaProducto->TabIndex = 23;
 			this->btnVistaProducto->Text = L"Productos";
 			this->btnVistaProducto->UseVisualStyleBackColor = false;
+			this->btnVistaProducto->Click += gcnew System::EventHandler(this, &clienteForm::btnVistaProducto_Click);
 			// 
 			// label7
 			// 
@@ -548,5 +541,10 @@ private: System::Void btnMostrarTodosClientes_Click(System::Object^ sender, Syst
 	}
 	}
 
+	private: System::Void btnVistaProducto_Click(System::Object^ sender, System::EventArgs^ e) {
+		ProductoForm^ vistaProducto = gcnew ProductoForm();
+		vistaProducto->Show();
+		this->Hide();
+	}
 };
 }

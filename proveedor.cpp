@@ -89,7 +89,6 @@ void Proveedor::actualizarProveedor(int idProveedor, std::string nombreProveedor
 		ps->setInt(2, cuit);
 		ps->setString(3, emailProveedor);
 		ps->setInt(4, idProveedor);
-
 		ps->executeUpdate();
 		delete ps;
 	}

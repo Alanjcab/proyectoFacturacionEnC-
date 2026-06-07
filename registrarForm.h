@@ -2,6 +2,8 @@
 #include "Usuario.h"
 #include <msclr/marshal_cppstd.h>
 #include "clienteForm.h"
+#include "ProductoForm.h"
+#include "ProveedorForm.h"
 
 
 namespace proyectoFacturacion {
@@ -111,8 +113,8 @@ namespace proyectoFacturacion {
 		/// </summary>
 		void InitializeComponent(void)
 		{
-			System::Windows::Forms::DataGridViewCellStyle^ dataGridViewCellStyle1 = (gcnew System::Windows::Forms::DataGridViewCellStyle());
-			System::Windows::Forms::DataGridViewCellStyle^ dataGridViewCellStyle2 = (gcnew System::Windows::Forms::DataGridViewCellStyle());
+			System::Windows::Forms::DataGridViewCellStyle^ dataGridViewCellStyle3 = (gcnew System::Windows::Forms::DataGridViewCellStyle());
+			System::Windows::Forms::DataGridViewCellStyle^ dataGridViewCellStyle4 = (gcnew System::Windows::Forms::DataGridViewCellStyle());
 			this->label1 = (gcnew System::Windows::Forms::Label());
 			this->label2 = (gcnew System::Windows::Forms::Label());
 			this->label3 = (gcnew System::Windows::Forms::Label());
@@ -307,6 +309,7 @@ namespace proyectoFacturacion {
 			this->btnVistaProducto->TabIndex = 19;
 			this->btnVistaProducto->Text = L"Productos";
 			this->btnVistaProducto->UseVisualStyleBackColor = false;
+			this->btnVistaProducto->Click += gcnew System::EventHandler(this, &registrarForm::btnVistaProducto_Click);
 			// 
 			// btnVistaProveedor
 			// 
@@ -320,6 +323,7 @@ namespace proyectoFacturacion {
 			this->btnVistaProveedor->TabIndex = 20;
 			this->btnVistaProveedor->Text = L"Proveedores";
 			this->btnVistaProveedor->UseVisualStyleBackColor = false;
+			this->btnVistaProveedor->Click += gcnew System::EventHandler(this, &registrarForm::btnVistaProveedor_Click);
 			// 
 			// btnVistaFacturacion
 			// 
@@ -386,15 +390,15 @@ namespace proyectoFacturacion {
 			this->tablaUsuarios->AutoSizeColumnsMode = System::Windows::Forms::DataGridViewAutoSizeColumnsMode::Fill;
 			this->tablaUsuarios->BackgroundColor = System::Drawing::SystemColors::ButtonHighlight;
 			this->tablaUsuarios->BorderStyle = System::Windows::Forms::BorderStyle::None;
-			dataGridViewCellStyle1->Alignment = System::Windows::Forms::DataGridViewContentAlignment::MiddleLeft;
-			dataGridViewCellStyle1->BackColor = System::Drawing::Color::Teal;
-			dataGridViewCellStyle1->Font = (gcnew System::Drawing::Font(L"Microsoft YaHei", 7.8F, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
+			dataGridViewCellStyle3->Alignment = System::Windows::Forms::DataGridViewContentAlignment::MiddleLeft;
+			dataGridViewCellStyle3->BackColor = System::Drawing::Color::Teal;
+			dataGridViewCellStyle3->Font = (gcnew System::Drawing::Font(L"Microsoft YaHei", 7.8F, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
-			dataGridViewCellStyle1->ForeColor = System::Drawing::Color::White;
-			dataGridViewCellStyle1->SelectionBackColor = System::Drawing::SystemColors::Highlight;
-			dataGridViewCellStyle1->SelectionForeColor = System::Drawing::SystemColors::HighlightText;
-			dataGridViewCellStyle1->WrapMode = System::Windows::Forms::DataGridViewTriState::True;
-			this->tablaUsuarios->ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
+			dataGridViewCellStyle3->ForeColor = System::Drawing::Color::White;
+			dataGridViewCellStyle3->SelectionBackColor = System::Drawing::SystemColors::Highlight;
+			dataGridViewCellStyle3->SelectionForeColor = System::Drawing::SystemColors::HighlightText;
+			dataGridViewCellStyle3->WrapMode = System::Windows::Forms::DataGridViewTriState::True;
+			this->tablaUsuarios->ColumnHeadersDefaultCellStyle = dataGridViewCellStyle3;
 			this->tablaUsuarios->ColumnHeadersHeightSizeMode = System::Windows::Forms::DataGridViewColumnHeadersHeightSizeMode::AutoSize;
 			this->tablaUsuarios->Columns->AddRange(gcnew cli::array< System::Windows::Forms::DataGridViewColumn^  >(8) {
 				this->colId,
@@ -405,11 +409,11 @@ namespace proyectoFacturacion {
 			this->tablaUsuarios->Location = System::Drawing::Point(174, 473);
 			this->tablaUsuarios->Name = L"tablaUsuarios";
 			this->tablaUsuarios->RowHeadersWidth = 51;
-			dataGridViewCellStyle2->BackColor = System::Drawing::Color::White;
-			dataGridViewCellStyle2->Font = (gcnew System::Drawing::Font(L"Microsoft YaHei", 7.8F, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
+			dataGridViewCellStyle4->BackColor = System::Drawing::Color::White;
+			dataGridViewCellStyle4->Font = (gcnew System::Drawing::Font(L"Microsoft YaHei", 7.8F, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
-			dataGridViewCellStyle2->ForeColor = System::Drawing::Color::Black;
-			this->tablaUsuarios->RowsDefaultCellStyle = dataGridViewCellStyle2;
+			dataGridViewCellStyle4->ForeColor = System::Drawing::Color::Black;
+			this->tablaUsuarios->RowsDefaultCellStyle = dataGridViewCellStyle4;
 			this->tablaUsuarios->RowTemplate->Height = 24;
 			this->tablaUsuarios->ScrollBars = System::Windows::Forms::ScrollBars::None;
 			this->tablaUsuarios->Size = System::Drawing::Size(881, 56);
@@ -653,10 +657,20 @@ namespace proyectoFacturacion {
 
 		tablaUsuarios->Rows->Clear();
 	}
-private: System::Void btnVistaClientes_Click(System::Object^ sender, System::EventArgs^ e) {
-	clienteForm^ vistaCliente = gcnew clienteForm();
-	vistaCliente->Show();
-	this->Hide();
+	private: System::Void btnVistaClientes_Click(System::Object^ sender, System::EventArgs^ e) {
+		clienteForm^ vistaCliente = gcnew clienteForm();
+		vistaCliente->Show();
+		this->Hide();
+	}
+	private: System::Void btnVistaProducto_Click(System::Object^ sender, System::EventArgs^ e) {
+		ProductoForm^ vistaProducto = gcnew ProductoForm();
+		vistaProducto->Show();
+		this->Hide();
+	}
+	private: System::Void btnVistaProveedor_Click(System::Object^ sender, System::EventArgs^ e) {
+		ProveedorForm^ vistaProveedor = gcnew ProveedorForm();
+		vistaProveedor->Show();
+		this->Hide();
 	}
 };
 }

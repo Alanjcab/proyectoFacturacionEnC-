@@ -170,6 +170,9 @@
     <EmbeddedResource Include="menuPrincipalForm.resx">
       <DependentUpon>menuPrincipalForm.h</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="ProductoForm.resx">
+      <DependentUpon>ProductoForm.h</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="ProveedorForm.resx">
       <DependentUpon>ProveedorForm.h</DependentUpon>
     </EmbeddedResource>

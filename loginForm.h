@@ -4,6 +4,8 @@
 #include <msclr/marshal_cppstd.h>
 #include "registrarForm.h"
 #include "clienteForm.h"
+#include "ProductoForm.h"
+#include "ProveedorForm.h"
 
 namespace proyectoFacturacion {
 
@@ -158,31 +160,34 @@ namespace proyectoFacturacion {
 
 		std::string rol = usuario.rolUsuario(email, pass);
 
-		if (rol == "admin") {
+		if (rol == "admin") { //el usuario con rol "admin" puede ver todas las vistas
 
 			registrarForm^ menuRegistrar = gcnew registrarForm();
 			menuRegistrar->Show();
 			this->Hide();
-			std::cout << "ingreso exitoso" << std::endl;
-			//aca tengo que agregar todas las vistas que puede ver el administrador.
+			
+			std::cout << "ingreso exitoso" << std::endl;	
 		}
-		if (rol == "cajero") {
+		else if(rol == "cajero") {  //abro solo las vistas que puede ver el usuario con rol "cajero"
 
 			clienteForm^ vistaCliente = gcnew clienteForm();
 			vistaCliente->Show();
 			this->Hide();
 			std::cout << "ingreso exitoso" << std::endl;
-			//aca tengo que agregar todas las vistas que puede ver el administrador.
 		}
-		//aca tengo que hacer los demas if que dependiendo que tipo de usuario ingrese.
-		else if (rol == "inactivo") {
+		else if (rol == "deposito") {  //abro solo las vistas que peude ver el usuario con rol "deposito"
 
+			ProveedorForm^ vistaProveedor = gcnew ProveedorForm();
+			vistaProveedor->Show();
+			this->Hide();
+			std::cout << "ingreso exitoso" << std::endl;
+		}
+		 //si el usuario esta inactivo muestrp mensaje
+		else if (rol == "inactivo") {
 			MessageBox::Show("Usuario deshabilitado");
 		}
-
 		else {
-
-			MessageBox::Show("No se pudo hacer el login");
+			MessageBox::Show("No se pudo hacer el login. Necesita registrarse");
 		}
 	}
 };

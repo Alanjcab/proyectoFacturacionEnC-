@@ -1,6 +1,8 @@
 #pragma once
 #include "Proveedor.h"
 #include <msclr/marshal_cppstd.h>
+#include "ProductoForm.h"
+
 
 namespace proyectoFacturacion {
 
@@ -136,6 +138,7 @@ namespace proyectoFacturacion {
 			this->btnProducto->TabIndex = 20;
 			this->btnProducto->Text = L"Producto";
 			this->btnProducto->UseVisualStyleBackColor = false;
+			this->btnProducto->Click += gcnew System::EventHandler(this, &ProveedorForm::btnProducto_Click);
 			// 
 			// txtNombreProveedor
 			// 
@@ -462,6 +465,11 @@ private: System::Void btnDeshabilitarProveedor_Click(System::Object^ sender, Sys
 	tablaProveedor->Rows->Clear();
 
 	MessageBox::Show("Porveedor deshabilitado.");
+	}
+private: System::Void btnProducto_Click(System::Object^ sender, System::EventArgs^ e) {
+		ProductoForm^ vistaProducto = gcnew ProductoForm();
+		vistaProducto->Show();
+		this->Hide();
 	}
 };
 }
