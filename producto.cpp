@@ -3,6 +3,11 @@
 #include <iostream>
 #include <jdbc/cppconn/prepared_statement.h>
 #include <jdbc/cppconn/resultset.h>
+#include "clienteForm.h"
+#include "ProductoForm.h"
+#include "registrarForm.h"
+#include "ProveedorForm.h"
+
 
 Producto::Producto(){}
 
@@ -37,6 +42,25 @@ bool Producto::getActivo() {
 }
 std::string Producto::getNombreProveedor() {
     return nombreProveedor;
+}
+
+
+namespace proyectoFacturacion {
+    System::Void clienteForm::btnProductoEnCliente_Click(System::Object^ sender, System::EventArgs^ e) {
+        ProductoForm^ vistaProducto = gcnew ProductoForm();
+        vistaProducto->Show();
+        this->Hide();
+    }
+    System::Void registrarForm::btnProductoEnRegistrar_Click(System::Object^ sender, System::EventArgs^ e) {
+        ProductoForm^ vistaProducto = gcnew ProductoForm();
+        vistaProducto->Show();
+        this->Hide();
+    }
+    System::Void ProveedorForm::btnProductoEnProveedor_Click(System::Object^ sender, System::EventArgs^ e) {
+        ProductoForm^ vistaProducto = gcnew ProductoForm();
+        vistaProducto->Show();
+        this->Hide();
+    }
 }
 
 

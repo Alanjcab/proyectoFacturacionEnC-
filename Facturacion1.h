@@ -79,6 +79,10 @@ namespace proyectoFacturacion {
 	private: System::Windows::Forms::DataGridViewTextBoxColumn^ ColCantidad;
 	private: System::Windows::Forms::DataGridViewTextBoxColumn^ ColSubtotal;
 	private: System::Windows::Forms::Label^ label13;
+	private: System::Windows::Forms::Label^ label14;
+	private: System::Windows::Forms::Label^ label15;
+	private: System::Windows::Forms::Label^ lbDescuentoProducto;
+	private: System::Windows::Forms::Label^ lbDescuentoTotal;
 
 
 
@@ -117,16 +121,20 @@ namespace proyectoFacturacion {
 			this->lbPrecioProducto = (gcnew System::Windows::Forms::Label());
 			this->lbStockProducto = (gcnew System::Windows::Forms::Label());
 			this->dataGridView1 = (gcnew System::Windows::Forms::DataGridView());
-			this->btnConfirmarCompra = (gcnew System::Windows::Forms::Button());
-			this->label11 = (gcnew System::Windows::Forms::Label());
-			this->label12 = (gcnew System::Windows::Forms::Label());
 			this->colId = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
 			this->colCodigo = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
 			this->ColDescripcion = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
 			this->ColPrecio = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
 			this->ColCantidad = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
 			this->ColSubtotal = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
+			this->btnConfirmarCompra = (gcnew System::Windows::Forms::Button());
+			this->label11 = (gcnew System::Windows::Forms::Label());
+			this->label12 = (gcnew System::Windows::Forms::Label());
 			this->label13 = (gcnew System::Windows::Forms::Label());
+			this->label14 = (gcnew System::Windows::Forms::Label());
+			this->label15 = (gcnew System::Windows::Forms::Label());
+			this->lbDescuentoProducto = (gcnew System::Windows::Forms::Label());
+			this->lbDescuentoTotal = (gcnew System::Windows::Forms::Label());
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->dataGridView1))->BeginInit();
 			this->SuspendLayout();
 			// 
@@ -246,7 +254,7 @@ namespace proyectoFacturacion {
 			// 
 			// btnAgregar
 			// 
-			this->btnAgregar->Location = System::Drawing::Point(221, 388);
+			this->btnAgregar->Location = System::Drawing::Point(217, 416);
 			this->btnAgregar->Name = L"btnAgregar";
 			this->btnAgregar->Size = System::Drawing::Size(75, 23);
 			this->btnAgregar->TabIndex = 13;
@@ -341,6 +349,49 @@ namespace proyectoFacturacion {
 			this->dataGridView1->Size = System::Drawing::Size(704, 313);
 			this->dataGridView1->TabIndex = 21;
 			// 
+			// colId
+			// 
+			this->colId->HeaderText = L"ID";
+			this->colId->MinimumWidth = 6;
+			this->colId->Name = L"colId";
+			this->colId->Width = 125;
+			// 
+			// colCodigo
+			// 
+			this->colCodigo->HeaderText = L"Codigo";
+			this->colCodigo->MinimumWidth = 6;
+			this->colCodigo->Name = L"colCodigo";
+			this->colCodigo->Width = 125;
+			// 
+			// ColDescripcion
+			// 
+			this->ColDescripcion->HeaderText = L"Descripcion";
+			this->ColDescripcion->MinimumWidth = 6;
+			this->ColDescripcion->Name = L"ColDescripcion";
+			this->ColDescripcion->Width = 125;
+			// 
+			// ColPrecio
+			// 
+			this->ColPrecio->HeaderText = L"Precio";
+			this->ColPrecio->MinimumWidth = 6;
+			this->ColPrecio->Name = L"ColPrecio";
+			this->ColPrecio->Width = 125;
+			// 
+			// ColCantidad
+			// 
+			this->ColCantidad->FillWeight = 50;
+			this->ColCantidad->HeaderText = L"Cantidad";
+			this->ColCantidad->MinimumWidth = 6;
+			this->ColCantidad->Name = L"ColCantidad";
+			this->ColCantidad->Width = 50;
+			// 
+			// ColSubtotal
+			// 
+			this->ColSubtotal->HeaderText = L"Subtotal";
+			this->ColSubtotal->MinimumWidth = 6;
+			this->ColSubtotal->Name = L"ColSubtotal";
+			this->ColSubtotal->Width = 125;
+			// 
 			// btnConfirmarCompra
 			// 
 			this->btnConfirmarCompra->Location = System::Drawing::Point(524, 440);
@@ -370,48 +421,6 @@ namespace proyectoFacturacion {
 			this->label12->TabIndex = 24;
 			this->label12->Text = L"                     ";
 			// 
-			// colId
-			// 
-			this->colId->HeaderText = L"ID";
-			this->colId->MinimumWidth = 6;
-			this->colId->Name = L"colId";
-			this->colId->Width = 125;
-			// 
-			// colCodigo
-			// 
-			this->colCodigo->HeaderText = L"Codigo";
-			this->colCodigo->MinimumWidth = 6;
-			this->colCodigo->Name = L"colCodigo";
-			this->colCodigo->Width = 125;
-			// 
-			// ColDescripcion
-			// 
-			this->ColDescripcion->HeaderText = L"Descripcion";
-			this->ColDescripcion->MinimumWidth = 6;
-			this->ColDescripcion->Name = L"ColDescripcion";
-			this->ColDescripcion->Width = 125;
-			// 
-			// ColPrecio
-			// 
-			this->ColPrecio->HeaderText = L"Precio";
-			this->ColPrecio->MinimumWidth = 6;
-			this->ColPrecio->Name = L"ColPrecio";
-			// 
-			// ColCantidad
-			// 
-			this->ColCantidad->FillWeight = 50;
-			this->ColCantidad->HeaderText = L"Cantidad";
-			this->ColCantidad->MinimumWidth = 6;
-			this->ColCantidad->Name = L"ColCantidad";
-			this->ColCantidad->Width = 50;
-			// 
-			// ColSubtotal
-			// 
-			this->ColSubtotal->HeaderText = L"Subtotal";
-			this->ColSubtotal->MinimumWidth = 6;
-			this->ColSubtotal->Name = L"ColSubtotal";
-			this->ColSubtotal->Width = 125;
-			// 
 			// label13
 			// 
 			this->label13->AutoSize = true;
@@ -421,11 +430,55 @@ namespace proyectoFacturacion {
 			this->label13->TabIndex = 25;
 			this->label13->Text = L"FACTURA";
 			// 
+			// label14
+			// 
+			this->label14->AutoSize = true;
+			this->label14->Location = System::Drawing::Point(88, 395);
+			this->label14->Name = L"label14";
+			this->label14->Size = System::Drawing::Size(95, 16);
+			this->label14->TabIndex = 26;
+			this->label14->Text = L"DESCUENTO:";
+			// 
+			// label15
+			// 
+			this->label15->AutoSize = true;
+			this->label15->Location = System::Drawing::Point(652, 443);
+			this->label15->Name = L"label15";
+			this->label15->Size = System::Drawing::Size(95, 16);
+			this->label15->TabIndex = 27;
+			this->label15->Text = L"DESCUENTO:";
+			// 
+			// lbDescuentoProducto
+			// 
+			this->lbDescuentoProducto->AutoSize = true;
+			this->lbDescuentoProducto->BackColor = System::Drawing::SystemColors::ControlLight;
+			this->lbDescuentoProducto->BorderStyle = System::Windows::Forms::BorderStyle::FixedSingle;
+			this->lbDescuentoProducto->Location = System::Drawing::Point(182, 393);
+			this->lbDescuentoProducto->Name = L"lbDescuentoProducto";
+			this->lbDescuentoProducto->Size = System::Drawing::Size(72, 18);
+			this->lbDescuentoProducto->TabIndex = 28;
+			this->lbDescuentoProducto->Text = L"                     ";
+			// 
+			// lbDescuentoTotal
+			// 
+			this->lbDescuentoTotal->AutoSize = true;
+			this->lbDescuentoTotal->BackColor = System::Drawing::SystemColors::ControlLight;
+			this->lbDescuentoTotal->BorderStyle = System::Windows::Forms::BorderStyle::FixedSingle;
+			this->lbDescuentoTotal->Location = System::Drawing::Point(753, 440);
+			this->lbDescuentoTotal->Name = L"lbDescuentoTotal";
+			this->lbDescuentoTotal->Size = System::Drawing::Size(72, 18);
+			this->lbDescuentoTotal->TabIndex = 29;
+			this->lbDescuentoTotal->Text = L"                     ";
+			// 
 			// Facturacion
 			// 
 			this->AutoScaleDimensions = System::Drawing::SizeF(8, 16);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
 			this->ClientSize = System::Drawing::Size(1189, 768);
+			this->Controls->Add(this->lbDescuentoTotal);
+			this->Controls->Add(this->lbDescuentoProducto);
+			this->Controls->Add(this->label15);
+			this->Controls->Add(this->label14);
 			this->Controls->Add(this->label13);
 			this->Controls->Add(this->label12);
 			this->Controls->Add(this->label11);

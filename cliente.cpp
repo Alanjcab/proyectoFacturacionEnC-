@@ -4,6 +4,10 @@
 #include <iostream>
 #include <jdbc/cppconn/prepared_statement.h>
 #include <jdbc/cppconn/resultset.h>
+#include "clienteForm.h"
+#include "productoForm.h"
+#include "registrarForm.h"
+#include "ProveedorForm.h"
 
 Cliente::Cliente() {}
 
@@ -13,6 +17,25 @@ Cliente::Cliente(std::string nombre, std::string apellido, int dniCliente, std::
 	this->dniCliente = dniCliente;
 	this->emailCliente = emailCliente;
 }
+//botones para ir a otras vistas
+namespace proyectoFacturacion {
+	System::Void ProductoForm::btnClienteEnProducto_Click(System::Object^ sender, System::EventArgs^ e) {
+		clienteForm^ vistaCliente = gcnew clienteForm();
+		vistaCliente->Show();
+		this->Hide();
+	}
+	System::Void registrarForm::btnClienteEnRegistrar_Click(System::Object^ sender, System::EventArgs^ e) {
+		clienteForm^ vistaCliente = gcnew clienteForm();
+		vistaCliente->Show();
+		this->Hide();
+	}
+	System::Void ProveedorForm::btnClienteEnProveedor_Click(System::Object^ sender, System::EventArgs^ e) {
+		clienteForm^ vistaCliente = gcnew clienteForm();
+		vistaCliente->Show();
+		this->Hide();
+	}
+}
+
 
 int Cliente::getIdCliente() {
 	return idCliente;

@@ -3,6 +3,10 @@
 #include <iostream>
 #include <jdbc/cppconn/prepared_statement.h>
 #include <jdbc/cppconn/resultset.h>
+#include "clienteForm.h"
+#include "registrarForm.h"
+#include "ProductoForm.h"
+#include "ProveedorForm.h"
 
 Usuario::Usuario() { 
 
@@ -25,6 +29,23 @@ Usuario::Usuario(
     this->rol = rol;
 }
 
+namespace proyectoFacturacion {
+    System::Void clienteForm::btnRegistrarEnCliente_Click(System::Object^ sender, System::EventArgs^ e) {
+        registrarForm^ vistaRegistrar = gcnew registrarForm();
+        vistaRegistrar->Show();
+        this->Hide();
+    }
+    System::Void ProductoForm::btnRegistrarEnProducto_Click(System::Object^ sender, System::EventArgs^ e) {
+        registrarForm^ vistaRegistrar = gcnew registrarForm();
+        vistaRegistrar->Show();
+        this->Hide();
+    }
+    System::Void ProveedorForm::btnRegistrarEnProveedor_Click(System::Object^ sender, System::EventArgs^ e) {
+        registrarForm^ vistaRegistrar = gcnew registrarForm();
+        vistaRegistrar->Show();
+        this->Hide();
+    }
+}
 
 //metodo de conexion.h para insertar 
 void Usuario::insertar() {

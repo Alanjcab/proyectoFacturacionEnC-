@@ -4,7 +4,7 @@
 #include "Conexion.h"
 #include <jdbc/cppconn/prepared_statement.h>
 #include <jdbc/cppconn/resultset.h>
-#include "ProductoForm.h"
+
 
 
 
@@ -43,8 +43,10 @@ namespace proyectoFacturacion {
 				delete components;
 			}
 		}
-	private: System::Windows::Forms::Button^ btnVistaFacturacion;
-	private: System::Windows::Forms::Button^ btnVistaProducto;
+	protected:
+
+	private: System::Windows::Forms::Button^ btnProductoEnCliente;
+
 	private: System::Windows::Forms::Label^ label7;
 	private: System::Windows::Forms::Label^ label1;
 	private: System::Windows::Forms::Label^ label2;
@@ -71,6 +73,12 @@ namespace proyectoFacturacion {
 	private: System::Windows::Forms::DataGridViewTextBoxColumn^ colNombre;
 	private: System::Windows::Forms::DataGridViewTextBoxColumn^ colId;
 	private: System::Windows::Forms::DataGridView^ tablaClientes;
+	private: System::Windows::Forms::Button^ btnProveedorEnCliente;
+	private: System::Windows::Forms::Button^ btnFacturacionEnCliente;
+
+
+	private: System::Windows::Forms::Button^ btnRegistrarEnCliente;
+
 
 	protected:
 
@@ -90,10 +98,9 @@ namespace proyectoFacturacion {
 		/// </summary>
 		void InitializeComponent(void)
 		{
-			System::Windows::Forms::DataGridViewCellStyle^ dataGridViewCellStyle1 = (gcnew System::Windows::Forms::DataGridViewCellStyle());
-			System::Windows::Forms::DataGridViewCellStyle^ dataGridViewCellStyle2 = (gcnew System::Windows::Forms::DataGridViewCellStyle());
-			this->btnVistaFacturacion = (gcnew System::Windows::Forms::Button());
-			this->btnVistaProducto = (gcnew System::Windows::Forms::Button());
+			System::Windows::Forms::DataGridViewCellStyle^ dataGridViewCellStyle11 = (gcnew System::Windows::Forms::DataGridViewCellStyle());
+			System::Windows::Forms::DataGridViewCellStyle^ dataGridViewCellStyle12 = (gcnew System::Windows::Forms::DataGridViewCellStyle());
+			this->btnProductoEnCliente = (gcnew System::Windows::Forms::Button());
 			this->label7 = (gcnew System::Windows::Forms::Label());
 			this->label1 = (gcnew System::Windows::Forms::Label());
 			this->label2 = (gcnew System::Windows::Forms::Label());
@@ -118,35 +125,25 @@ namespace proyectoFacturacion {
 			this->colNombre = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
 			this->colId = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
 			this->tablaClientes = (gcnew System::Windows::Forms::DataGridView());
+			this->btnProveedorEnCliente = (gcnew System::Windows::Forms::Button());
+			this->btnFacturacionEnCliente = (gcnew System::Windows::Forms::Button());
+			this->btnRegistrarEnCliente = (gcnew System::Windows::Forms::Button());
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->tablaClientes))->BeginInit();
 			this->SuspendLayout();
 			// 
-			// btnVistaFacturacion
+			// btnProductoEnCliente
 			// 
-			this->btnVistaFacturacion->BackColor = System::Drawing::Color::Teal;
-			this->btnVistaFacturacion->Font = (gcnew System::Drawing::Font(L"Microsoft YaHei", 10.2F, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
+			this->btnProductoEnCliente->BackColor = System::Drawing::Color::Teal;
+			this->btnProductoEnCliente->Font = (gcnew System::Drawing::Font(L"Microsoft YaHei", 10.2F, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
-			this->btnVistaFacturacion->ForeColor = System::Drawing::SystemColors::ButtonHighlight;
-			this->btnVistaFacturacion->Location = System::Drawing::Point(489, 29);
-			this->btnVistaFacturacion->Name = L"btnVistaFacturacion";
-			this->btnVistaFacturacion->Size = System::Drawing::Size(154, 59);
-			this->btnVistaFacturacion->TabIndex = 22;
-			this->btnVistaFacturacion->Text = L"Facturacion";
-			this->btnVistaFacturacion->UseVisualStyleBackColor = false;
-			// 
-			// btnVistaProducto
-			// 
-			this->btnVistaProducto->BackColor = System::Drawing::Color::Teal;
-			this->btnVistaProducto->Font = (gcnew System::Drawing::Font(L"Microsoft YaHei", 10.2F, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
-				static_cast<System::Byte>(0)));
-			this->btnVistaProducto->ForeColor = System::Drawing::SystemColors::ButtonHighlight;
-			this->btnVistaProducto->Location = System::Drawing::Point(333, 29);
-			this->btnVistaProducto->Name = L"btnVistaProducto";
-			this->btnVistaProducto->Size = System::Drawing::Size(119, 59);
-			this->btnVistaProducto->TabIndex = 23;
-			this->btnVistaProducto->Text = L"Productos";
-			this->btnVistaProducto->UseVisualStyleBackColor = false;
-			this->btnVistaProducto->Click += gcnew System::EventHandler(this, &clienteForm::btnVistaProducto_Click);
+			this->btnProductoEnCliente->ForeColor = System::Drawing::SystemColors::ButtonHighlight;
+			this->btnProductoEnCliente->Location = System::Drawing::Point(333, 12);
+			this->btnProductoEnCliente->Name = L"btnProductoEnCliente";
+			this->btnProductoEnCliente->Size = System::Drawing::Size(160, 60);
+			this->btnProductoEnCliente->TabIndex = 23;
+			this->btnProductoEnCliente->Text = L"PRODUCTO";
+			this->btnProductoEnCliente->UseVisualStyleBackColor = false;
+			this->btnProductoEnCliente->Click += gcnew System::EventHandler(this, &clienteForm::btnProductoEnCliente_Click);
 			// 
 			// label7
 			// 
@@ -372,15 +369,15 @@ namespace proyectoFacturacion {
 			this->tablaClientes->AutoSizeColumnsMode = System::Windows::Forms::DataGridViewAutoSizeColumnsMode::Fill;
 			this->tablaClientes->BackgroundColor = System::Drawing::SystemColors::ButtonHighlight;
 			this->tablaClientes->BorderStyle = System::Windows::Forms::BorderStyle::None;
-			dataGridViewCellStyle1->Alignment = System::Windows::Forms::DataGridViewContentAlignment::MiddleLeft;
-			dataGridViewCellStyle1->BackColor = System::Drawing::Color::Teal;
-			dataGridViewCellStyle1->Font = (gcnew System::Drawing::Font(L"Microsoft YaHei", 7.8F, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
+			dataGridViewCellStyle11->Alignment = System::Windows::Forms::DataGridViewContentAlignment::MiddleLeft;
+			dataGridViewCellStyle11->BackColor = System::Drawing::Color::Teal;
+			dataGridViewCellStyle11->Font = (gcnew System::Drawing::Font(L"Microsoft YaHei", 7.8F, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
-			dataGridViewCellStyle1->ForeColor = System::Drawing::Color::White;
-			dataGridViewCellStyle1->SelectionBackColor = System::Drawing::SystemColors::Highlight;
-			dataGridViewCellStyle1->SelectionForeColor = System::Drawing::SystemColors::HighlightText;
-			dataGridViewCellStyle1->WrapMode = System::Windows::Forms::DataGridViewTriState::True;
-			this->tablaClientes->ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
+			dataGridViewCellStyle11->ForeColor = System::Drawing::Color::White;
+			dataGridViewCellStyle11->SelectionBackColor = System::Drawing::SystemColors::Highlight;
+			dataGridViewCellStyle11->SelectionForeColor = System::Drawing::SystemColors::HighlightText;
+			dataGridViewCellStyle11->WrapMode = System::Windows::Forms::DataGridViewTriState::True;
+			this->tablaClientes->ColumnHeadersDefaultCellStyle = dataGridViewCellStyle11;
 			this->tablaClientes->ColumnHeadersHeightSizeMode = System::Windows::Forms::DataGridViewColumnHeadersHeightSizeMode::AutoSize;
 			this->tablaClientes->Columns->AddRange(gcnew cli::array< System::Windows::Forms::DataGridViewColumn^  >(6) {
 				this->colId,
@@ -391,21 +388,66 @@ namespace proyectoFacturacion {
 			this->tablaClientes->Location = System::Drawing::Point(76, 480);
 			this->tablaClientes->Name = L"tablaClientes";
 			this->tablaClientes->RowHeadersWidth = 51;
-			dataGridViewCellStyle2->BackColor = System::Drawing::Color::White;
-			dataGridViewCellStyle2->Font = (gcnew System::Drawing::Font(L"Microsoft YaHei", 7.8F, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
+			dataGridViewCellStyle12->BackColor = System::Drawing::Color::White;
+			dataGridViewCellStyle12->Font = (gcnew System::Drawing::Font(L"Microsoft YaHei", 7.8F, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
-			dataGridViewCellStyle2->ForeColor = System::Drawing::Color::Black;
-			this->tablaClientes->RowsDefaultCellStyle = dataGridViewCellStyle2;
+			dataGridViewCellStyle12->ForeColor = System::Drawing::Color::Black;
+			this->tablaClientes->RowsDefaultCellStyle = dataGridViewCellStyle12;
 			this->tablaClientes->RowTemplate->Height = 24;
 			this->tablaClientes->ScrollBars = System::Windows::Forms::ScrollBars::None;
 			this->tablaClientes->Size = System::Drawing::Size(881, 123);
 			this->tablaClientes->TabIndex = 43;
 			// 
+			// btnProveedorEnCliente
+			// 
+			this->btnProveedorEnCliente->BackColor = System::Drawing::Color::Teal;
+			this->btnProveedorEnCliente->Font = (gcnew System::Drawing::Font(L"Microsoft YaHei", 10.2F, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
+				static_cast<System::Byte>(0)));
+			this->btnProveedorEnCliente->ForeColor = System::Drawing::SystemColors::ButtonHighlight;
+			this->btnProveedorEnCliente->Location = System::Drawing::Point(512, 12);
+			this->btnProveedorEnCliente->Name = L"btnProveedorEnCliente";
+			this->btnProveedorEnCliente->Size = System::Drawing::Size(160, 60);
+			this->btnProveedorEnCliente->TabIndex = 44;
+			this->btnProveedorEnCliente->Text = L"PROVEEDOR";
+			this->btnProveedorEnCliente->UseVisualStyleBackColor = false;
+			this->btnProveedorEnCliente->Click += gcnew System::EventHandler(this, &clienteForm::btnProveedorEnCliente_Click);
+			// 
+			// btnFacturacionEnCliente
+			// 
+			this->btnFacturacionEnCliente->BackColor = System::Drawing::Color::Teal;
+			this->btnFacturacionEnCliente->Font = (gcnew System::Drawing::Font(L"Microsoft YaHei", 10.2F, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
+				static_cast<System::Byte>(0)));
+			this->btnFacturacionEnCliente->ForeColor = System::Drawing::SystemColors::ButtonHighlight;
+			this->btnFacturacionEnCliente->Location = System::Drawing::Point(691, 12);
+			this->btnFacturacionEnCliente->Name = L"btnFacturacionEnCliente";
+			this->btnFacturacionEnCliente->Size = System::Drawing::Size(160, 60);
+			this->btnFacturacionEnCliente->TabIndex = 45;
+			this->btnFacturacionEnCliente->Text = L"FACTURACION";
+			this->btnFacturacionEnCliente->UseVisualStyleBackColor = false;
+			this->btnFacturacionEnCliente->Click += gcnew System::EventHandler(this, &clienteForm::btnFacturacionEnCliente_Click);
+			// 
+			// btnRegistrarEnCliente
+			// 
+			this->btnRegistrarEnCliente->BackColor = System::Drawing::Color::Teal;
+			this->btnRegistrarEnCliente->Font = (gcnew System::Drawing::Font(L"Microsoft YaHei", 10.2F, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
+				static_cast<System::Byte>(0)));
+			this->btnRegistrarEnCliente->ForeColor = System::Drawing::SystemColors::ButtonHighlight;
+			this->btnRegistrarEnCliente->Location = System::Drawing::Point(161, 12);
+			this->btnRegistrarEnCliente->Name = L"btnRegistrarEnCliente";
+			this->btnRegistrarEnCliente->Size = System::Drawing::Size(160, 60);
+			this->btnRegistrarEnCliente->TabIndex = 46;
+			this->btnRegistrarEnCliente->Text = L"REGISTRAR";
+			this->btnRegistrarEnCliente->UseVisualStyleBackColor = false;
+			this->btnRegistrarEnCliente->Click += gcnew System::EventHandler(this, &clienteForm::btnRegistrarEnCliente_Click);
+			// 
 			// clienteForm
 			// 
 			this->AutoScaleDimensions = System::Drawing::SizeF(8, 16);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
-			this->ClientSize = System::Drawing::Size(1049, 634);
+			this->ClientSize = System::Drawing::Size(1182, 653);
+			this->Controls->Add(this->btnRegistrarEnCliente);
+			this->Controls->Add(this->btnFacturacionEnCliente);
+			this->Controls->Add(this->btnProveedorEnCliente);
 			this->Controls->Add(this->tablaClientes);
 			this->Controls->Add(this->txtBuscarCliente);
 			this->Controls->Add(this->label8);
@@ -424,9 +466,9 @@ namespace proyectoFacturacion {
 			this->Controls->Add(this->label2);
 			this->Controls->Add(this->label1);
 			this->Controls->Add(this->label7);
-			this->Controls->Add(this->btnVistaProducto);
-			this->Controls->Add(this->btnVistaFacturacion);
+			this->Controls->Add(this->btnProductoEnCliente);
 			this->Name = L"clienteForm";
+			this->StartPosition = System::Windows::Forms::FormStartPosition::CenterScreen;
 			this->Text = L"cliente";
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->tablaClientes))->EndInit();
 			this->ResumeLayout(false);
@@ -540,11 +582,11 @@ private: System::Void btnMostrarTodosClientes_Click(System::Object^ sender, Syst
 		MessageBox::Show("Error al mostrar clientes");
 	}
 	}
+	   //botones a las demas vistas
+	   System::Void btnProductoEnCliente_Click(System::Object^ sender, System::EventArgs^ e);
+	   System::Void btnRegistrarEnCliente_Click(System::Object^ sender, System::EventArgs^ e);
+	   System::Void btnProveedorEnCliente_Click(System::Object^ sender, System::EventArgs^ e);
+	   System::Void btnFacturacionEnCliente_Click(System::Object^ sender, System::EventArgs^ e);
 
-	private: System::Void btnVistaProducto_Click(System::Object^ sender, System::EventArgs^ e) {
-		ProductoForm^ vistaProducto = gcnew ProductoForm();
-		vistaProducto->Show();
-		this->Hide();
-	}
 };
 }

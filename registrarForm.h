@@ -59,10 +59,12 @@ namespace proyectoFacturacion {
 
 	private: System::Windows::Forms::Label^ label7;
 	private: System::Windows::Forms::Button^ btnRegistrarse;
-	private: System::Windows::Forms::Button^ btnVistaClientes;
-	private: System::Windows::Forms::Button^ btnVistaProducto;
-	private: System::Windows::Forms::Button^ btnVistaProveedor;
-	private: System::Windows::Forms::Button^ btnVistaFacturacion;
+	private: System::Windows::Forms::Button^ btnProductoEnRegistrar;
+
+	private: System::Windows::Forms::Button^ btnProveedorEnRegistrar;
+
+	private: System::Windows::Forms::Button^ btnFacturacionEnRegistrar;
+
 	private: System::Windows::Forms::Label^ label8;
 	private: System::Windows::Forms::TextBox^ txtRolUsuario;
 	private: System::Windows::Forms::Label^ label9;
@@ -83,18 +85,7 @@ namespace proyectoFacturacion {
 	private: System::Windows::Forms::DataGridViewTextBoxColumn^ colEmail;
 	private: System::Windows::Forms::DataGridViewTextBoxColumn^ colRol;
 	private: System::Windows::Forms::DataGridViewTextBoxColumn^ colEstado;
-
-
-
-
-
-
-
-
-
-
-
-
+	private: System::Windows::Forms::Button^ btnClienteEnRegistrar;
 
 
 
@@ -113,8 +104,8 @@ namespace proyectoFacturacion {
 		/// </summary>
 		void InitializeComponent(void)
 		{
-			System::Windows::Forms::DataGridViewCellStyle^ dataGridViewCellStyle3 = (gcnew System::Windows::Forms::DataGridViewCellStyle());
-			System::Windows::Forms::DataGridViewCellStyle^ dataGridViewCellStyle4 = (gcnew System::Windows::Forms::DataGridViewCellStyle());
+			System::Windows::Forms::DataGridViewCellStyle^ dataGridViewCellStyle5 = (gcnew System::Windows::Forms::DataGridViewCellStyle());
+			System::Windows::Forms::DataGridViewCellStyle^ dataGridViewCellStyle6 = (gcnew System::Windows::Forms::DataGridViewCellStyle());
 			this->label1 = (gcnew System::Windows::Forms::Label());
 			this->label2 = (gcnew System::Windows::Forms::Label());
 			this->label3 = (gcnew System::Windows::Forms::Label());
@@ -129,10 +120,9 @@ namespace proyectoFacturacion {
 			this->txtPassword = (gcnew System::Windows::Forms::TextBox());
 			this->label7 = (gcnew System::Windows::Forms::Label());
 			this->btnRegistrarse = (gcnew System::Windows::Forms::Button());
-			this->btnVistaClientes = (gcnew System::Windows::Forms::Button());
-			this->btnVistaProducto = (gcnew System::Windows::Forms::Button());
-			this->btnVistaProveedor = (gcnew System::Windows::Forms::Button());
-			this->btnVistaFacturacion = (gcnew System::Windows::Forms::Button());
+			this->btnProductoEnRegistrar = (gcnew System::Windows::Forms::Button());
+			this->btnProveedorEnRegistrar = (gcnew System::Windows::Forms::Button());
+			this->btnFacturacionEnRegistrar = (gcnew System::Windows::Forms::Button());
 			this->label8 = (gcnew System::Windows::Forms::Label());
 			this->txtRolUsuario = (gcnew System::Windows::Forms::TextBox());
 			this->label9 = (gcnew System::Windows::Forms::Label());
@@ -150,6 +140,7 @@ namespace proyectoFacturacion {
 			this->btnBuscarUsuario = (gcnew System::Windows::Forms::Button());
 			this->btnActualizarUsuario = (gcnew System::Windows::Forms::Button());
 			this->btnDeshabilitarUsuario = (gcnew System::Windows::Forms::Button());
+			this->btnClienteEnRegistrar = (gcnew System::Windows::Forms::Button());
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->tablaUsuarios))->BeginInit();
 			this->SuspendLayout();
 			// 
@@ -283,60 +274,47 @@ namespace proyectoFacturacion {
 			this->btnRegistrarse->UseVisualStyleBackColor = false;
 			this->btnRegistrarse->Click += gcnew System::EventHandler(this, &registrarForm::btnRegistrarse_Click);
 			// 
-			// btnVistaClientes
+			// btnProductoEnRegistrar
 			// 
-			this->btnVistaClientes->BackColor = System::Drawing::Color::Teal;
-			this->btnVistaClientes->Font = (gcnew System::Drawing::Font(L"Microsoft YaHei", 10.2F, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
+			this->btnProductoEnRegistrar->BackColor = System::Drawing::Color::Teal;
+			this->btnProductoEnRegistrar->Font = (gcnew System::Drawing::Font(L"Microsoft YaHei", 10.2F, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
-			this->btnVistaClientes->ForeColor = System::Drawing::SystemColors::ButtonHighlight;
-			this->btnVistaClientes->Location = System::Drawing::Point(212, 12);
-			this->btnVistaClientes->Name = L"btnVistaClientes";
-			this->btnVistaClientes->Size = System::Drawing::Size(148, 59);
-			this->btnVistaClientes->TabIndex = 18;
-			this->btnVistaClientes->Text = L"Clientes";
-			this->btnVistaClientes->UseVisualStyleBackColor = false;
-			this->btnVistaClientes->Click += gcnew System::EventHandler(this, &registrarForm::btnVistaClientes_Click);
+			this->btnProductoEnRegistrar->ForeColor = System::Drawing::SystemColors::ButtonHighlight;
+			this->btnProductoEnRegistrar->Location = System::Drawing::Point(357, 12);
+			this->btnProductoEnRegistrar->Name = L"btnProductoEnRegistrar";
+			this->btnProductoEnRegistrar->Size = System::Drawing::Size(160, 60);
+			this->btnProductoEnRegistrar->TabIndex = 19;
+			this->btnProductoEnRegistrar->Text = L"PRODUCTO";
+			this->btnProductoEnRegistrar->UseVisualStyleBackColor = false;
+			this->btnProductoEnRegistrar->Click += gcnew System::EventHandler(this, &registrarForm::btnProductoEnRegistrar_Click);
 			// 
-			// btnVistaProducto
+			// btnProveedorEnRegistrar
 			// 
-			this->btnVistaProducto->BackColor = System::Drawing::Color::Teal;
-			this->btnVistaProducto->Font = (gcnew System::Drawing::Font(L"Microsoft YaHei", 10.2F, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
+			this->btnProveedorEnRegistrar->BackColor = System::Drawing::Color::Teal;
+			this->btnProveedorEnRegistrar->Font = (gcnew System::Drawing::Font(L"Microsoft YaHei", 10.2F, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
-			this->btnVistaProducto->ForeColor = System::Drawing::SystemColors::ButtonHighlight;
-			this->btnVistaProducto->Location = System::Drawing::Point(387, 12);
-			this->btnVistaProducto->Name = L"btnVistaProducto";
-			this->btnVistaProducto->Size = System::Drawing::Size(119, 59);
-			this->btnVistaProducto->TabIndex = 19;
-			this->btnVistaProducto->Text = L"Productos";
-			this->btnVistaProducto->UseVisualStyleBackColor = false;
-			this->btnVistaProducto->Click += gcnew System::EventHandler(this, &registrarForm::btnVistaProducto_Click);
+			this->btnProveedorEnRegistrar->ForeColor = System::Drawing::SystemColors::ButtonHighlight;
+			this->btnProveedorEnRegistrar->Location = System::Drawing::Point(545, 12);
+			this->btnProveedorEnRegistrar->Name = L"btnProveedorEnRegistrar";
+			this->btnProveedorEnRegistrar->Size = System::Drawing::Size(160, 60);
+			this->btnProveedorEnRegistrar->TabIndex = 20;
+			this->btnProveedorEnRegistrar->Text = L"PROVEEDOR";
+			this->btnProveedorEnRegistrar->UseVisualStyleBackColor = false;
+			this->btnProveedorEnRegistrar->Click += gcnew System::EventHandler(this, &registrarForm::btnProveedorEnRegistrar_Click);
 			// 
-			// btnVistaProveedor
+			// btnFacturacionEnRegistrar
 			// 
-			this->btnVistaProveedor->BackColor = System::Drawing::Color::Teal;
-			this->btnVistaProveedor->Font = (gcnew System::Drawing::Font(L"Microsoft YaHei", 10.2F, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
-				static_cast<System::Byte>(0)));
-			this->btnVistaProveedor->ForeColor = System::Drawing::SystemColors::ButtonHighlight;
-			this->btnVistaProveedor->Location = System::Drawing::Point(531, 12);
-			this->btnVistaProveedor->Name = L"btnVistaProveedor";
-			this->btnVistaProveedor->Size = System::Drawing::Size(149, 59);
-			this->btnVistaProveedor->TabIndex = 20;
-			this->btnVistaProveedor->Text = L"Proveedores";
-			this->btnVistaProveedor->UseVisualStyleBackColor = false;
-			this->btnVistaProveedor->Click += gcnew System::EventHandler(this, &registrarForm::btnVistaProveedor_Click);
-			// 
-			// btnVistaFacturacion
-			// 
-			this->btnVistaFacturacion->BackColor = System::Drawing::Color::Teal;
-			this->btnVistaFacturacion->Font = (gcnew System::Drawing::Font(L"Microsoft YaHei", 10.2F, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
-				static_cast<System::Byte>(0)));
-			this->btnVistaFacturacion->ForeColor = System::Drawing::SystemColors::ButtonHighlight;
-			this->btnVistaFacturacion->Location = System::Drawing::Point(708, 12);
-			this->btnVistaFacturacion->Name = L"btnVistaFacturacion";
-			this->btnVistaFacturacion->Size = System::Drawing::Size(154, 59);
-			this->btnVistaFacturacion->TabIndex = 21;
-			this->btnVistaFacturacion->Text = L"Facturacion";
-			this->btnVistaFacturacion->UseVisualStyleBackColor = false;
+			this->btnFacturacionEnRegistrar->BackColor = System::Drawing::Color::Teal;
+			this->btnFacturacionEnRegistrar->Font = (gcnew System::Drawing::Font(L"Microsoft YaHei", 10.2F, System::Drawing::FontStyle::Bold,
+				System::Drawing::GraphicsUnit::Point, static_cast<System::Byte>(0)));
+			this->btnFacturacionEnRegistrar->ForeColor = System::Drawing::SystemColors::ButtonHighlight;
+			this->btnFacturacionEnRegistrar->Location = System::Drawing::Point(746, 12);
+			this->btnFacturacionEnRegistrar->Name = L"btnFacturacionEnRegistrar";
+			this->btnFacturacionEnRegistrar->Size = System::Drawing::Size(160, 60);
+			this->btnFacturacionEnRegistrar->TabIndex = 21;
+			this->btnFacturacionEnRegistrar->Text = L"FACTURACION";
+			this->btnFacturacionEnRegistrar->UseVisualStyleBackColor = false;
+			this->btnFacturacionEnRegistrar->Click += gcnew System::EventHandler(this, &registrarForm::btnFacturacionEnRegistrar_Click);
 			// 
 			// label8
 			// 
@@ -390,15 +368,15 @@ namespace proyectoFacturacion {
 			this->tablaUsuarios->AutoSizeColumnsMode = System::Windows::Forms::DataGridViewAutoSizeColumnsMode::Fill;
 			this->tablaUsuarios->BackgroundColor = System::Drawing::SystemColors::ButtonHighlight;
 			this->tablaUsuarios->BorderStyle = System::Windows::Forms::BorderStyle::None;
-			dataGridViewCellStyle3->Alignment = System::Windows::Forms::DataGridViewContentAlignment::MiddleLeft;
-			dataGridViewCellStyle3->BackColor = System::Drawing::Color::Teal;
-			dataGridViewCellStyle3->Font = (gcnew System::Drawing::Font(L"Microsoft YaHei", 7.8F, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
+			dataGridViewCellStyle5->Alignment = System::Windows::Forms::DataGridViewContentAlignment::MiddleLeft;
+			dataGridViewCellStyle5->BackColor = System::Drawing::Color::Teal;
+			dataGridViewCellStyle5->Font = (gcnew System::Drawing::Font(L"Microsoft YaHei", 7.8F, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
-			dataGridViewCellStyle3->ForeColor = System::Drawing::Color::White;
-			dataGridViewCellStyle3->SelectionBackColor = System::Drawing::SystemColors::Highlight;
-			dataGridViewCellStyle3->SelectionForeColor = System::Drawing::SystemColors::HighlightText;
-			dataGridViewCellStyle3->WrapMode = System::Windows::Forms::DataGridViewTriState::True;
-			this->tablaUsuarios->ColumnHeadersDefaultCellStyle = dataGridViewCellStyle3;
+			dataGridViewCellStyle5->ForeColor = System::Drawing::Color::White;
+			dataGridViewCellStyle5->SelectionBackColor = System::Drawing::SystemColors::Highlight;
+			dataGridViewCellStyle5->SelectionForeColor = System::Drawing::SystemColors::HighlightText;
+			dataGridViewCellStyle5->WrapMode = System::Windows::Forms::DataGridViewTriState::True;
+			this->tablaUsuarios->ColumnHeadersDefaultCellStyle = dataGridViewCellStyle5;
 			this->tablaUsuarios->ColumnHeadersHeightSizeMode = System::Windows::Forms::DataGridViewColumnHeadersHeightSizeMode::AutoSize;
 			this->tablaUsuarios->Columns->AddRange(gcnew cli::array< System::Windows::Forms::DataGridViewColumn^  >(8) {
 				this->colId,
@@ -409,11 +387,11 @@ namespace proyectoFacturacion {
 			this->tablaUsuarios->Location = System::Drawing::Point(174, 473);
 			this->tablaUsuarios->Name = L"tablaUsuarios";
 			this->tablaUsuarios->RowHeadersWidth = 51;
-			dataGridViewCellStyle4->BackColor = System::Drawing::Color::White;
-			dataGridViewCellStyle4->Font = (gcnew System::Drawing::Font(L"Microsoft YaHei", 7.8F, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
+			dataGridViewCellStyle6->BackColor = System::Drawing::Color::White;
+			dataGridViewCellStyle6->Font = (gcnew System::Drawing::Font(L"Microsoft YaHei", 7.8F, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
-			dataGridViewCellStyle4->ForeColor = System::Drawing::Color::Black;
-			this->tablaUsuarios->RowsDefaultCellStyle = dataGridViewCellStyle4;
+			dataGridViewCellStyle6->ForeColor = System::Drawing::Color::Black;
+			this->tablaUsuarios->RowsDefaultCellStyle = dataGridViewCellStyle6;
 			this->tablaUsuarios->RowTemplate->Height = 24;
 			this->tablaUsuarios->ScrollBars = System::Windows::Forms::ScrollBars::None;
 			this->tablaUsuarios->Size = System::Drawing::Size(881, 56);
@@ -517,11 +495,26 @@ namespace proyectoFacturacion {
 			this->btnDeshabilitarUsuario->UseVisualStyleBackColor = false;
 			this->btnDeshabilitarUsuario->Click += gcnew System::EventHandler(this, &registrarForm::btnDeshabilitarUsuario_Click);
 			// 
+			// btnClienteEnRegistrar
+			// 
+			this->btnClienteEnRegistrar->BackColor = System::Drawing::Color::Teal;
+			this->btnClienteEnRegistrar->Font = (gcnew System::Drawing::Font(L"Microsoft YaHei", 10.2F, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
+				static_cast<System::Byte>(0)));
+			this->btnClienteEnRegistrar->ForeColor = System::Drawing::SystemColors::ButtonHighlight;
+			this->btnClienteEnRegistrar->Location = System::Drawing::Point(182, 12);
+			this->btnClienteEnRegistrar->Name = L"btnClienteEnRegistrar";
+			this->btnClienteEnRegistrar->Size = System::Drawing::Size(160, 60);
+			this->btnClienteEnRegistrar->TabIndex = 43;
+			this->btnClienteEnRegistrar->Text = L"CLIENTE";
+			this->btnClienteEnRegistrar->UseVisualStyleBackColor = false;
+			this->btnClienteEnRegistrar->Click += gcnew System::EventHandler(this, &registrarForm::btnClienteEnRegistrar_Click);
+			// 
 			// registrarForm
 			// 
 			this->AutoScaleDimensions = System::Drawing::SizeF(8, 16);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
-			this->ClientSize = System::Drawing::Size(1185, 683);
+			this->ClientSize = System::Drawing::Size(1182, 653);
+			this->Controls->Add(this->btnClienteEnRegistrar);
 			this->Controls->Add(this->btnDeshabilitarUsuario);
 			this->Controls->Add(this->btnActualizarUsuario);
 			this->Controls->Add(this->btnBuscarUsuario);
@@ -531,10 +524,9 @@ namespace proyectoFacturacion {
 			this->Controls->Add(this->label9);
 			this->Controls->Add(this->txtRolUsuario);
 			this->Controls->Add(this->label8);
-			this->Controls->Add(this->btnVistaFacturacion);
-			this->Controls->Add(this->btnVistaProveedor);
-			this->Controls->Add(this->btnVistaProducto);
-			this->Controls->Add(this->btnVistaClientes);
+			this->Controls->Add(this->btnFacturacionEnRegistrar);
+			this->Controls->Add(this->btnProveedorEnRegistrar);
+			this->Controls->Add(this->btnProductoEnRegistrar);
 			this->Controls->Add(this->btnRegistrarse);
 			this->Controls->Add(this->label7);
 			this->Controls->Add(this->txtPassword);
@@ -657,20 +649,13 @@ namespace proyectoFacturacion {
 
 		tablaUsuarios->Rows->Clear();
 	}
-	private: System::Void btnVistaClientes_Click(System::Object^ sender, System::EventArgs^ e) {
-		clienteForm^ vistaCliente = gcnew clienteForm();
-		vistaCliente->Show();
-		this->Hide();
-	}
-	private: System::Void btnVistaProducto_Click(System::Object^ sender, System::EventArgs^ e) {
-		ProductoForm^ vistaProducto = gcnew ProductoForm();
-		vistaProducto->Show();
-		this->Hide();
-	}
-	private: System::Void btnVistaProveedor_Click(System::Object^ sender, System::EventArgs^ e) {
-		ProveedorForm^ vistaProveedor = gcnew ProveedorForm();
-		vistaProveedor->Show();
-		this->Hide();
-	}
+		   System::Void btnClienteEnRegistrar_Click(System::Object^ sender, System::EventArgs^ e);
+
+		   System::Void btnProductoEnRegistrar_Click(System::Object^ sender, System::EventArgs^ e);
+
+		   System::Void btnProveedorEnRegistrar_Click(System::Object^ sender, System::EventArgs^ e);
+
+		   System::Void btnFacturacionEnRegistrar_Click(System::Object^ sender, System::EventArgs^ e);
+
 };
 }

@@ -4,6 +4,30 @@
 #include <iostream>
 #include <jdbc/cppconn/prepared_statement.h>
 #include <jdbc/cppconn/resultset.h>
+#include "clienteForm.h"
+#include "ProveedorForm.h"
+#include "registrarForm.h"
+#include "ProductoForm.h"
+
+namespace proyectoFacturacion {
+	System::Void clienteForm::btnProveedorEnCliente_Click(System::Object^ sender, System::EventArgs^ e) {
+		ProveedorForm^ vistaProveedor = gcnew ProveedorForm();
+		vistaProveedor->Show();
+		this->Hide();
+	}
+	System::Void registrarForm::btnProveedorEnRegistrar_Click(System::Object^ sender, System::EventArgs^ e) {
+		ProveedorForm^ vistaProveedor = gcnew ProveedorForm();
+		vistaProveedor->Show();
+		this->Hide();
+	}
+	System::Void ProductoForm::btnProveedorEnProducto_Click(System::Object^ sender, System::EventArgs^ e) {
+		ProveedorForm^ vistaProveedor = gcnew ProveedorForm();
+		vistaProveedor->Show();
+		this->Hide();
+	}
+}
+
+
 
 Proveedor::Proveedor(){}
 Proveedor::Proveedor(std::string nombreProveedor, int cuit, std::string emailProveedor) {

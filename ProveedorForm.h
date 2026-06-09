@@ -39,7 +39,9 @@ namespace proyectoFacturacion {
 				delete components;
 			}
 		}
-	private: System::Windows::Forms::Button^ btnProducto;
+	private: System::Windows::Forms::Button^ btnClienteEnProveedor;
+	protected:
+
 	private: System::Windows::Forms::TextBox^ txtNombreProveedor;
 
 	private: System::Windows::Forms::Label^ label1;
@@ -73,13 +75,18 @@ namespace proyectoFacturacion {
 
 
 
-	private: System::Windows::Forms::Button^ button1;
+
 	private: System::Windows::Forms::DataGridViewTextBoxColumn^ colId;
 	private: System::Windows::Forms::DataGridViewTextBoxColumn^ colNombreProveedor;
 	private: System::Windows::Forms::DataGridViewTextBoxColumn^ ColCuit;
 	private: System::Windows::Forms::DataGridViewTextBoxColumn^ colEmailProveedor;
 	private: System::Windows::Forms::DataGridViewTextBoxColumn^ colEstado;
 	private: System::Windows::Forms::Button^ btnBuscarProveedor;
+	private: System::Windows::Forms::Button^ btnRegistrarEnProveedor;
+	private: System::Windows::Forms::Button^ btnFacturacionEnProveedor;
+
+	private: System::Windows::Forms::Button^ btnProductoEnProveedor;
+
 	protected:
 
 	protected:
@@ -99,9 +106,9 @@ namespace proyectoFacturacion {
 		/// </summary>
 		void InitializeComponent(void)
 		{
-			System::Windows::Forms::DataGridViewCellStyle^ dataGridViewCellStyle1 = (gcnew System::Windows::Forms::DataGridViewCellStyle());
-			System::Windows::Forms::DataGridViewCellStyle^ dataGridViewCellStyle2 = (gcnew System::Windows::Forms::DataGridViewCellStyle());
-			this->btnProducto = (gcnew System::Windows::Forms::Button());
+			System::Windows::Forms::DataGridViewCellStyle^ dataGridViewCellStyle5 = (gcnew System::Windows::Forms::DataGridViewCellStyle());
+			System::Windows::Forms::DataGridViewCellStyle^ dataGridViewCellStyle6 = (gcnew System::Windows::Forms::DataGridViewCellStyle());
+			this->btnClienteEnProveedor = (gcnew System::Windows::Forms::Button());
 			this->txtNombreProveedor = (gcnew System::Windows::Forms::TextBox());
 			this->label1 = (gcnew System::Windows::Forms::Label());
 			this->label16 = (gcnew System::Windows::Forms::Label());
@@ -121,24 +128,26 @@ namespace proyectoFacturacion {
 			this->label4 = (gcnew System::Windows::Forms::Label());
 			this->label5 = (gcnew System::Windows::Forms::Label());
 			this->txtBuscarProveedor = (gcnew System::Windows::Forms::TextBox());
-			this->button1 = (gcnew System::Windows::Forms::Button());
 			this->btnBuscarProveedor = (gcnew System::Windows::Forms::Button());
+			this->btnRegistrarEnProveedor = (gcnew System::Windows::Forms::Button());
+			this->btnFacturacionEnProveedor = (gcnew System::Windows::Forms::Button());
+			this->btnProductoEnProveedor = (gcnew System::Windows::Forms::Button());
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->tablaProveedor))->BeginInit();
 			this->SuspendLayout();
 			// 
-			// btnProducto
+			// btnClienteEnProveedor
 			// 
-			this->btnProducto->BackColor = System::Drawing::Color::Teal;
-			this->btnProducto->Font = (gcnew System::Drawing::Font(L"Microsoft YaHei", 10.2F, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
+			this->btnClienteEnProveedor->BackColor = System::Drawing::Color::Teal;
+			this->btnClienteEnProveedor->Font = (gcnew System::Drawing::Font(L"Microsoft YaHei", 10.2F, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
-			this->btnProducto->ForeColor = System::Drawing::SystemColors::ButtonHighlight;
-			this->btnProducto->Location = System::Drawing::Point(464, 45);
-			this->btnProducto->Name = L"btnProducto";
-			this->btnProducto->Size = System::Drawing::Size(148, 59);
-			this->btnProducto->TabIndex = 20;
-			this->btnProducto->Text = L"Producto";
-			this->btnProducto->UseVisualStyleBackColor = false;
-			this->btnProducto->Click += gcnew System::EventHandler(this, &ProveedorForm::btnProducto_Click);
+			this->btnClienteEnProveedor->ForeColor = System::Drawing::SystemColors::ButtonHighlight;
+			this->btnClienteEnProveedor->Location = System::Drawing::Point(387, 42);
+			this->btnClienteEnProveedor->Name = L"btnClienteEnProveedor";
+			this->btnClienteEnProveedor->Size = System::Drawing::Size(160, 60);
+			this->btnClienteEnProveedor->TabIndex = 20;
+			this->btnClienteEnProveedor->Text = L"CLIENTE";
+			this->btnClienteEnProveedor->UseVisualStyleBackColor = false;
+			this->btnClienteEnProveedor->Click += gcnew System::EventHandler(this, &ProveedorForm::btnClienteEnProveedor_Click);
 			// 
 			// txtNombreProveedor
 			// 
@@ -251,15 +260,15 @@ namespace proyectoFacturacion {
 			this->tablaProveedor->AutoSizeColumnsMode = System::Windows::Forms::DataGridViewAutoSizeColumnsMode::Fill;
 			this->tablaProveedor->BackgroundColor = System::Drawing::SystemColors::ButtonHighlight;
 			this->tablaProveedor->BorderStyle = System::Windows::Forms::BorderStyle::None;
-			dataGridViewCellStyle1->Alignment = System::Windows::Forms::DataGridViewContentAlignment::MiddleLeft;
-			dataGridViewCellStyle1->BackColor = System::Drawing::Color::Teal;
-			dataGridViewCellStyle1->Font = (gcnew System::Drawing::Font(L"Microsoft YaHei", 7.8F, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
+			dataGridViewCellStyle5->Alignment = System::Windows::Forms::DataGridViewContentAlignment::MiddleLeft;
+			dataGridViewCellStyle5->BackColor = System::Drawing::Color::Teal;
+			dataGridViewCellStyle5->Font = (gcnew System::Drawing::Font(L"Microsoft YaHei", 7.8F, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
-			dataGridViewCellStyle1->ForeColor = System::Drawing::Color::White;
-			dataGridViewCellStyle1->SelectionBackColor = System::Drawing::SystemColors::Highlight;
-			dataGridViewCellStyle1->SelectionForeColor = System::Drawing::SystemColors::HighlightText;
-			dataGridViewCellStyle1->WrapMode = System::Windows::Forms::DataGridViewTriState::True;
-			this->tablaProveedor->ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
+			dataGridViewCellStyle5->ForeColor = System::Drawing::Color::White;
+			dataGridViewCellStyle5->SelectionBackColor = System::Drawing::SystemColors::Highlight;
+			dataGridViewCellStyle5->SelectionForeColor = System::Drawing::SystemColors::HighlightText;
+			dataGridViewCellStyle5->WrapMode = System::Windows::Forms::DataGridViewTriState::True;
+			this->tablaProveedor->ColumnHeadersDefaultCellStyle = dataGridViewCellStyle5;
 			this->tablaProveedor->ColumnHeadersHeightSizeMode = System::Windows::Forms::DataGridViewColumnHeadersHeightSizeMode::AutoSize;
 			this->tablaProveedor->Columns->AddRange(gcnew cli::array< System::Windows::Forms::DataGridViewColumn^  >(5) {
 				this->colId,
@@ -270,11 +279,11 @@ namespace proyectoFacturacion {
 			this->tablaProveedor->Location = System::Drawing::Point(154, 533);
 			this->tablaProveedor->Name = L"tablaProveedor";
 			this->tablaProveedor->RowHeadersWidth = 51;
-			dataGridViewCellStyle2->BackColor = System::Drawing::Color::White;
-			dataGridViewCellStyle2->Font = (gcnew System::Drawing::Font(L"Microsoft YaHei", 7.8F, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
+			dataGridViewCellStyle6->BackColor = System::Drawing::Color::White;
+			dataGridViewCellStyle6->Font = (gcnew System::Drawing::Font(L"Microsoft YaHei", 7.8F, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
-			dataGridViewCellStyle2->ForeColor = System::Drawing::Color::Black;
-			this->tablaProveedor->RowsDefaultCellStyle = dataGridViewCellStyle2;
+			dataGridViewCellStyle6->ForeColor = System::Drawing::Color::Black;
+			this->tablaProveedor->RowsDefaultCellStyle = dataGridViewCellStyle6;
 			this->tablaProveedor->RowTemplate->Height = 24;
 			this->tablaProveedor->ScrollBars = System::Windows::Forms::ScrollBars::None;
 			this->tablaProveedor->Size = System::Drawing::Size(881, 56);
@@ -345,13 +354,6 @@ namespace proyectoFacturacion {
 			this->txtBuscarProveedor->Size = System::Drawing::Size(173, 22);
 			this->txtBuscarProveedor->TabIndex = 52;
 			// 
-			// button1
-			// 
-			this->button1->Location = System::Drawing::Point(0, 0);
-			this->button1->Name = L"button1";
-			this->button1->Size = System::Drawing::Size(75, 23);
-			this->button1->TabIndex = 0;
-			// 
 			// btnBuscarProveedor
 			// 
 			this->btnBuscarProveedor->BackColor = System::Drawing::Color::Teal;
@@ -366,13 +368,57 @@ namespace proyectoFacturacion {
 			this->btnBuscarProveedor->UseVisualStyleBackColor = false;
 			this->btnBuscarProveedor->Click += gcnew System::EventHandler(this, &ProveedorForm::btnBuscarProveedor_Click);
 			// 
+			// btnRegistrarEnProveedor
+			// 
+			this->btnRegistrarEnProveedor->BackColor = System::Drawing::Color::Teal;
+			this->btnRegistrarEnProveedor->Font = (gcnew System::Drawing::Font(L"Microsoft YaHei", 10.2F, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
+				static_cast<System::Byte>(0)));
+			this->btnRegistrarEnProveedor->ForeColor = System::Drawing::SystemColors::ButtonHighlight;
+			this->btnRegistrarEnProveedor->Location = System::Drawing::Point(196, 42);
+			this->btnRegistrarEnProveedor->Name = L"btnRegistrarEnProveedor";
+			this->btnRegistrarEnProveedor->Size = System::Drawing::Size(160, 60);
+			this->btnRegistrarEnProveedor->TabIndex = 54;
+			this->btnRegistrarEnProveedor->Text = L"REGISTRAR";
+			this->btnRegistrarEnProveedor->UseVisualStyleBackColor = false;
+			this->btnRegistrarEnProveedor->Click += gcnew System::EventHandler(this, &ProveedorForm::btnRegistrarEnProveedor_Click);
+			// 
+			// btnFacturacionEnProveedor
+			// 
+			this->btnFacturacionEnProveedor->BackColor = System::Drawing::Color::Teal;
+			this->btnFacturacionEnProveedor->Font = (gcnew System::Drawing::Font(L"Microsoft YaHei", 10.2F, System::Drawing::FontStyle::Bold,
+				System::Drawing::GraphicsUnit::Point, static_cast<System::Byte>(0)));
+			this->btnFacturacionEnProveedor->ForeColor = System::Drawing::SystemColors::ButtonHighlight;
+			this->btnFacturacionEnProveedor->Location = System::Drawing::Point(750, 42);
+			this->btnFacturacionEnProveedor->Name = L"btnFacturacionEnProveedor";
+			this->btnFacturacionEnProveedor->Size = System::Drawing::Size(160, 60);
+			this->btnFacturacionEnProveedor->TabIndex = 55;
+			this->btnFacturacionEnProveedor->Text = L"FACTURACION";
+			this->btnFacturacionEnProveedor->UseVisualStyleBackColor = false;
+			this->btnFacturacionEnProveedor->Click += gcnew System::EventHandler(this, &ProveedorForm::btnFacturacionEnProveedor_Click);
+			// 
+			// btnProductoEnProveedor
+			// 
+			this->btnProductoEnProveedor->BackColor = System::Drawing::Color::Teal;
+			this->btnProductoEnProveedor->Font = (gcnew System::Drawing::Font(L"Microsoft YaHei", 10.2F, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
+				static_cast<System::Byte>(0)));
+			this->btnProductoEnProveedor->ForeColor = System::Drawing::SystemColors::ButtonHighlight;
+			this->btnProductoEnProveedor->Location = System::Drawing::Point(568, 42);
+			this->btnProductoEnProveedor->Name = L"btnProductoEnProveedor";
+			this->btnProductoEnProveedor->Size = System::Drawing::Size(160, 60);
+			this->btnProductoEnProveedor->TabIndex = 56;
+			this->btnProductoEnProveedor->Text = L"PRODUCTO";
+			this->btnProductoEnProveedor->UseVisualStyleBackColor = false;
+			this->btnProductoEnProveedor->Click += gcnew System::EventHandler(this, &ProveedorForm::btnProductoEnProveedor_Click);
+			// 
 			// ProveedorForm
 			// 
 			this->AutoScaleDimensions = System::Drawing::SizeF(8, 16);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
-			this->ClientSize = System::Drawing::Size(1183, 767);
+			this->ClientSize = System::Drawing::Size(1182, 653);
+			this->Controls->Add(this->btnProductoEnProveedor);
+			this->Controls->Add(this->btnFacturacionEnProveedor);
+			this->Controls->Add(this->btnRegistrarEnProveedor);
 			this->Controls->Add(this->btnBuscarProveedor);
-			this->Controls->Add(this->button1);
 			this->Controls->Add(this->txtBuscarProveedor);
 			this->Controls->Add(this->label5);
 			this->Controls->Add(this->label4);
@@ -387,8 +433,9 @@ namespace proyectoFacturacion {
 			this->Controls->Add(this->label16);
 			this->Controls->Add(this->label1);
 			this->Controls->Add(this->txtNombreProveedor);
-			this->Controls->Add(this->btnProducto);
+			this->Controls->Add(this->btnClienteEnProveedor);
 			this->Name = L"ProveedorForm";
+			this->StartPosition = System::Windows::Forms::FormStartPosition::CenterScreen;
 			this->Text = L"ProveedorForm";
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->tablaProveedor))->EndInit();
 			this->ResumeLayout(false);
@@ -466,10 +513,11 @@ private: System::Void btnDeshabilitarProveedor_Click(System::Object^ sender, Sys
 
 	MessageBox::Show("Porveedor deshabilitado.");
 	}
-private: System::Void btnProducto_Click(System::Object^ sender, System::EventArgs^ e) {
-		ProductoForm^ vistaProducto = gcnew ProductoForm();
-		vistaProducto->Show();
-		this->Hide();
-	}
+	//botones para ir a las demas vistas
+	System::Void btnRegistrarEnProveedor_Click(System::Object^ sender, System::EventArgs^ e);
+	System::Void btnProductoEnProveedor_Click(System::Object^ sender, System::EventArgs^ e);
+	System::Void btnFacturacionEnProveedor_Click(System::Object^ sender, System::EventArgs^ e);
+	System::Void btnClienteEnProveedor_Click(System::Object^ sender, System::EventArgs^ e);
+
 };
 }
