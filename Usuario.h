@@ -23,7 +23,7 @@ public:
 		std::string pass,
 		std::string rol
 	);
-	void insertar(); //inserta el usuario en la base de datos con los datos que ingreso
+	bool insertar(); //inserta el usuario en la base de datos con los datos que ingreso
 	bool validarUsuario(std::string email, std::string pass); //valido el usuario con mail y contra
 	std::string rolUsuario(std::string email, std::string pass); //verifico que sea admin
 	void buscarUsuarioPorDni(int dni); //busco por dni el usuario
@@ -45,4 +45,6 @@ public:
 		std::string rol
 	);
 	void deshabilitarUsuario(int dni);
+	void habilitarUsuario(int dni);
+	void mostrarUsuariosActivos();
 };

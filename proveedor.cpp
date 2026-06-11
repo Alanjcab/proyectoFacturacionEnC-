@@ -136,29 +136,18 @@ void Proveedor::deshabilitarProveedor(int cuit) {
 	}
 }
 
-void Proveedor::mostrarProveedores() {
+void Proveedor::habilitarProveedor(int cuit) {
 	Conexion conexion;
 	sql::Connection* con = conexion.getConexion();
 	try {
 		sql::PreparedStatement* ps;
-		sql::ResultSet* rs;
-
-		ps = con->prepareStatement("select * from proveedores");
-
-		rs = ps->executeQuery();
-
-		if (rs->next()) {
-
-			std::cout << "proveedores encontrados" << std::endl;
-
-			this->idProveedor = rs->getInt("idProveedor");
-			this->nombreProveedor = rs->getString("nombreProveedor");
-			this->cuit = rs->getInt("cuit");
-			this->emailProveedor = rs->getString("emailProveedor");
-			this->activo = rs->getBoolean("activo");
-		}
+		ps = con->prepareStatement("update proveedores set activo = 1 where cuit = ?");
+		ps->setInt(1, cuit);
+		ps->executeUpdate();
+		std::cout << "Proveedor deshabilitado correctamente" << std::endl;
 	}
 	catch (sql::SQLException& e) {
 		std::cerr << "Error " << e.what() << std::endl;
 	}
 }
+

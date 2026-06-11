@@ -25,6 +25,12 @@ namespace proyectoFacturacion {
 		registrarForm(void)
 		{
 			InitializeComponent();
+
+			comboRolUsuario->Items->Add("admin");
+			comboRolUsuario->Items->Add("cajero");
+			comboRolUsuario->Items->Add("deposito");
+			
+			mostrarUsuariosActivos();
 			//
 			//TODO: agregar código de constructor aquí
 			//
@@ -49,32 +55,23 @@ namespace proyectoFacturacion {
 	private: System::Windows::Forms::Label^ label4;
 	private: System::Windows::Forms::Label^ label5;
 	private: System::Windows::Forms::TextBox^ txtNombre;
-
 	private: System::Windows::Forms::Label^ label6;
 	private: System::Windows::Forms::TextBox^ txtApellido;
 	private: System::Windows::Forms::TextBox^ txtEdad;
 	private: System::Windows::Forms::TextBox^ txtDni;
 	private: System::Windows::Forms::TextBox^ txtEmail;
 	private: System::Windows::Forms::TextBox^ txtPassword;
-
 	private: System::Windows::Forms::Label^ label7;
 	private: System::Windows::Forms::Button^ btnRegistrarse;
 	private: System::Windows::Forms::Button^ btnProductoEnRegistrar;
-
 	private: System::Windows::Forms::Button^ btnProveedorEnRegistrar;
-
 	private: System::Windows::Forms::Button^ btnFacturacionEnRegistrar;
-
 	private: System::Windows::Forms::Label^ label8;
-	private: System::Windows::Forms::TextBox^ txtRolUsuario;
 	private: System::Windows::Forms::Label^ label9;
 	private: System::Windows::Forms::TextBox^ txtBuscarDni;
-
 	private: System::Windows::Forms::Label^ label16;
 	private: System::Windows::Forms::DataGridView^ tablaUsuarios;
-
 	private: System::Windows::Forms::Button^ btnBuscarUsuario;
-
 	private: System::Windows::Forms::Button^ btnActualizarUsuario;
 	private: System::Windows::Forms::Button^ btnDeshabilitarUsuario;
 	private: System::Windows::Forms::DataGridViewTextBoxColumn^ colId;
@@ -86,10 +83,8 @@ namespace proyectoFacturacion {
 	private: System::Windows::Forms::DataGridViewTextBoxColumn^ colRol;
 	private: System::Windows::Forms::DataGridViewTextBoxColumn^ colEstado;
 	private: System::Windows::Forms::Button^ btnClienteEnRegistrar;
-
-
-
-
+	private: System::Windows::Forms::ComboBox^ comboRolUsuario;
+	private: System::Windows::Forms::Button^ bntHabilitarUsuario;
 
 	private:
 		/// <summary>
@@ -104,8 +99,8 @@ namespace proyectoFacturacion {
 		/// </summary>
 		void InitializeComponent(void)
 		{
-			System::Windows::Forms::DataGridViewCellStyle^ dataGridViewCellStyle5 = (gcnew System::Windows::Forms::DataGridViewCellStyle());
-			System::Windows::Forms::DataGridViewCellStyle^ dataGridViewCellStyle6 = (gcnew System::Windows::Forms::DataGridViewCellStyle());
+			System::Windows::Forms::DataGridViewCellStyle^ dataGridViewCellStyle1 = (gcnew System::Windows::Forms::DataGridViewCellStyle());
+			System::Windows::Forms::DataGridViewCellStyle^ dataGridViewCellStyle2 = (gcnew System::Windows::Forms::DataGridViewCellStyle());
 			this->label1 = (gcnew System::Windows::Forms::Label());
 			this->label2 = (gcnew System::Windows::Forms::Label());
 			this->label3 = (gcnew System::Windows::Forms::Label());
@@ -124,7 +119,6 @@ namespace proyectoFacturacion {
 			this->btnProveedorEnRegistrar = (gcnew System::Windows::Forms::Button());
 			this->btnFacturacionEnRegistrar = (gcnew System::Windows::Forms::Button());
 			this->label8 = (gcnew System::Windows::Forms::Label());
-			this->txtRolUsuario = (gcnew System::Windows::Forms::TextBox());
 			this->label9 = (gcnew System::Windows::Forms::Label());
 			this->txtBuscarDni = (gcnew System::Windows::Forms::TextBox());
 			this->label16 = (gcnew System::Windows::Forms::Label());
@@ -141,6 +135,8 @@ namespace proyectoFacturacion {
 			this->btnActualizarUsuario = (gcnew System::Windows::Forms::Button());
 			this->btnDeshabilitarUsuario = (gcnew System::Windows::Forms::Button());
 			this->btnClienteEnRegistrar = (gcnew System::Windows::Forms::Button());
+			this->comboRolUsuario = (gcnew System::Windows::Forms::ComboBox());
+			this->bntHabilitarUsuario = (gcnew System::Windows::Forms::Button());
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->tablaUsuarios))->BeginInit();
 			this->SuspendLayout();
 			// 
@@ -266,7 +262,7 @@ namespace proyectoFacturacion {
 			this->btnRegistrarse->Font = (gcnew System::Drawing::Font(L"Microsoft YaHei", 9, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
 			this->btnRegistrarse->ForeColor = System::Drawing::SystemColors::ButtonHighlight;
-			this->btnRegistrarse->Location = System::Drawing::Point(174, 405);
+			this->btnRegistrarse->Location = System::Drawing::Point(215, 407);
 			this->btnRegistrarse->Name = L"btnRegistrarse";
 			this->btnRegistrarse->Size = System::Drawing::Size(127, 35);
 			this->btnRegistrarse->TabIndex = 13;
@@ -325,14 +321,6 @@ namespace proyectoFacturacion {
 			this->label8->TabIndex = 22;
 			this->label8->Text = L"Rol:";
 			// 
-			// txtRolUsuario
-			// 
-			this->txtRolUsuario->BorderStyle = System::Windows::Forms::BorderStyle::FixedSingle;
-			this->txtRolUsuario->Location = System::Drawing::Point(187, 367);
-			this->txtRolUsuario->Name = L"txtRolUsuario";
-			this->txtRolUsuario->Size = System::Drawing::Size(173, 22);
-			this->txtRolUsuario->TabIndex = 23;
-			// 
 			// label9
 			// 
 			this->label9->AutoSize = true;
@@ -365,18 +353,18 @@ namespace proyectoFacturacion {
 			// 
 			// tablaUsuarios
 			// 
+			this->tablaUsuarios->AllowUserToAddRows = false;
 			this->tablaUsuarios->AutoSizeColumnsMode = System::Windows::Forms::DataGridViewAutoSizeColumnsMode::Fill;
 			this->tablaUsuarios->BackgroundColor = System::Drawing::SystemColors::ButtonHighlight;
-			this->tablaUsuarios->BorderStyle = System::Windows::Forms::BorderStyle::None;
-			dataGridViewCellStyle5->Alignment = System::Windows::Forms::DataGridViewContentAlignment::MiddleLeft;
-			dataGridViewCellStyle5->BackColor = System::Drawing::Color::Teal;
-			dataGridViewCellStyle5->Font = (gcnew System::Drawing::Font(L"Microsoft YaHei", 7.8F, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
+			dataGridViewCellStyle1->Alignment = System::Windows::Forms::DataGridViewContentAlignment::MiddleLeft;
+			dataGridViewCellStyle1->BackColor = System::Drawing::Color::Teal;
+			dataGridViewCellStyle1->Font = (gcnew System::Drawing::Font(L"Microsoft YaHei", 7.8F, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
-			dataGridViewCellStyle5->ForeColor = System::Drawing::Color::White;
-			dataGridViewCellStyle5->SelectionBackColor = System::Drawing::SystemColors::Highlight;
-			dataGridViewCellStyle5->SelectionForeColor = System::Drawing::SystemColors::HighlightText;
-			dataGridViewCellStyle5->WrapMode = System::Windows::Forms::DataGridViewTriState::True;
-			this->tablaUsuarios->ColumnHeadersDefaultCellStyle = dataGridViewCellStyle5;
+			dataGridViewCellStyle1->ForeColor = System::Drawing::Color::White;
+			dataGridViewCellStyle1->SelectionBackColor = System::Drawing::SystemColors::Highlight;
+			dataGridViewCellStyle1->SelectionForeColor = System::Drawing::SystemColors::HighlightText;
+			dataGridViewCellStyle1->WrapMode = System::Windows::Forms::DataGridViewTriState::True;
+			this->tablaUsuarios->ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
 			this->tablaUsuarios->ColumnHeadersHeightSizeMode = System::Windows::Forms::DataGridViewColumnHeadersHeightSizeMode::AutoSize;
 			this->tablaUsuarios->Columns->AddRange(gcnew cli::array< System::Windows::Forms::DataGridViewColumn^  >(8) {
 				this->colId,
@@ -384,17 +372,17 @@ namespace proyectoFacturacion {
 			});
 			this->tablaUsuarios->EnableHeadersVisualStyles = false;
 			this->tablaUsuarios->GridColor = System::Drawing::SystemColors::ActiveCaptionText;
-			this->tablaUsuarios->Location = System::Drawing::Point(174, 473);
+			this->tablaUsuarios->Location = System::Drawing::Point(164, 508);
 			this->tablaUsuarios->Name = L"tablaUsuarios";
 			this->tablaUsuarios->RowHeadersWidth = 51;
-			dataGridViewCellStyle6->BackColor = System::Drawing::Color::White;
-			dataGridViewCellStyle6->Font = (gcnew System::Drawing::Font(L"Microsoft YaHei", 7.8F, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
+			dataGridViewCellStyle2->BackColor = System::Drawing::Color::White;
+			dataGridViewCellStyle2->Font = (gcnew System::Drawing::Font(L"Microsoft YaHei", 7.8F, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
-			dataGridViewCellStyle6->ForeColor = System::Drawing::Color::Black;
-			this->tablaUsuarios->RowsDefaultCellStyle = dataGridViewCellStyle6;
+			dataGridViewCellStyle2->ForeColor = System::Drawing::Color::Black;
+			this->tablaUsuarios->RowsDefaultCellStyle = dataGridViewCellStyle2;
 			this->tablaUsuarios->RowTemplate->Height = 24;
-			this->tablaUsuarios->ScrollBars = System::Windows::Forms::ScrollBars::None;
-			this->tablaUsuarios->Size = System::Drawing::Size(881, 56);
+			this->tablaUsuarios->ScrollBars = System::Windows::Forms::ScrollBars::Vertical;
+			this->tablaUsuarios->Size = System::Drawing::Size(882, 114);
 			this->tablaUsuarios->TabIndex = 39;
 			// 
 			// colId
@@ -461,7 +449,7 @@ namespace proyectoFacturacion {
 			this->btnBuscarUsuario->ForeColor = System::Drawing::SystemColors::ButtonHighlight;
 			this->btnBuscarUsuario->Location = System::Drawing::Point(730, 249);
 			this->btnBuscarUsuario->Name = L"btnBuscarUsuario";
-			this->btnBuscarUsuario->Size = System::Drawing::Size(96, 30);
+			this->btnBuscarUsuario->Size = System::Drawing::Size(96, 37);
 			this->btnBuscarUsuario->TabIndex = 40;
 			this->btnBuscarUsuario->Text = L"BUSCAR";
 			this->btnBuscarUsuario->UseVisualStyleBackColor = false;
@@ -473,7 +461,7 @@ namespace proyectoFacturacion {
 			this->btnActualizarUsuario->Font = (gcnew System::Drawing::Font(L"Microsoft YaHei", 9, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
 			this->btnActualizarUsuario->ForeColor = System::Drawing::SystemColors::ButtonHighlight;
-			this->btnActualizarUsuario->Location = System::Drawing::Point(307, 405);
+			this->btnActualizarUsuario->Location = System::Drawing::Point(388, 275);
 			this->btnActualizarUsuario->Name = L"btnActualizarUsuario";
 			this->btnActualizarUsuario->Size = System::Drawing::Size(129, 35);
 			this->btnActualizarUsuario->TabIndex = 41;
@@ -487,7 +475,7 @@ namespace proyectoFacturacion {
 			this->btnDeshabilitarUsuario->Font = (gcnew System::Drawing::Font(L"Microsoft YaHei", 9, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
 			this->btnDeshabilitarUsuario->ForeColor = System::Drawing::SystemColors::ButtonHighlight;
-			this->btnDeshabilitarUsuario->Location = System::Drawing::Point(174, 535);
+			this->btnDeshabilitarUsuario->Location = System::Drawing::Point(388, 358);
 			this->btnDeshabilitarUsuario->Name = L"btnDeshabilitarUsuario";
 			this->btnDeshabilitarUsuario->Size = System::Drawing::Size(138, 35);
 			this->btnDeshabilitarUsuario->TabIndex = 42;
@@ -509,11 +497,35 @@ namespace proyectoFacturacion {
 			this->btnClienteEnRegistrar->UseVisualStyleBackColor = false;
 			this->btnClienteEnRegistrar->Click += gcnew System::EventHandler(this, &registrarForm::btnClienteEnRegistrar_Click);
 			// 
+			// comboRolUsuario
+			// 
+			this->comboRolUsuario->FormattingEnabled = true;
+			this->comboRolUsuario->Location = System::Drawing::Point(188, 368);
+			this->comboRolUsuario->Name = L"comboRolUsuario";
+			this->comboRolUsuario->Size = System::Drawing::Size(172, 24);
+			this->comboRolUsuario->TabIndex = 44;
+			// 
+			// bntHabilitarUsuario
+			// 
+			this->bntHabilitarUsuario->BackColor = System::Drawing::Color::Teal;
+			this->bntHabilitarUsuario->Font = (gcnew System::Drawing::Font(L"Microsoft YaHei", 9, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
+				static_cast<System::Byte>(0)));
+			this->bntHabilitarUsuario->ForeColor = System::Drawing::SystemColors::ButtonHighlight;
+			this->bntHabilitarUsuario->Location = System::Drawing::Point(388, 317);
+			this->bntHabilitarUsuario->Name = L"bntHabilitarUsuario";
+			this->bntHabilitarUsuario->Size = System::Drawing::Size(129, 35);
+			this->bntHabilitarUsuario->TabIndex = 45;
+			this->bntHabilitarUsuario->Text = L"HABILITAR";
+			this->bntHabilitarUsuario->UseVisualStyleBackColor = false;
+			this->bntHabilitarUsuario->Click += gcnew System::EventHandler(this, &registrarForm::bntHabilitarUsuario_Click);
+			// 
 			// registrarForm
 			// 
 			this->AutoScaleDimensions = System::Drawing::SizeF(8, 16);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
 			this->ClientSize = System::Drawing::Size(1182, 653);
+			this->Controls->Add(this->bntHabilitarUsuario);
+			this->Controls->Add(this->comboRolUsuario);
 			this->Controls->Add(this->btnClienteEnRegistrar);
 			this->Controls->Add(this->btnDeshabilitarUsuario);
 			this->Controls->Add(this->btnActualizarUsuario);
@@ -522,7 +534,6 @@ namespace proyectoFacturacion {
 			this->Controls->Add(this->label16);
 			this->Controls->Add(this->txtBuscarDni);
 			this->Controls->Add(this->label9);
-			this->Controls->Add(this->txtRolUsuario);
 			this->Controls->Add(this->label8);
 			this->Controls->Add(this->btnFacturacionEnRegistrar);
 			this->Controls->Add(this->btnProveedorEnRegistrar);
@@ -553,6 +564,38 @@ namespace proyectoFacturacion {
 
 		}
 #pragma endregion
+		//muestro los usuarios activos en mi tabla de usuarios
+	private: void mostrarUsuariosActivos() {
+		tablaUsuarios->Rows->Clear();
+		Conexion conexion;
+		sql::Connection* con = conexion.getConexion();
+
+		try {
+			sql::PreparedStatement* ps = con->prepareStatement(
+				"select * from usuarios where activo = 1"
+			);
+			sql::ResultSet* rs = ps->executeQuery();
+
+			while (rs->next()) {
+				tablaUsuarios->Rows->Add(
+					rs->getInt("id"),
+					gcnew String(rs->getString("nombre").c_str()),
+					gcnew String(rs->getString("apellido").c_str()),
+					rs->getInt("edad"),
+					rs->getInt("dni"),
+					gcnew String(rs->getString("email").c_str()),
+					gcnew String(rs->getString("rol").c_str()),
+					"SI"
+				);
+			}
+			delete rs;
+			delete ps;
+		}
+		catch (sql::SQLException& e) {
+			MessageBox::Show(gcnew String(e.what()));
+		}
+	}
+
 	private: System::Void btnRegistrarse_Click(System::Object^ sender, System::EventArgs^ e) {
 		std::string nombre = msclr::interop::marshal_as<std::string>(txtNombre->Text);
 		std::string apellido = msclr::interop::marshal_as<std::string>(txtApellido->Text);
@@ -560,7 +603,14 @@ namespace proyectoFacturacion {
 		int dni = System::Convert::ToInt32(txtDni->Text);
 		std::string email = msclr::interop::marshal_as<std::string>(txtEmail->Text);
 		std::string pass = msclr::interop::marshal_as<std::string>(txtPassword->Text);
-		std::string rol = msclr::interop::marshal_as<std::string>(txtRolUsuario->Text);
+		if (comboRolUsuario->SelectedIndex == -1) {
+			MessageBox::Show("Selecciona un rol.");
+			return;
+		}
+
+		std::string rol = msclr::interop::marshal_as<std::string>(
+			comboRolUsuario->SelectedItem->ToString()
+		);
 
 		Usuario usuario(
 			nombre,
@@ -572,16 +622,19 @@ namespace proyectoFacturacion {
 			rol
 		);
 
-		usuario.insertar();
-
-		txtNombre->Text = "";
-		txtApellido->Text = "";
-		txtEdad->Text = "";
-		txtDni->Text = "";
-		txtEmail->Text = "";
-		txtPassword->Text = "";
-		txtRolUsuario->Text = "";
-		txtNombre->Focus();
+		if (usuario.insertar()) {
+			txtNombre->Text = "";
+			txtApellido->Text = "";
+			txtEdad->Text = "";
+			txtDni->Text = "";
+			txtEmail->Text = "";
+			txtPassword->Text = "";
+			comboRolUsuario->SelectedIndex = -1;
+			MessageBox::Show("Usuario registrado correctamente.");
+		}
+		else {
+			MessageBox::Show("El dni ya existe o hay un error al registrar.");
+		}
 	}
 	private: System::Void tablaUsuario_Click(System::Object^ sender, System::EventArgs^ e) {
 	}
@@ -599,20 +652,17 @@ namespace proyectoFacturacion {
 		txtEdad->Text = usuario.getEdad().ToString();
 		txtDni->Text = usuario.getDni().ToString();
 		txtEmail->Text = gcnew String(usuario.getEmail().c_str());
-		txtRolUsuario->Text = gcnew String(usuario.getRol().c_str());
+		comboRolUsuario->SelectedItem = gcnew String(usuario.getRol().c_str());
 
-		tablaUsuarios->Rows->Clear();
-
-		tablaUsuarios->Rows->Add(
-			usuario.getId(),
-			gcnew String(usuario.getNombre().c_str()),
-			gcnew String(usuario.getApellido().c_str()),
-			usuario.getEdad(),
-			usuario.getDni(),
-			gcnew String(usuario.getEmail().c_str()),
-			gcnew String(usuario.getRol().c_str()),
-			usuario.getActivo() ? "SI" : "NO"
-		);
+		//depende del estado del ususario muetro los botones
+		if (usuario.getActivo()) {
+			btnDeshabilitarUsuario->Enabled = true;
+			bntHabilitarUsuario->Enabled = false;
+		}
+		else {
+			btnDeshabilitarUsuario->Enabled = false;
+			bntHabilitarUsuario->Enabled = true;
+		}
 
 	}
 	private: System::Void btnActualizarUsuario_Click(System::Object^ sender, System::EventArgs^ e) {
@@ -625,10 +675,15 @@ namespace proyectoFacturacion {
 		int dni = Convert::ToInt32(txtDni->Text);
 		std::string email = msclr::interop::marshal_as<std::string>(txtEmail->Text);
 		std::string pass = msclr::interop::marshal_as<std::string>(txtPassword->Text);
-		std::string rol = msclr::interop::marshal_as<std::string>(txtRolUsuario->Text);
+		if (comboRolUsuario->SelectedIndex == -1) {
+			MessageBox::Show("Selecciona un rol.");
+			return;
+		}
 
+		std::string rol = msclr::interop::marshal_as<std::string>(
+			comboRolUsuario->SelectedItem->ToString()
+		);
 		Usuario usuario;
-
 		usuario.actualizarUsuario(
 			id,
 			nombre,
@@ -647,15 +702,22 @@ namespace proyectoFacturacion {
 		Usuario usuario;
 		usuario.deshabilitarUsuario(dni);
 
-		tablaUsuarios->Rows->Clear();
+		mostrarUsuariosActivos();
+		MessageBox::Show("Usuario deshabilitado");
 	}
-		   System::Void btnClienteEnRegistrar_Click(System::Object^ sender, System::EventArgs^ e);
+	private: System::Void bntHabilitarUsuario_Click(System::Object^ sender, System::EventArgs^ e) {
+		int dni = Convert::ToInt32(txtBuscarDni->Text);
 
-		   System::Void btnProductoEnRegistrar_Click(System::Object^ sender, System::EventArgs^ e);
+		Usuario usuario;
+		usuario.habilitarUsuario(dni);
 
-		   System::Void btnProveedorEnRegistrar_Click(System::Object^ sender, System::EventArgs^ e);
+		mostrarUsuariosActivos();
+		MessageBox::Show("Usuario habilitado");
+	}
 
-		   System::Void btnFacturacionEnRegistrar_Click(System::Object^ sender, System::EventArgs^ e);
-
+	System::Void btnClienteEnRegistrar_Click(System::Object^ sender, System::EventArgs^ e);
+	System::Void btnProductoEnRegistrar_Click(System::Object^ sender, System::EventArgs^ e);
+	System::Void btnProveedorEnRegistrar_Click(System::Object^ sender, System::EventArgs^ e);
+	System::Void btnFacturacionEnRegistrar_Click(System::Object^ sender, System::EventArgs^ e);
 };
 }

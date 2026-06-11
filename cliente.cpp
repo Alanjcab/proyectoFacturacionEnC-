@@ -123,6 +123,20 @@ void Cliente::deshabilitarCliente(int dniCliente) {  //deshabilito al cliente po
 		std::cerr << "Error " << e.what() << std::endl;
 	}
 }
+void Cliente::habilitarCliente(int dniCliente) {  //deshabilito al cliente por numero de dni
+	Conexion conexion;
+	sql::Connection* con = conexion.getConexion();
+	try {
+		sql::PreparedStatement* ps;
+		ps = con->prepareStatement("update clientes set activo = 1 where dniCliente = ?");
+		ps->setInt(1, dniCliente);
+		ps->executeUpdate();
+		std::cout << "Cliente habilitado correctamente" << std::endl;
+	}
+	catch (sql::SQLException& e) {
+		std::cerr << "Error " << e.what() << std::endl;
+	}
+}
 
 void Cliente::actualizarCliente(int idCliente, std::string nombre, std::string apellido, int dniCliente, std::string emailCliente) { //actualizo datos de un cliente
 	Conexion conexion;

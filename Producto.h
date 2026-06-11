@@ -28,6 +28,8 @@ class Producto {
 		void buscarProducto(int codigo);
 		void actualizarProducto(int idProducto, std::string descripcion, double precio,int stock);
 		void deshabilitarProducto(int codigo);
+		void habilitarProducto(int codigo);
 		void sumarStock(int idProducto, int cantidad);
 		void descontarStock(int idProducto, int cantidad);
+		void mostrarProductoActivos();
 };

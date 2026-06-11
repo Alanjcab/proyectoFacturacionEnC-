@@ -143,3 +143,18 @@ void Producto::deshabilitarProducto(int codigo) {
         std::cerr << "Error " << e.what() << std::endl;
     }
 }
+
+void Producto::habilitarProducto(int codigo) {
+    Conexion conexion;
+    sql::Connection* con = conexion.getConexion();
+    try {
+        sql::PreparedStatement* ps;
+        ps = con->prepareStatement("update productos set activo = 1 where codigo = ?");
+        ps->setInt(1, codigo);
+        ps->executeUpdate();
+        std::cout << "Producto habilitado." << std::endl;
+    }
+    catch (sql::SQLException& e) {
+        std::cerr << "Error " << e.what() << std::endl;
+    }
+}

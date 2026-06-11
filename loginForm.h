@@ -77,11 +77,11 @@ namespace proyectoFacturacion {
 			this->btnIngresar->Font = (gcnew System::Drawing::Font(L"Microsoft YaHei", 9, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
 			this->btnIngresar->ForeColor = System::Drawing::SystemColors::ButtonHighlight;
-			this->btnIngresar->Location = System::Drawing::Point(333, 307);
+			this->btnIngresar->Location = System::Drawing::Point(466, 329);
 			this->btnIngresar->Name = L"btnIngresar";
-			this->btnIngresar->Size = System::Drawing::Size(98, 37);
+			this->btnIngresar->Size = System::Drawing::Size(160, 60);
 			this->btnIngresar->TabIndex = 0;
-			this->btnIngresar->Text = L"Ingresar";
+			this->btnIngresar->Text = L"INGRESAR";
 			this->btnIngresar->UseVisualStyleBackColor = false;
 			this->btnIngresar->Click += gcnew System::EventHandler(this, &loginForm::btnIngresar_Click);
 			// 
@@ -90,29 +90,29 @@ namespace proyectoFacturacion {
 			this->label1->AutoSize = true;
 			this->label1->Font = (gcnew System::Drawing::Font(L"Microsoft YaHei", 9, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
-			this->label1->Location = System::Drawing::Point(319, 148);
+			this->label1->Location = System::Drawing::Point(481, 145);
 			this->label1->Name = L"label1";
-			this->label1->Size = System::Drawing::Size(112, 19);
+			this->label1->Size = System::Drawing::Size(132, 19);
 			this->label1->TabIndex = 2;
-			this->label1->Text = L"Usuario email";
+			this->label1->Text = L"USUARIO EMAIL";
 			// 
 			// label2
 			// 
 			this->label2->AutoSize = true;
 			this->label2->Font = (gcnew System::Drawing::Font(L"Microsoft YaHei", 9, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
-			this->label2->Location = System::Drawing::Point(326, 221);
+			this->label2->Location = System::Drawing::Point(486, 232);
 			this->label2->Name = L"label2";
-			this->label2->Size = System::Drawing::Size(95, 19);
+			this->label2->Size = System::Drawing::Size(116, 19);
 			this->label2->TabIndex = 3;
-			this->label2->Text = L"Contraseña";
+			this->label2->Text = L"CONTRASEÑA";
 			// 
 			// txtUsuario
 			// 
 			this->txtUsuario->BackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(224)), static_cast<System::Int32>(static_cast<System::Byte>(224)),
 				static_cast<System::Int32>(static_cast<System::Byte>(224)));
 			this->txtUsuario->BorderStyle = System::Windows::Forms::BorderStyle::FixedSingle;
-			this->txtUsuario->Location = System::Drawing::Point(270, 185);
+			this->txtUsuario->Location = System::Drawing::Point(435, 188);
 			this->txtUsuario->Name = L"txtUsuario";
 			this->txtUsuario->Size = System::Drawing::Size(219, 22);
 			this->txtUsuario->TabIndex = 4;
@@ -122,7 +122,7 @@ namespace proyectoFacturacion {
 			this->txtPasswordUser->BackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(224)), static_cast<System::Int32>(static_cast<System::Byte>(224)),
 				static_cast<System::Int32>(static_cast<System::Byte>(224)));
 			this->txtPasswordUser->BorderStyle = System::Windows::Forms::BorderStyle::FixedSingle;
-			this->txtPasswordUser->Location = System::Drawing::Point(270, 254);
+			this->txtPasswordUser->Location = System::Drawing::Point(435, 272);
 			this->txtPasswordUser->Name = L"txtPasswordUser";
 			this->txtPasswordUser->Size = System::Drawing::Size(219, 22);
 			this->txtPasswordUser->TabIndex = 5;
@@ -138,7 +138,7 @@ namespace proyectoFacturacion {
 			// 
 			this->AutoScaleDimensions = System::Drawing::SizeF(8, 16);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
-			this->ClientSize = System::Drawing::Size(757, 682);
+			this->ClientSize = System::Drawing::Size(1182, 653);
 			this->Controls->Add(this->label3);
 			this->Controls->Add(this->txtPasswordUser);
 			this->Controls->Add(this->txtUsuario);
@@ -146,6 +146,7 @@ namespace proyectoFacturacion {
 			this->Controls->Add(this->label1);
 			this->Controls->Add(this->btnIngresar);
 			this->Name = L"loginForm";
+			this->StartPosition = System::Windows::Forms::FormStartPosition::CenterScreen;
 			this->Text = L"loginForm";
 			this->ResumeLayout(false);
 			this->PerformLayout();
@@ -153,6 +154,15 @@ namespace proyectoFacturacion {
 		}
 #pragma endregion
 	private: System::Void btnIngresar_Click(System::Object^ sender, System::EventArgs^ e) {
+
+		String^ txtEmail = txtUsuario->Text;
+
+		if (!txtEmail->Contains("@"))
+		{
+			MessageBox::Show("Ingrese un email válido.");
+			return;
+		}
+
 		std::string email = msclr::interop::marshal_as<std::string>(txtUsuario->Text);
 		std::string pass = msclr::interop::marshal_as<std::string>(txtPasswordUser->Text);
 

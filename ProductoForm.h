@@ -25,6 +25,7 @@ namespace proyectoFacturacion {
 		{
 			InitializeComponent();
 			cargarProveedores();
+			mostrarProductosActivos();
 			//
 			//TODO: agregar código de constructor aquí
 			//
@@ -76,6 +77,7 @@ namespace proyectoFacturacion {
 	private: System::Windows::Forms::Button^ btnClienteEnProducto;
 	private: System::Windows::Forms::Button^ btnRegistrarEnProducto;
 	private: System::Windows::Forms::Button^ btnFacturacionEnProducto;
+	private: System::Windows::Forms::Button^ btnHabilitarProducto;
 
 
 
@@ -96,8 +98,8 @@ namespace proyectoFacturacion {
 		/// </summary>
 		void InitializeComponent(void)
 		{
-			System::Windows::Forms::DataGridViewCellStyle^ dataGridViewCellStyle7 = (gcnew System::Windows::Forms::DataGridViewCellStyle());
-			System::Windows::Forms::DataGridViewCellStyle^ dataGridViewCellStyle8 = (gcnew System::Windows::Forms::DataGridViewCellStyle());
+			System::Windows::Forms::DataGridViewCellStyle^ dataGridViewCellStyle1 = (gcnew System::Windows::Forms::DataGridViewCellStyle());
+			System::Windows::Forms::DataGridViewCellStyle^ dataGridViewCellStyle2 = (gcnew System::Windows::Forms::DataGridViewCellStyle());
 			this->btnProveedorEnProducto = (gcnew System::Windows::Forms::Button());
 			this->label16 = (gcnew System::Windows::Forms::Label());
 			this->btnRegistrarProveedor = (gcnew System::Windows::Forms::Button());
@@ -127,6 +129,7 @@ namespace proyectoFacturacion {
 			this->btnClienteEnProducto = (gcnew System::Windows::Forms::Button());
 			this->btnRegistrarEnProducto = (gcnew System::Windows::Forms::Button());
 			this->btnFacturacionEnProducto = (gcnew System::Windows::Forms::Button());
+			this->btnHabilitarProducto = (gcnew System::Windows::Forms::Button());
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->tablaProductos))->BeginInit();
 			this->SuspendLayout();
 			// 
@@ -259,18 +262,18 @@ namespace proyectoFacturacion {
 			// 
 			// tablaProductos
 			// 
+			this->tablaProductos->AllowUserToAddRows = false;
 			this->tablaProductos->AutoSizeColumnsMode = System::Windows::Forms::DataGridViewAutoSizeColumnsMode::Fill;
 			this->tablaProductos->BackgroundColor = System::Drawing::SystemColors::ButtonHighlight;
-			this->tablaProductos->BorderStyle = System::Windows::Forms::BorderStyle::None;
-			dataGridViewCellStyle7->Alignment = System::Windows::Forms::DataGridViewContentAlignment::MiddleLeft;
-			dataGridViewCellStyle7->BackColor = System::Drawing::Color::Teal;
-			dataGridViewCellStyle7->Font = (gcnew System::Drawing::Font(L"Microsoft YaHei", 7.8F, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
+			dataGridViewCellStyle1->Alignment = System::Windows::Forms::DataGridViewContentAlignment::MiddleLeft;
+			dataGridViewCellStyle1->BackColor = System::Drawing::Color::Teal;
+			dataGridViewCellStyle1->Font = (gcnew System::Drawing::Font(L"Microsoft YaHei", 7.8F, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
-			dataGridViewCellStyle7->ForeColor = System::Drawing::Color::White;
-			dataGridViewCellStyle7->SelectionBackColor = System::Drawing::SystemColors::Highlight;
-			dataGridViewCellStyle7->SelectionForeColor = System::Drawing::SystemColors::HighlightText;
-			dataGridViewCellStyle7->WrapMode = System::Windows::Forms::DataGridViewTriState::True;
-			this->tablaProductos->ColumnHeadersDefaultCellStyle = dataGridViewCellStyle7;
+			dataGridViewCellStyle1->ForeColor = System::Drawing::Color::White;
+			dataGridViewCellStyle1->SelectionBackColor = System::Drawing::SystemColors::Highlight;
+			dataGridViewCellStyle1->SelectionForeColor = System::Drawing::SystemColors::HighlightText;
+			dataGridViewCellStyle1->WrapMode = System::Windows::Forms::DataGridViewTriState::True;
+			this->tablaProductos->ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
 			this->tablaProductos->ColumnHeadersHeightSizeMode = System::Windows::Forms::DataGridViewColumnHeadersHeightSizeMode::AutoSize;
 			this->tablaProductos->Columns->AddRange(gcnew cli::array< System::Windows::Forms::DataGridViewColumn^  >(7) {
 				this->colId,
@@ -278,17 +281,17 @@ namespace proyectoFacturacion {
 			});
 			this->tablaProductos->EnableHeadersVisualStyles = false;
 			this->tablaProductos->GridColor = System::Drawing::SystemColors::ActiveCaptionText;
-			this->tablaProductos->Location = System::Drawing::Point(120, 533);
+			this->tablaProductos->Location = System::Drawing::Point(153, 491);
 			this->tablaProductos->Name = L"tablaProductos";
 			this->tablaProductos->RowHeadersWidth = 51;
-			dataGridViewCellStyle8->BackColor = System::Drawing::Color::White;
-			dataGridViewCellStyle8->Font = (gcnew System::Drawing::Font(L"Microsoft YaHei", 7.8F, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
+			dataGridViewCellStyle2->BackColor = System::Drawing::Color::White;
+			dataGridViewCellStyle2->Font = (gcnew System::Drawing::Font(L"Microsoft YaHei", 7.8F, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
-			dataGridViewCellStyle8->ForeColor = System::Drawing::Color::Black;
-			this->tablaProductos->RowsDefaultCellStyle = dataGridViewCellStyle8;
+			dataGridViewCellStyle2->ForeColor = System::Drawing::Color::Black;
+			this->tablaProductos->RowsDefaultCellStyle = dataGridViewCellStyle2;
 			this->tablaProductos->RowTemplate->Height = 24;
 			this->tablaProductos->ScrollBars = System::Windows::Forms::ScrollBars::None;
-			this->tablaProductos->Size = System::Drawing::Size(881, 56);
+			this->tablaProductos->Size = System::Drawing::Size(881, 106);
 			this->tablaProductos->TabIndex = 60;
 			// 
 			// colId
@@ -347,7 +350,7 @@ namespace proyectoFacturacion {
 			this->btnBuscarProducto->Font = (gcnew System::Drawing::Font(L"Microsoft YaHei", 9, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
 			this->btnBuscarProducto->ForeColor = System::Drawing::SystemColors::ButtonHighlight;
-			this->btnBuscarProducto->Location = System::Drawing::Point(472, 498);
+			this->btnBuscarProducto->Location = System::Drawing::Point(345, 445);
 			this->btnBuscarProducto->Name = L"btnBuscarProducto";
 			this->btnBuscarProducto->Size = System::Drawing::Size(70, 31);
 			this->btnBuscarProducto->TabIndex = 61;
@@ -358,7 +361,7 @@ namespace proyectoFacturacion {
 			// txtBuscarProducto
 			// 
 			this->txtBuscarProducto->BorderStyle = System::Windows::Forms::BorderStyle::FixedSingle;
-			this->txtBuscarProducto->Location = System::Drawing::Point(281, 504);
+			this->txtBuscarProducto->Location = System::Drawing::Point(153, 451);
 			this->txtBuscarProducto->Name = L"txtBuscarProducto";
 			this->txtBuscarProducto->Size = System::Drawing::Size(173, 22);
 			this->txtBuscarProducto->TabIndex = 62;
@@ -366,7 +369,7 @@ namespace proyectoFacturacion {
 			// label6
 			// 
 			this->label6->AutoSize = true;
-			this->label6->Location = System::Drawing::Point(130, 506);
+			this->label6->Location = System::Drawing::Point(150, 421);
 			this->label6->Name = L"label6";
 			this->label6->Size = System::Drawing::Size(132, 16);
 			this->label6->TabIndex = 63;
@@ -378,7 +381,7 @@ namespace proyectoFacturacion {
 			this->btnDeshabilitarProducto->Font = (gcnew System::Drawing::Font(L"Microsoft YaHei", 9, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
 			this->btnDeshabilitarProducto->ForeColor = System::Drawing::SystemColors::ButtonHighlight;
-			this->btnDeshabilitarProducto->Location = System::Drawing::Point(537, 434);
+			this->btnDeshabilitarProducto->Location = System::Drawing::Point(639, 310);
 			this->btnDeshabilitarProducto->Name = L"btnDeshabilitarProducto";
 			this->btnDeshabilitarProducto->Size = System::Drawing::Size(129, 35);
 			this->btnDeshabilitarProducto->TabIndex = 65;
@@ -392,7 +395,7 @@ namespace proyectoFacturacion {
 			this->btnActualizarProducto->Font = (gcnew System::Drawing::Font(L"Microsoft YaHei", 9, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
 			this->btnActualizarProducto->ForeColor = System::Drawing::SystemColors::ButtonHighlight;
-			this->btnActualizarProducto->Location = System::Drawing::Point(354, 434);
+			this->btnActualizarProducto->Location = System::Drawing::Point(639, 269);
 			this->btnActualizarProducto->Name = L"btnActualizarProducto";
 			this->btnActualizarProducto->Size = System::Drawing::Size(129, 35);
 			this->btnActualizarProducto->TabIndex = 66;
@@ -442,11 +445,26 @@ namespace proyectoFacturacion {
 			this->btnFacturacionEnProducto->UseVisualStyleBackColor = false;
 			this->btnFacturacionEnProducto->Click += gcnew System::EventHandler(this, &ProductoForm::btnFacturacionEnProducto_Click);
 			// 
+			// btnHabilitarProducto
+			// 
+			this->btnHabilitarProducto->BackColor = System::Drawing::Color::Teal;
+			this->btnHabilitarProducto->Font = (gcnew System::Drawing::Font(L"Microsoft YaHei", 9, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
+				static_cast<System::Byte>(0)));
+			this->btnHabilitarProducto->ForeColor = System::Drawing::SystemColors::ButtonHighlight;
+			this->btnHabilitarProducto->Location = System::Drawing::Point(639, 353);
+			this->btnHabilitarProducto->Name = L"btnHabilitarProducto";
+			this->btnHabilitarProducto->Size = System::Drawing::Size(129, 35);
+			this->btnHabilitarProducto->TabIndex = 71;
+			this->btnHabilitarProducto->Text = L"HABILITAR";
+			this->btnHabilitarProducto->UseVisualStyleBackColor = false;
+			this->btnHabilitarProducto->Click += gcnew System::EventHandler(this, &ProductoForm::btnHabilitarProducto_Click);
+			// 
 			// ProductoForm
 			// 
 			this->AutoScaleDimensions = System::Drawing::SizeF(8, 16);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
 			this->ClientSize = System::Drawing::Size(1182, 653);
+			this->Controls->Add(this->btnHabilitarProducto);
 			this->Controls->Add(this->btnFacturacionEnProducto);
 			this->Controls->Add(this->btnRegistrarEnProducto);
 			this->Controls->Add(this->btnClienteEnProducto);
@@ -478,6 +496,34 @@ namespace proyectoFacturacion {
 
 		}
 #pragma endregion
+	private: void mostrarProductosActivos() {
+				
+		tablaProductos->Rows->Clear();
+			Conexion conexion;
+			sql::Connection* con = conexion.getConexion();
+
+			try {
+				sql::PreparedStatement* ps = con->prepareStatement("select * from productos where activo = 1");
+				sql::ResultSet* rs = ps->executeQuery();
+
+				while (rs->next()) {
+				tablaProductos->Rows->Add(
+					rs->getInt("idProducto"),
+					rs->getInt("codigo"),
+					gcnew String(rs->getString("descripcion").c_str()),
+					rs->getDouble("precio"),
+					rs->getInt("stock"),
+					gcnew String(rs->getString("idProveedor").c_str()),
+					"SI"
+					);
+				}
+				delete rs;
+				delete ps;
+				}
+				catch (sql::SQLException& e) {
+					MessageBox::Show(gcnew String(e.what()));
+				}
+			}
 	private: void cargarProveedores() { //metodo para que el usuario seleccine el proveedor cuando registra un producto
 
 		Conexion conexion;
@@ -560,17 +606,14 @@ namespace proyectoFacturacion {
 		txtStock->Text = producto.getStock().ToString();
 		cbProveedores->Text = gcnew String(producto.getNombreProveedor().c_str());
 
-		tablaProductos->Rows->Clear();
-
-		tablaProductos->Rows->Add(
-			producto.getIdProducto(),
-			producto.getCodigo(),
-			gcnew String(producto.getDescripcion().c_str()),
-			producto.getPrecio(),
-			producto.getStock(),
-			gcnew String(producto.getNombreProveedor().c_str()),
-			producto.getActivo() ? "SI" : "NO"
-		);
+		if (producto.getActivo()) {
+			btnDeshabilitarProducto->Enabled = true;
+			btnHabilitarProducto->Enabled = false;
+		}
+		else {
+			btnDeshabilitarProducto->Enabled = false;
+			btnHabilitarProducto->Enabled = true;
+		}
 	}
 
 	private: System::Void btnActualizarProducto_Click(System::Object^ sender, System::EventArgs^ e) {
@@ -596,15 +639,34 @@ namespace proyectoFacturacion {
 
 		Producto producto;
 		producto.deshabilitarProducto(codigo);
-
-		tablaProductos->Rows->Clear();
-
+		mostrarProductosActivos();
 		MessageBox::Show("Porducto deshabilitado.");
+
+		txtCodigo->Text = "";
+		txtDescripcion->Text = "";
+		txtPrecio->Text = "";
+		txtStock->Text = "";
+		cbProveedores->SelectedIndex = -1;
+	}
+	private: System::Void btnHabilitarProducto_Click(System::Object^ sender, System::EventArgs^ e) {
+		int codigo = Convert::ToInt32(txtBuscarProducto->Text);
+
+		Producto producto;
+		producto.habilitarProducto(codigo);
+		mostrarProductosActivos();
+		MessageBox::Show("Porducto habilitado.");
+
+		txtCodigo->Text = "";
+		txtDescripcion->Text = "";
+		txtPrecio->Text = "";
+		txtStock->Text = "";
+		cbProveedores->SelectedIndex = -1;
 	}
 	System::Void btnClienteEnProducto_Click(System::Object^ sender, System::EventArgs^ e);
 	System::Void btnRegistrarEnProducto_Click(System::Object^ sender, System::EventArgs^ e);
 	System::Void btnProveedorEnProducto_Click(System::Object^ sender, System::EventArgs^ e);
 	System::Void btnFacturacionEnProducto_Click(System::Object^ sender, System::EventArgs^ e);
+
 
 };
 }

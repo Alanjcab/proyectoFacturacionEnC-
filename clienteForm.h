@@ -63,7 +63,7 @@ namespace proyectoFacturacion {
 	private: System::Windows::Forms::Button^ btnDeshabilitarCliente;
 	private: System::Windows::Forms::Label^ label5;
 
-	private: System::Windows::Forms::Label^ label8;
+
 
 	private: System::Windows::Forms::TextBox^ txtBuscarCliente;
 	private: System::Windows::Forms::DataGridViewTextBoxColumn^ colEstado;
@@ -78,6 +78,7 @@ namespace proyectoFacturacion {
 
 
 	private: System::Windows::Forms::Button^ btnRegistrarEnCliente;
+	private: System::Windows::Forms::Button^ bntHabilitarCliente;
 
 
 	protected:
@@ -98,8 +99,8 @@ namespace proyectoFacturacion {
 		/// </summary>
 		void InitializeComponent(void)
 		{
-			System::Windows::Forms::DataGridViewCellStyle^ dataGridViewCellStyle11 = (gcnew System::Windows::Forms::DataGridViewCellStyle());
-			System::Windows::Forms::DataGridViewCellStyle^ dataGridViewCellStyle12 = (gcnew System::Windows::Forms::DataGridViewCellStyle());
+			System::Windows::Forms::DataGridViewCellStyle^ dataGridViewCellStyle1 = (gcnew System::Windows::Forms::DataGridViewCellStyle());
+			System::Windows::Forms::DataGridViewCellStyle^ dataGridViewCellStyle2 = (gcnew System::Windows::Forms::DataGridViewCellStyle());
 			this->btnProductoEnCliente = (gcnew System::Windows::Forms::Button());
 			this->label7 = (gcnew System::Windows::Forms::Label());
 			this->label1 = (gcnew System::Windows::Forms::Label());
@@ -116,7 +117,6 @@ namespace proyectoFacturacion {
 			this->btnActualizarCliente = (gcnew System::Windows::Forms::Button());
 			this->btnDeshabilitarCliente = (gcnew System::Windows::Forms::Button());
 			this->label5 = (gcnew System::Windows::Forms::Label());
-			this->label8 = (gcnew System::Windows::Forms::Label());
 			this->txtBuscarCliente = (gcnew System::Windows::Forms::TextBox());
 			this->colEstado = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
 			this->colEmail = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
@@ -128,6 +128,7 @@ namespace proyectoFacturacion {
 			this->btnProveedorEnCliente = (gcnew System::Windows::Forms::Button());
 			this->btnFacturacionEnCliente = (gcnew System::Windows::Forms::Button());
 			this->btnRegistrarEnCliente = (gcnew System::Windows::Forms::Button());
+			this->bntHabilitarCliente = (gcnew System::Windows::Forms::Button());
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->tablaClientes))->BeginInit();
 			this->SuspendLayout();
 			// 
@@ -137,7 +138,7 @@ namespace proyectoFacturacion {
 			this->btnProductoEnCliente->Font = (gcnew System::Drawing::Font(L"Microsoft YaHei", 10.2F, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
 			this->btnProductoEnCliente->ForeColor = System::Drawing::SystemColors::ButtonHighlight;
-			this->btnProductoEnCliente->Location = System::Drawing::Point(333, 12);
+			this->btnProductoEnCliente->Location = System::Drawing::Point(382, 12);
 			this->btnProductoEnCliente->Name = L"btnProductoEnCliente";
 			this->btnProductoEnCliente->Size = System::Drawing::Size(160, 60);
 			this->btnProductoEnCliente->TabIndex = 23;
@@ -232,7 +233,7 @@ namespace proyectoFacturacion {
 			this->btnRegistrarCliente->Font = (gcnew System::Drawing::Font(L"Microsoft YaHei", 9, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
 			this->btnRegistrarCliente->ForeColor = System::Drawing::SystemColors::ButtonHighlight;
-			this->btnRegistrarCliente->Location = System::Drawing::Point(415, 313);
+			this->btnRegistrarCliente->Location = System::Drawing::Point(415, 324);
 			this->btnRegistrarCliente->Name = L"btnRegistrarCliente";
 			this->btnRegistrarCliente->Size = System::Drawing::Size(127, 35);
 			this->btnRegistrarCliente->TabIndex = 33;
@@ -246,7 +247,7 @@ namespace proyectoFacturacion {
 			this->btnBuscarCliente->Font = (gcnew System::Drawing::Font(L"Microsoft YaHei", 9, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
 			this->btnBuscarCliente->ForeColor = System::Drawing::SystemColors::ButtonHighlight;
-			this->btnBuscarCliente->Location = System::Drawing::Point(405, 439);
+			this->btnBuscarCliente->Location = System::Drawing::Point(471, 439);
 			this->btnBuscarCliente->Name = L"btnBuscarCliente";
 			this->btnBuscarCliente->Size = System::Drawing::Size(182, 35);
 			this->btnBuscarCliente->TabIndex = 34;
@@ -260,7 +261,7 @@ namespace proyectoFacturacion {
 			this->btnMostrarTodosClientes->Font = (gcnew System::Drawing::Font(L"Microsoft YaHei", 9, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
 			this->btnMostrarTodosClientes->ForeColor = System::Drawing::SystemColors::ButtonHighlight;
-			this->btnMostrarTodosClientes->Location = System::Drawing::Point(593, 439);
+			this->btnMostrarTodosClientes->Location = System::Drawing::Point(659, 439);
 			this->btnMostrarTodosClientes->Name = L"btnMostrarTodosClientes";
 			this->btnMostrarTodosClientes->Size = System::Drawing::Size(192, 35);
 			this->btnMostrarTodosClientes->TabIndex = 35;
@@ -274,7 +275,7 @@ namespace proyectoFacturacion {
 			this->btnActualizarCliente->Font = (gcnew System::Drawing::Font(L"Microsoft YaHei", 9, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
 			this->btnActualizarCliente->ForeColor = System::Drawing::SystemColors::ButtonHighlight;
-			this->btnActualizarCliente->Location = System::Drawing::Point(379, 362);
+			this->btnActualizarCliente->Location = System::Drawing::Point(580, 193);
 			this->btnActualizarCliente->Name = L"btnActualizarCliente";
 			this->btnActualizarCliente->Size = System::Drawing::Size(127, 35);
 			this->btnActualizarCliente->TabIndex = 36;
@@ -288,7 +289,7 @@ namespace proyectoFacturacion {
 			this->btnDeshabilitarCliente->Font = (gcnew System::Drawing::Font(L"Microsoft YaHei", 9, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
 			this->btnDeshabilitarCliente->ForeColor = System::Drawing::SystemColors::ButtonHighlight;
-			this->btnDeshabilitarCliente->Location = System::Drawing::Point(512, 362);
+			this->btnDeshabilitarCliente->Location = System::Drawing::Point(580, 234);
 			this->btnDeshabilitarCliente->Name = L"btnDeshabilitarCliente";
 			this->btnDeshabilitarCliente->Size = System::Drawing::Size(149, 35);
 			this->btnDeshabilitarCliente->TabIndex = 37;
@@ -299,25 +300,16 @@ namespace proyectoFacturacion {
 			// label5
 			// 
 			this->label5->AutoSize = true;
-			this->label5->Location = System::Drawing::Point(93, 453);
+			this->label5->Location = System::Drawing::Point(148, 453);
 			this->label5->Name = L"label5";
 			this->label5->Size = System::Drawing::Size(143, 16);
 			this->label5->TabIndex = 38;
 			this->label5->Text = L"Buscar cleinte por DNI:";
 			// 
-			// label8
-			// 
-			this->label8->AutoSize = true;
-			this->label8->Location = System::Drawing::Point(204, 372);
-			this->label8->Name = L"label8";
-			this->label8->Size = System::Drawing::Size(169, 16);
-			this->label8->TabIndex = 40;
-			this->label8->Text = L"Actualizar datos del cliente:";
-			// 
 			// txtBuscarCliente
 			// 
 			this->txtBuscarCliente->BorderStyle = System::Windows::Forms::BorderStyle::FixedSingle;
-			this->txtBuscarCliente->Location = System::Drawing::Point(242, 447);
+			this->txtBuscarCliente->Location = System::Drawing::Point(307, 447);
 			this->txtBuscarCliente->Name = L"txtBuscarCliente";
 			this->txtBuscarCliente->Size = System::Drawing::Size(157, 22);
 			this->txtBuscarCliente->TabIndex = 42;
@@ -366,18 +358,18 @@ namespace proyectoFacturacion {
 			// 
 			// tablaClientes
 			// 
+			this->tablaClientes->AllowUserToAddRows = false;
 			this->tablaClientes->AutoSizeColumnsMode = System::Windows::Forms::DataGridViewAutoSizeColumnsMode::Fill;
 			this->tablaClientes->BackgroundColor = System::Drawing::SystemColors::ButtonHighlight;
-			this->tablaClientes->BorderStyle = System::Windows::Forms::BorderStyle::None;
-			dataGridViewCellStyle11->Alignment = System::Windows::Forms::DataGridViewContentAlignment::MiddleLeft;
-			dataGridViewCellStyle11->BackColor = System::Drawing::Color::Teal;
-			dataGridViewCellStyle11->Font = (gcnew System::Drawing::Font(L"Microsoft YaHei", 7.8F, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
+			dataGridViewCellStyle1->Alignment = System::Windows::Forms::DataGridViewContentAlignment::MiddleLeft;
+			dataGridViewCellStyle1->BackColor = System::Drawing::Color::Teal;
+			dataGridViewCellStyle1->Font = (gcnew System::Drawing::Font(L"Microsoft YaHei", 7.8F, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
-			dataGridViewCellStyle11->ForeColor = System::Drawing::Color::White;
-			dataGridViewCellStyle11->SelectionBackColor = System::Drawing::SystemColors::Highlight;
-			dataGridViewCellStyle11->SelectionForeColor = System::Drawing::SystemColors::HighlightText;
-			dataGridViewCellStyle11->WrapMode = System::Windows::Forms::DataGridViewTriState::True;
-			this->tablaClientes->ColumnHeadersDefaultCellStyle = dataGridViewCellStyle11;
+			dataGridViewCellStyle1->ForeColor = System::Drawing::Color::White;
+			dataGridViewCellStyle1->SelectionBackColor = System::Drawing::SystemColors::Highlight;
+			dataGridViewCellStyle1->SelectionForeColor = System::Drawing::SystemColors::HighlightText;
+			dataGridViewCellStyle1->WrapMode = System::Windows::Forms::DataGridViewTriState::True;
+			this->tablaClientes->ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
 			this->tablaClientes->ColumnHeadersHeightSizeMode = System::Windows::Forms::DataGridViewColumnHeadersHeightSizeMode::AutoSize;
 			this->tablaClientes->Columns->AddRange(gcnew cli::array< System::Windows::Forms::DataGridViewColumn^  >(6) {
 				this->colId,
@@ -385,16 +377,16 @@ namespace proyectoFacturacion {
 			});
 			this->tablaClientes->EnableHeadersVisualStyles = false;
 			this->tablaClientes->GridColor = System::Drawing::SystemColors::ActiveCaptionText;
-			this->tablaClientes->Location = System::Drawing::Point(76, 480);
+			this->tablaClientes->Location = System::Drawing::Point(151, 491);
 			this->tablaClientes->Name = L"tablaClientes";
 			this->tablaClientes->RowHeadersWidth = 51;
-			dataGridViewCellStyle12->BackColor = System::Drawing::Color::White;
-			dataGridViewCellStyle12->Font = (gcnew System::Drawing::Font(L"Microsoft YaHei", 7.8F, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
+			dataGridViewCellStyle2->BackColor = System::Drawing::Color::White;
+			dataGridViewCellStyle2->Font = (gcnew System::Drawing::Font(L"Microsoft YaHei", 7.8F, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
-			dataGridViewCellStyle12->ForeColor = System::Drawing::Color::Black;
-			this->tablaClientes->RowsDefaultCellStyle = dataGridViewCellStyle12;
+			dataGridViewCellStyle2->ForeColor = System::Drawing::Color::Black;
+			this->tablaClientes->RowsDefaultCellStyle = dataGridViewCellStyle2;
 			this->tablaClientes->RowTemplate->Height = 24;
-			this->tablaClientes->ScrollBars = System::Windows::Forms::ScrollBars::None;
+			this->tablaClientes->ScrollBars = System::Windows::Forms::ScrollBars::Vertical;
 			this->tablaClientes->Size = System::Drawing::Size(881, 123);
 			this->tablaClientes->TabIndex = 43;
 			// 
@@ -404,7 +396,7 @@ namespace proyectoFacturacion {
 			this->btnProveedorEnCliente->Font = (gcnew System::Drawing::Font(L"Microsoft YaHei", 10.2F, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
 			this->btnProveedorEnCliente->ForeColor = System::Drawing::SystemColors::ButtonHighlight;
-			this->btnProveedorEnCliente->Location = System::Drawing::Point(512, 12);
+			this->btnProveedorEnCliente->Location = System::Drawing::Point(569, 12);
 			this->btnProveedorEnCliente->Name = L"btnProveedorEnCliente";
 			this->btnProveedorEnCliente->Size = System::Drawing::Size(160, 60);
 			this->btnProveedorEnCliente->TabIndex = 44;
@@ -418,9 +410,9 @@ namespace proyectoFacturacion {
 			this->btnFacturacionEnCliente->Font = (gcnew System::Drawing::Font(L"Microsoft YaHei", 10.2F, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
 			this->btnFacturacionEnCliente->ForeColor = System::Drawing::SystemColors::ButtonHighlight;
-			this->btnFacturacionEnCliente->Location = System::Drawing::Point(691, 12);
+			this->btnFacturacionEnCliente->Location = System::Drawing::Point(760, 12);
 			this->btnFacturacionEnCliente->Name = L"btnFacturacionEnCliente";
-			this->btnFacturacionEnCliente->Size = System::Drawing::Size(160, 60);
+			this->btnFacturacionEnCliente->Size = System::Drawing::Size(170, 60);
 			this->btnFacturacionEnCliente->TabIndex = 45;
 			this->btnFacturacionEnCliente->Text = L"FACTURACION";
 			this->btnFacturacionEnCliente->UseVisualStyleBackColor = false;
@@ -432,7 +424,7 @@ namespace proyectoFacturacion {
 			this->btnRegistrarEnCliente->Font = (gcnew System::Drawing::Font(L"Microsoft YaHei", 10.2F, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
 			this->btnRegistrarEnCliente->ForeColor = System::Drawing::SystemColors::ButtonHighlight;
-			this->btnRegistrarEnCliente->Location = System::Drawing::Point(161, 12);
+			this->btnRegistrarEnCliente->Location = System::Drawing::Point(198, 12);
 			this->btnRegistrarEnCliente->Name = L"btnRegistrarEnCliente";
 			this->btnRegistrarEnCliente->Size = System::Drawing::Size(160, 60);
 			this->btnRegistrarEnCliente->TabIndex = 46;
@@ -440,17 +432,31 @@ namespace proyectoFacturacion {
 			this->btnRegistrarEnCliente->UseVisualStyleBackColor = false;
 			this->btnRegistrarEnCliente->Click += gcnew System::EventHandler(this, &clienteForm::btnRegistrarEnCliente_Click);
 			// 
+			// bntHabilitarCliente
+			// 
+			this->bntHabilitarCliente->BackColor = System::Drawing::Color::Teal;
+			this->bntHabilitarCliente->Font = (gcnew System::Drawing::Font(L"Microsoft YaHei", 9, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
+				static_cast<System::Byte>(0)));
+			this->bntHabilitarCliente->ForeColor = System::Drawing::SystemColors::ButtonHighlight;
+			this->bntHabilitarCliente->Location = System::Drawing::Point(580, 275);
+			this->bntHabilitarCliente->Name = L"bntHabilitarCliente";
+			this->bntHabilitarCliente->Size = System::Drawing::Size(129, 35);
+			this->bntHabilitarCliente->TabIndex = 47;
+			this->bntHabilitarCliente->Text = L"HABILITAR";
+			this->bntHabilitarCliente->UseVisualStyleBackColor = false;
+			this->bntHabilitarCliente->Click += gcnew System::EventHandler(this, &clienteForm::bntHabilitarCliente_Click);
+			// 
 			// clienteForm
 			// 
 			this->AutoScaleDimensions = System::Drawing::SizeF(8, 16);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
 			this->ClientSize = System::Drawing::Size(1182, 653);
+			this->Controls->Add(this->bntHabilitarCliente);
 			this->Controls->Add(this->btnRegistrarEnCliente);
 			this->Controls->Add(this->btnFacturacionEnCliente);
 			this->Controls->Add(this->btnProveedorEnCliente);
 			this->Controls->Add(this->tablaClientes);
 			this->Controls->Add(this->txtBuscarCliente);
-			this->Controls->Add(this->label8);
 			this->Controls->Add(this->label5);
 			this->Controls->Add(this->btnDeshabilitarCliente);
 			this->Controls->Add(this->btnActualizarCliente);
@@ -527,11 +533,20 @@ private: System::Void btnDeshabilitarCliente_Click(System::Object^ sender, Syste
 
 	Cliente cliente;
 	cliente.deshabilitarCliente(dniCliente);
-
-	tablaClientes->Rows->Clear();
-
+	btnMostrarTodosClientes_Click(nullptr, nullptr);  //vuelvo a llamar al boton de mostrar clientes para que actualice la tabla
 	MessageBox::Show("Cliente deshabilitado.");
 	}
+
+private: System::Void bntHabilitarCliente_Click(System::Object^ sender, System::EventArgs^ e) {
+	int dniCliente = Convert::ToInt32(txtBuscarCliente->Text);
+
+	Cliente cliente;
+	cliente.habilitarCliente(dniCliente);
+	cliente.habilitarCliente(dniCliente);
+	btnMostrarTodosClientes_Click(nullptr, nullptr);
+	MessageBox::Show("Cliente habilitado.");
+}
+
 private: System::Void btnActualizarCliente_Click(System::Object^ sender, System::EventArgs^ e) {
 	int idCliente = idClienteSeleccionado;
 
@@ -587,6 +602,5 @@ private: System::Void btnMostrarTodosClientes_Click(System::Object^ sender, Syst
 	   System::Void btnRegistrarEnCliente_Click(System::Object^ sender, System::EventArgs^ e);
 	   System::Void btnProveedorEnCliente_Click(System::Object^ sender, System::EventArgs^ e);
 	   System::Void btnFacturacionEnCliente_Click(System::Object^ sender, System::EventArgs^ e);
-
 };
 }

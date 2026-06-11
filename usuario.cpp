@@ -48,7 +48,7 @@ namespace proyectoFacturacion {
 }
 
 //metodo de conexion.h para insertar 
-void Usuario::insertar() {
+bool Usuario::insertar() {
     Conexion conexion;
     sql::Connection* con = conexion.getConexion();
     try {
@@ -64,10 +64,12 @@ void Usuario::insertar() {
         ps->executeUpdate();
         delete ps;
         std::cout << "Insert ok" << std::endl;
+        return true;
     }
 
     catch (sql::SQLException& e) {
         std::cerr << "Error " << e.what() << std::endl;
+        return false;
     }
 }
 
@@ -203,6 +205,23 @@ void Usuario::deshabilitarUsuario(int dni) {
         std::cerr << "Error " << e.what() << std::endl;
     }
   
+}
+
+void Usuario::habilitarUsuario(int dni) {
+
+    Conexion conexion;
+    sql::Connection* con = conexion.getConexion();
+    try {
+        sql::PreparedStatement* ps;
+        ps = con->prepareStatement("update usuarios set activo = 1 where dni = ?");
+        ps->setInt(1, dni);
+        ps->executeUpdate();
+        std::cout << "Usuario habilitado correctamente" << std::endl;
+    }
+    catch (sql::SQLException& e) {
+        std::cerr << "Error " << e.what() << std::endl;
+    }
+
 }
 
 //actualizar usuario
