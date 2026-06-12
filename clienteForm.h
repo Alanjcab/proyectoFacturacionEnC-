@@ -27,6 +27,9 @@ namespace proyectoFacturacion {
 		clienteForm(void)
 		{
 			InitializeComponent();
+
+			mostrarClientesActivos();
+
 			//
 			//TODO: agregar código de constructor aquí
 			//
@@ -113,7 +116,6 @@ namespace proyectoFacturacion {
 			this->txtEmailCliente = (gcnew System::Windows::Forms::TextBox());
 			this->btnRegistrarCliente = (gcnew System::Windows::Forms::Button());
 			this->btnBuscarCliente = (gcnew System::Windows::Forms::Button());
-			this->btnMostrarTodosClientes = (gcnew System::Windows::Forms::Button());
 			this->btnActualizarCliente = (gcnew System::Windows::Forms::Button());
 			this->btnDeshabilitarCliente = (gcnew System::Windows::Forms::Button());
 			this->label5 = (gcnew System::Windows::Forms::Label());
@@ -254,20 +256,6 @@ namespace proyectoFacturacion {
 			this->btnBuscarCliente->Text = L"BUSCAR CLEINTE";
 			this->btnBuscarCliente->UseVisualStyleBackColor = false;
 			this->btnBuscarCliente->Click += gcnew System::EventHandler(this, &clienteForm::btnBuscarCliente_Click);
-			// 
-			// btnMostrarTodosClientes
-			// 
-			this->btnMostrarTodosClientes->BackColor = System::Drawing::Color::Teal;
-			this->btnMostrarTodosClientes->Font = (gcnew System::Drawing::Font(L"Microsoft YaHei", 9, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
-				static_cast<System::Byte>(0)));
-			this->btnMostrarTodosClientes->ForeColor = System::Drawing::SystemColors::ButtonHighlight;
-			this->btnMostrarTodosClientes->Location = System::Drawing::Point(659, 439);
-			this->btnMostrarTodosClientes->Name = L"btnMostrarTodosClientes";
-			this->btnMostrarTodosClientes->Size = System::Drawing::Size(192, 35);
-			this->btnMostrarTodosClientes->TabIndex = 35;
-			this->btnMostrarTodosClientes->Text = L"MOSTRAR TODOS";
-			this->btnMostrarTodosClientes->UseVisualStyleBackColor = false;
-			this->btnMostrarTodosClientes->Click += gcnew System::EventHandler(this, &clienteForm::btnMostrarTodosClientes_Click);
 			// 
 			// btnActualizarCliente
 			// 
@@ -460,7 +448,6 @@ namespace proyectoFacturacion {
 			this->Controls->Add(this->label5);
 			this->Controls->Add(this->btnDeshabilitarCliente);
 			this->Controls->Add(this->btnActualizarCliente);
-			this->Controls->Add(this->btnMostrarTodosClientes);
 			this->Controls->Add(this->btnBuscarCliente);
 			this->Controls->Add(this->btnRegistrarCliente);
 			this->Controls->Add(this->txtEmailCliente);
@@ -482,6 +469,34 @@ namespace proyectoFacturacion {
 
 		}
 #pragma endregion
+		private: void mostrarClientesActivos() {
+			tablaClientes->Rows->Clear();
+			Conexion conexion;
+			sql::Connection* con = conexion.getConexion();
+
+			try {
+				sql::PreparedStatement* ps = con->prepareStatement(
+					"select * from clientes where activo = 1"
+				);
+				sql::ResultSet* rs = ps->executeQuery();
+
+				while (rs->next()) {
+					tablaClientes->Rows->Add(
+						rs->getInt("idCliente"),
+						gcnew String(rs->getString("nombre").c_str()),
+						gcnew String(rs->getString("apellido").c_str()),
+						rs->getInt("dniCliente"),
+						gcnew String(rs->getString("emailCliente").c_str()),
+						"SI"
+					);
+				}
+				delete rs;
+				delete ps;
+			}
+			catch (sql::SQLException& e) {
+				MessageBox::Show(gcnew String(e.what()));
+			}
+		}
 	private: System::Void btnRegistrarCliente_Click(System::Object^ sender, System::EventArgs^ e) {
 		std::string nombre = msclr::interop::marshal_as<std::string>(txtNombreCliente->Text);
 		std::string apellido = msclr::interop::marshal_as<std::string>(txtApellidoCliente->Text);
@@ -516,16 +531,14 @@ private: System::Void btnBuscarCliente_Click(System::Object^ sender, System::Eve
 	txtDniCliente->Text = cliente.getDniCliente().ToString();
 	txtEmailCliente->Text = gcnew String(cliente.getEmailCliente().c_str());
 
-	tablaClientes->Rows->Clear();
-
-	tablaClientes->Rows->Add(
-		cliente.getIdCliente(),
-		gcnew String(cliente.getNombre().c_str()),
-		gcnew String(cliente.getApellido().c_str()),
-		cliente.getDniCliente(),
-		gcnew String(cliente.getEmailCliente().c_str()),
-		cliente.getActivo() ? "SI" : "NO"
-	);
+	if (cliente.getActivo()) {
+		btnDeshabilitarCliente->Enabled = true;
+		bntHabilitarCliente->Enabled = false;
+	}
+	else {
+		btnDeshabilitarCliente->Enabled = false;
+		bntHabilitarCliente->Enabled = true;
+	}
 
 	}
 private: System::Void btnDeshabilitarCliente_Click(System::Object^ sender, System::EventArgs^ e) {
@@ -533,18 +546,32 @@ private: System::Void btnDeshabilitarCliente_Click(System::Object^ sender, Syste
 
 	Cliente cliente;
 	cliente.deshabilitarCliente(dniCliente);
-	btnMostrarTodosClientes_Click(nullptr, nullptr);  //vuelvo a llamar al boton de mostrar clientes para que actualice la tabla
+
+	mostrarClientesActivos();  //vuelvo a llamar al metodto de mostrar clientes para que actualice la tabla
+
 	MessageBox::Show("Cliente deshabilitado.");
+
+	txtNombreCliente->Text = "";
+	txtApellidoCliente->Text = "";
+	txtDniCliente->Text = "";
+	txtEmailCliente->Text = "";
 	}
 
 private: System::Void bntHabilitarCliente_Click(System::Object^ sender, System::EventArgs^ e) {
+
 	int dniCliente = Convert::ToInt32(txtBuscarCliente->Text);
 
 	Cliente cliente;
 	cliente.habilitarCliente(dniCliente);
-	cliente.habilitarCliente(dniCliente);
-	btnMostrarTodosClientes_Click(nullptr, nullptr);
+
+	mostrarClientesActivos();
+
 	MessageBox::Show("Cliente habilitado.");
+
+	txtNombreCliente->Text = "";
+	txtApellidoCliente->Text = "";
+	txtDniCliente->Text = "";
+	txtEmailCliente->Text = "";
 }
 
 private: System::Void btnActualizarCliente_Click(System::Object^ sender, System::EventArgs^ e) {
@@ -565,37 +592,6 @@ private: System::Void btnActualizarCliente_Click(System::Object^ sender, System:
 		emailCliente
 	);
 	MessageBox::Show("Cliente actualizado");
-	}
-private: System::Void btnMostrarTodosClientes_Click(System::Object^ sender, System::EventArgs^ e) {
-	tablaClientes->Rows->Clear();
-
-	Conexion conexion;
-	sql::Connection* con = conexion.getConexion();
-
-	try {
-		sql::PreparedStatement* ps;
-		sql::ResultSet* rs;
-
-		ps = con->prepareStatement("SELECT * FROM clientes");
-		rs = ps->executeQuery();
-
-		while (rs->next()) {
-			tablaClientes->Rows->Add(
-				rs->getInt("idCliente"),
-				gcnew String(rs->getString("nombre").c_str()),
-				gcnew String(rs->getString("apellido").c_str()),
-				rs->getInt("dniCliente"),
-				gcnew String(rs->getString("emailCliente").c_str()),
-				rs->getBoolean("activo") ? "SI" : "NO"
-			);
-		}
-		delete rs;
-		delete ps;
-	}
-	catch (sql::SQLException& e) {
-		MessageBox::Show(gcnew String(e.what()));
-		MessageBox::Show("Error al mostrar clientes");
-	}
 	}
 	   //botones a las demas vistas
 	   System::Void btnProductoEnCliente_Click(System::Object^ sender, System::EventArgs^ e);

@@ -290,7 +290,7 @@ namespace proyectoFacturacion {
 			dataGridViewCellStyle2->ForeColor = System::Drawing::Color::Black;
 			this->tablaProductos->RowsDefaultCellStyle = dataGridViewCellStyle2;
 			this->tablaProductos->RowTemplate->Height = 24;
-			this->tablaProductos->ScrollBars = System::Windows::Forms::ScrollBars::None;
+			this->tablaProductos->ScrollBars = System::Windows::Forms::ScrollBars::Vertical;
 			this->tablaProductos->Size = System::Drawing::Size(881, 106);
 			this->tablaProductos->TabIndex = 60;
 			// 

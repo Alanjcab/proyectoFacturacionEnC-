@@ -123,6 +123,7 @@
   <ItemGroup>
     <ClCompile Include="cliente.cpp" />
     <ClCompile Include="conectar.cpp" />
+    <ClCompile Include="detalleFactura.cpp" />
     <ClCompile Include="facturacion.cpp" />
     <ClCompile Include="Facturacion1.cpp" />
     <ClCompile Include="loginForm.cpp" />
@@ -141,6 +142,7 @@
       <FileType>CppForm</FileType>
     </ClInclude>
     <ClInclude Include="Conexion.h" />
+    <ClInclude Include="DetalleFactura.h" />
     <ClInclude Include="Facturacion.h" />
     <ClInclude Include="Facturacion1.h">
       <FileType>CppForm</FileType>

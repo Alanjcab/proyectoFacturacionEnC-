@@ -31,3 +31,28 @@ namespace proyectoFacturacion {
 		this->Hide();
 	}
 }
+
+Facturacion::Facturacion() {}
+
+Facturacion::Facturacion(
+	int idCliente,
+	double subtotalProdcuto,
+	double subtotalNeto,
+	double descuentoGeneral,
+	double total
+)
+{
+	this->idCliente = idCliente;
+	this->subtotalProducto = subtotalProducto;
+	this->subtotalNeto = subtotalNeto;
+	this->descuentoGeneral = descuentoGeneral;
+	this->total = total;
+}
+
+int Facturacion::guardarFactura()
+{
+	// INSERT INTO facturas
+	// devolver idFactura generado
+
+	return 0;
+}

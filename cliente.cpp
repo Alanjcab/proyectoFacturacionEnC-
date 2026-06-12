@@ -158,30 +158,3 @@ void Cliente::actualizarCliente(int idCliente, std::string nombre, std::string a
 	}
 }
 
-void Cliente::mostrarClientes() {  //muestro todos los clientes existentes
-	Conexion conexion;
-	sql::Connection* con = conexion.getConexion();
-	try {
-		sql::PreparedStatement* ps;
-		sql::ResultSet* rs;
-
-		ps = con->prepareStatement("select * from clientes");
-
-		rs = ps->executeQuery();
-
-		if (rs->next()) {
-
-			std::cout << "clientes encontrados" << std::endl;
-
-			this->idCliente = rs->getInt("id");
-			this->nombre = rs->getString("nombre");
-			this->apellido = rs->getString("apellido");
-			this->dniCliente = rs->getInt("dni");
-			this->emailCliente = rs->getString("email");
-			this->activo = rs->getBoolean("activo");
-		}
-	}
-	catch (sql::SQLException& e) {
-		std::cerr << "Error " << e.what() << std::endl;
-	}
-}

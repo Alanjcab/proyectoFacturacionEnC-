@@ -57,6 +57,9 @@
     <ClCompile Include="Facturacion1.cpp">
       <Filter>Archivos de origen</Filter>
     </ClCompile>
+    <ClCompile Include="detalleFactura.cpp">
+      <Filter>Archivos de origen</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="registrarForm.h">
@@ -96,6 +99,9 @@
       <Filter>Archivos de encabezado</Filter>
     </ClInclude>
     <ClInclude Include="Facturacion1.h">
+      <Filter>Archivos de encabezado</Filter>
+    </ClInclude>
+    <ClInclude Include="DetalleFactura.h">
       <Filter>Archivos de encabezado</Filter>
     </ClInclude>
   </ItemGroup>
