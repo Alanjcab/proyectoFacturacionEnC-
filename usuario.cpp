@@ -7,6 +7,7 @@
 #include "registrarForm.h"
 #include "ProductoForm.h"
 #include "ProveedorForm.h"
+#include "Facturacion1.h"
 
 Usuario::Usuario() { 
 
@@ -45,6 +46,12 @@ namespace proyectoFacturacion {
         vistaRegistrar->Show();
         this->Hide();
     }
+    System::Void Facturacion::btnRegistrarEnFacturacion_Click(System::Object^ sender, System::EventArgs^ e) {
+        registrarForm^ vistaRegistrar = gcnew registrarForm();
+        vistaRegistrar->Show();
+        this->Hide();
+    }
+   
 }
 
 //metodo de conexion.h para insertar 

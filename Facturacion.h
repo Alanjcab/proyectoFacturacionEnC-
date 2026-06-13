@@ -1,17 +1,16 @@
 #pragma once
 #include <string>
 
-class Facturacion{
+class Factura{
 private:
     int idFactura;
     int idCliente;
-    double subtotalProducto;
-    double subtotalNeto;
+    double subtotal;
     double descuentoGeneral;
     double total;
 
 public:
-    Facturacion();
-    Facturacion(int idCliente, double subtotalProducto, double subtotalNeto, double descuentoGeneral, double total);
+    Factura();
+    Factura(int idCliente, double subtotal, double descuentoGeneral, double total);
     int guardarFactura();
 };

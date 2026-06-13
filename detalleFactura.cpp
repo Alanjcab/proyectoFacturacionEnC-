@@ -8,8 +8,7 @@ DetalleFactura::DetalleFactura(
     int cantidad,
     double precioUnitario,
     double descuentoProducto,
-    double subtotalNeto,
-    double subtotalProducto
+    double subtotalNeto
 )
 {
     this->idFactura = idFactura;
@@ -18,7 +17,6 @@ DetalleFactura::DetalleFactura(
     this->precioUnitario = precioUnitario;
     this->descuentoProducto = descuentoProducto;
     this->subtotalNeto = subtotalNeto;
-    this->subtotalProducto = subtotalProducto;
 }
 
 void DetalleFactura::guardarDetalle()

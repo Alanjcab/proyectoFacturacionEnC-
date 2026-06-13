@@ -306,7 +306,7 @@ namespace proyectoFacturacion {
 			this->btnFacturacionEnRegistrar->ForeColor = System::Drawing::SystemColors::ButtonHighlight;
 			this->btnFacturacionEnRegistrar->Location = System::Drawing::Point(746, 12);
 			this->btnFacturacionEnRegistrar->Name = L"btnFacturacionEnRegistrar";
-			this->btnFacturacionEnRegistrar->Size = System::Drawing::Size(160, 60);
+			this->btnFacturacionEnRegistrar->Size = System::Drawing::Size(177, 60);
 			this->btnFacturacionEnRegistrar->TabIndex = 21;
 			this->btnFacturacionEnRegistrar->Text = L"FACTURACION";
 			this->btnFacturacionEnRegistrar->UseVisualStyleBackColor = false;

@@ -8,6 +8,7 @@
 #include "productoForm.h"
 #include "registrarForm.h"
 #include "ProveedorForm.h"
+#include "Facturacion1.h"
 
 Cliente::Cliente() {}
 
@@ -30,6 +31,11 @@ namespace proyectoFacturacion {
 		this->Hide();
 	}
 	System::Void ProveedorForm::btnClienteEnProveedor_Click(System::Object^ sender, System::EventArgs^ e) {
+		clienteForm^ vistaCliente = gcnew clienteForm();
+		vistaCliente->Show();
+		this->Hide();
+	}
+	System::Void Facturacion::btnClienteEnFacturacion_Click(System::Object^ sender, System::EventArgs^ e) {
 		clienteForm^ vistaCliente = gcnew clienteForm();
 		vistaCliente->Show();
 		this->Hide();

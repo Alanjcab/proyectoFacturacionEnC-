@@ -32,27 +32,52 @@ namespace proyectoFacturacion {
 	}
 }
 
-Facturacion::Facturacion() {}
+Factura::Factura() {}
 
-Facturacion::Facturacion(
+Factura::Factura(
 	int idCliente,
-	double subtotalProdcuto,
-	double subtotalNeto,
+	double subtotal,
 	double descuentoGeneral,
 	double total
 )
 {
 	this->idCliente = idCliente;
-	this->subtotalProducto = subtotalProducto;
-	this->subtotalNeto = subtotalNeto;
+	this->subtotal = subtotal;
 	this->descuentoGeneral = descuentoGeneral;
 	this->total = total;
 }
 
-int Facturacion::guardarFactura()
+int Factura::guardarFactura()
 {
-	// INSERT INTO facturas
-	// devolver idFactura generado
+	Conexion conexion;
+	sql::Connection* con = conexion.getConexion();
+	try {
+		sql::PreparedStatement* ps = con->prepareStatement("insert into facturas (idCliente, subtotal, descuentoGeneral, total) values (?, ?, ?, ?)");
+		ps->setInt(1, idCliente);
+		ps->setDouble(2, subtotal);
+		ps->setDouble(3, descuentoGeneral);
+		ps->setDouble(4, total);
+
+		ps->executeUpdate();
+		delete ps;
+
+		sql::PreparedStatement* psId = con->prepareStatement("select last_insert_id() AS idFactura");
+		sql::ResultSet* rs = psId->executeQuery();
+
+		int idGenerado = 0;
+
+		if (rs->next()) {
+			idGenerado = rs->getInt("idFactura");
+		}
+		delete rs;
+		delete psId;
+
+		return idGenerado;
+	}
+	catch (sql::SQLException& e) {
+		std::cerr << "Error " << e.what() << std::endl;
+		return 0;
+	}
 
 	return 0;
 }

@@ -21,7 +21,9 @@ namespace proyectoFacturacion {
 	private: //guargo los id seleccionados
 		int idClienteSeleccionado;
 		int idProductoSeleccionado;
+		int stockProductoSeleccionado;
 		double precioProductoSeleccionado;
+
 	private: System::Windows::Forms::TextBox^ txtDescuentoProducto;
 	private: System::Windows::Forms::DataGridViewTextBoxColumn^ colId;
 	private: System::Windows::Forms::DataGridViewTextBoxColumn^ colCodigo;
@@ -31,11 +33,12 @@ namespace proyectoFacturacion {
 	private: System::Windows::Forms::DataGridViewTextBoxColumn^ ColDescuento;
 	private: System::Windows::Forms::DataGridViewTextBoxColumn^ ColSubtotal;
 	private: System::Windows::Forms::TextBox^ txtDescuentoTotal;
-	private: System::Windows::Forms::Button^ button2;
-	private: System::Windows::Forms::Button^ button3;
-	private: System::Windows::Forms::Button^ button4;
-	private: System::Windows::Forms::Button^ button5;
-		   int stockProductoSeleccionado;
+	private: System::Windows::Forms::Button^ btnClienteEnFacturacion;
+	private: System::Windows::Forms::Button^ btnProductoEnFacturacion;
+	private: System::Windows::Forms::Button^ btnProveedorEnFacturacion;
+	private: System::Windows::Forms::Button^ btnRegistrarEnFacturacion;
+
+		    
 	public:
 		Facturacion(void)
 		{
@@ -145,10 +148,10 @@ namespace proyectoFacturacion {
 			this->button1 = (gcnew System::Windows::Forms::Button());
 			this->txtDescuentoProducto = (gcnew System::Windows::Forms::TextBox());
 			this->txtDescuentoTotal = (gcnew System::Windows::Forms::TextBox());
-			this->button2 = (gcnew System::Windows::Forms::Button());
-			this->button3 = (gcnew System::Windows::Forms::Button());
-			this->button4 = (gcnew System::Windows::Forms::Button());
-			this->button5 = (gcnew System::Windows::Forms::Button());
+			this->btnClienteEnFacturacion = (gcnew System::Windows::Forms::Button());
+			this->btnProductoEnFacturacion = (gcnew System::Windows::Forms::Button());
+			this->btnProveedorEnFacturacion = (gcnew System::Windows::Forms::Button());
+			this->btnRegistrarEnFacturacion = (gcnew System::Windows::Forms::Button());
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->tablaFacturacion))->BeginInit();
 			this->SuspendLayout();
 			// 
@@ -438,6 +441,7 @@ namespace proyectoFacturacion {
 			this->btnConfirmarCompra->TabIndex = 22;
 			this->btnConfirmarCompra->Text = L"CONFIRMAR";
 			this->btnConfirmarCompra->UseVisualStyleBackColor = false;
+			this->btnConfirmarCompra->Click += gcnew System::EventHandler(this, &Facturacion::btnConfirmarCompra_Click);
 			// 
 			// label11
 			// 
@@ -538,67 +542,71 @@ namespace proyectoFacturacion {
 			this->txtDescuentoTotal->TabIndex = 36;
 			this->txtDescuentoTotal->TextChanged += gcnew System::EventHandler(this, &Facturacion::txtDescuentoTotal_TextChanged);
 			// 
-			// button2
+			// btnClienteEnFacturacion
 			// 
-			this->button2->BackColor = System::Drawing::Color::Teal;
-			this->button2->Font = (gcnew System::Drawing::Font(L"Microsoft YaHei", 7.8F, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
+			this->btnClienteEnFacturacion->BackColor = System::Drawing::Color::Teal;
+			this->btnClienteEnFacturacion->Font = (gcnew System::Drawing::Font(L"Microsoft YaHei", 10.2F, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
-			this->button2->ForeColor = System::Drawing::Color::White;
-			this->button2->Location = System::Drawing::Point(167, 12);
-			this->button2->Name = L"button2";
-			this->button2->Size = System::Drawing::Size(170, 60);
-			this->button2->TabIndex = 37;
-			this->button2->Text = L"REGISTRAR";
-			this->button2->UseVisualStyleBackColor = false;
+			this->btnClienteEnFacturacion->ForeColor = System::Drawing::Color::White;
+			this->btnClienteEnFacturacion->Location = System::Drawing::Point(376, 12);
+			this->btnClienteEnFacturacion->Name = L"btnClienteEnFacturacion";
+			this->btnClienteEnFacturacion->Size = System::Drawing::Size(170, 60);
+			this->btnClienteEnFacturacion->TabIndex = 38;
+			this->btnClienteEnFacturacion->Text = L"CLIENTE";
+			this->btnClienteEnFacturacion->UseVisualStyleBackColor = false;
+			this->btnClienteEnFacturacion->Click += gcnew System::EventHandler(this, &Facturacion::btnClienteEnFacturacion_Click);
 			// 
-			// button3
+			// btnProductoEnFacturacion
 			// 
-			this->button3->BackColor = System::Drawing::Color::Teal;
-			this->button3->Font = (gcnew System::Drawing::Font(L"Microsoft YaHei", 7.8F, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
-				static_cast<System::Byte>(0)));
-			this->button3->ForeColor = System::Drawing::Color::White;
-			this->button3->Location = System::Drawing::Point(376, 12);
-			this->button3->Name = L"button3";
-			this->button3->Size = System::Drawing::Size(170, 60);
-			this->button3->TabIndex = 38;
-			this->button3->Text = L"CLIENTE";
-			this->button3->UseVisualStyleBackColor = false;
+			this->btnProductoEnFacturacion->BackColor = System::Drawing::Color::Teal;
+			this->btnProductoEnFacturacion->Font = (gcnew System::Drawing::Font(L"Microsoft YaHei", 10.2F, System::Drawing::FontStyle::Bold,
+				System::Drawing::GraphicsUnit::Point, static_cast<System::Byte>(0)));
+			this->btnProductoEnFacturacion->ForeColor = System::Drawing::Color::White;
+			this->btnProductoEnFacturacion->Location = System::Drawing::Point(579, 12);
+			this->btnProductoEnFacturacion->Name = L"btnProductoEnFacturacion";
+			this->btnProductoEnFacturacion->Size = System::Drawing::Size(170, 60);
+			this->btnProductoEnFacturacion->TabIndex = 39;
+			this->btnProductoEnFacturacion->Text = L"PRODUCTO";
+			this->btnProductoEnFacturacion->UseVisualStyleBackColor = false;
+			this->btnProductoEnFacturacion->Click += gcnew System::EventHandler(this, &Facturacion::btnProductoEnFacturacion_Click);
 			// 
-			// button4
+			// btnProveedorEnFacturacion
 			// 
-			this->button4->BackColor = System::Drawing::Color::Teal;
-			this->button4->Font = (gcnew System::Drawing::Font(L"Microsoft YaHei", 7.8F, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
-				static_cast<System::Byte>(0)));
-			this->button4->ForeColor = System::Drawing::Color::White;
-			this->button4->Location = System::Drawing::Point(579, 12);
-			this->button4->Name = L"button4";
-			this->button4->Size = System::Drawing::Size(170, 60);
-			this->button4->TabIndex = 39;
-			this->button4->Text = L"PRODUCTO";
-			this->button4->UseVisualStyleBackColor = false;
+			this->btnProveedorEnFacturacion->BackColor = System::Drawing::Color::Teal;
+			this->btnProveedorEnFacturacion->Font = (gcnew System::Drawing::Font(L"Microsoft YaHei", 10.2F, System::Drawing::FontStyle::Bold,
+				System::Drawing::GraphicsUnit::Point, static_cast<System::Byte>(0)));
+			this->btnProveedorEnFacturacion->ForeColor = System::Drawing::Color::White;
+			this->btnProveedorEnFacturacion->Location = System::Drawing::Point(787, 12);
+			this->btnProveedorEnFacturacion->Name = L"btnProveedorEnFacturacion";
+			this->btnProveedorEnFacturacion->Size = System::Drawing::Size(170, 60);
+			this->btnProveedorEnFacturacion->TabIndex = 40;
+			this->btnProveedorEnFacturacion->Text = L"PROVEEDOR";
+			this->btnProveedorEnFacturacion->UseVisualStyleBackColor = false;
+			this->btnProveedorEnFacturacion->Click += gcnew System::EventHandler(this, &Facturacion::btnProveedorEnFacturacion_Click);
 			// 
-			// button5
+			// btnRegistrarEnFacturacion
 			// 
-			this->button5->BackColor = System::Drawing::Color::Teal;
-			this->button5->Font = (gcnew System::Drawing::Font(L"Microsoft YaHei", 7.8F, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
-				static_cast<System::Byte>(0)));
-			this->button5->ForeColor = System::Drawing::Color::White;
-			this->button5->Location = System::Drawing::Point(787, 12);
-			this->button5->Name = L"button5";
-			this->button5->Size = System::Drawing::Size(170, 60);
-			this->button5->TabIndex = 40;
-			this->button5->Text = L"PROVEEDOR";
-			this->button5->UseVisualStyleBackColor = false;
+			this->btnRegistrarEnFacturacion->BackColor = System::Drawing::Color::Teal;
+			this->btnRegistrarEnFacturacion->Font = (gcnew System::Drawing::Font(L"Microsoft YaHei", 10.2F, System::Drawing::FontStyle::Bold,
+				System::Drawing::GraphicsUnit::Point, static_cast<System::Byte>(0)));
+			this->btnRegistrarEnFacturacion->ForeColor = System::Drawing::Color::White;
+			this->btnRegistrarEnFacturacion->Location = System::Drawing::Point(176, 12);
+			this->btnRegistrarEnFacturacion->Name = L"btnRegistrarEnFacturacion";
+			this->btnRegistrarEnFacturacion->Size = System::Drawing::Size(170, 60);
+			this->btnRegistrarEnFacturacion->TabIndex = 41;
+			this->btnRegistrarEnFacturacion->Text = L"REGISTRAR";
+			this->btnRegistrarEnFacturacion->UseVisualStyleBackColor = false;
+			this->btnRegistrarEnFacturacion->Click += gcnew System::EventHandler(this, &Facturacion::btnRegistrarEnFacturacion_Click);
 			// 
 			// Facturacion
 			// 
 			this->AutoScaleDimensions = System::Drawing::SizeF(8, 16);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
 			this->ClientSize = System::Drawing::Size(1182, 653);
-			this->Controls->Add(this->button5);
-			this->Controls->Add(this->button4);
-			this->Controls->Add(this->button3);
-			this->Controls->Add(this->button2);
+			this->Controls->Add(this->btnRegistrarEnFacturacion);
+			this->Controls->Add(this->btnProveedorEnFacturacion);
+			this->Controls->Add(this->btnProductoEnFacturacion);
+			this->Controls->Add(this->btnClienteEnFacturacion);
 			this->Controls->Add(this->txtDescuentoTotal);
 			this->Controls->Add(this->txtDescuentoProducto);
 			this->Controls->Add(this->button1);
@@ -632,7 +640,7 @@ namespace proyectoFacturacion {
 			this->Controls->Add(this->txtDniCliente);
 			this->Controls->Add(this->label1);
 			this->Name = L"Facturacion";
-			this->Text = L"Facturacion";
+			this->Text = L"REGISTRAR";
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->tablaFacturacion))->EndInit();
 			this->ResumeLayout(false);
 			this->PerformLayout();
@@ -828,5 +836,50 @@ namespace proyectoFacturacion {
 			txtDescuentoTotal->Text->Length;
 		}
 	}
+
+	private: System::Void btnConfirmarCompra_Click(System::Object^ sender, System::EventArgs^ e) {
+
+		if (idClienteSeleccionado == 0) {
+			MessageBox::Show("Tiene que seleccionar un cliente");
+			return;
+		}
+
+		if (tablaFacturacion->Rows->Count == 0) {
+			MessageBox::Show("Tiene que agregar un producto");
+			return;
+		}
+
+		double subtotal = Convert::ToDouble(lbSubTotalNeto->Text);
+
+		double descuentoGeneral = 0;
+
+		if (txtDescuentoTotal->Text != "") {
+			descuentoGeneral = Convert::ToDouble(txtDescuentoTotal->Text);
+		}
+
+		double total = Convert::ToDouble(lbTotal->Text);
+
+		Factura factura(
+			idClienteSeleccionado,
+			subtotal,
+			descuentoGeneral,
+			total
+		);
+
+		int idFactura = factura.guardarFactura();
+
+		if (idFactura == 0) {
+			MessageBox::Show("No se guardo la factura");
+			return;
+		}
+
+		MessageBox::Show("factura guardada correctamente" + idFactura.ToString());
+	}
+
+	//boton a las demas vistas
+	System::Void btnRegistrarEnFacturacion_Click(System::Object^ sender, System::EventArgs^ e);
+	System::Void btnClienteEnFacturacion_Click(System::Object^ sender, System::EventArgs^ e);
+	System::Void btnProductoEnFacturacion_Click(System::Object^ sender, System::EventArgs^ e);
+	System::Void btnProveedorEnFacturacion_Click(System::Object^ sender, System::EventArgs^ e);
 };
 }

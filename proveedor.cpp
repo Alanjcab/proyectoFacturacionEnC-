@@ -8,6 +8,7 @@
 #include "ProveedorForm.h"
 #include "registrarForm.h"
 #include "ProductoForm.h"
+#include "Facturacion1.h"
 
 namespace proyectoFacturacion {
 	System::Void clienteForm::btnProveedorEnCliente_Click(System::Object^ sender, System::EventArgs^ e) {
@@ -21,6 +22,11 @@ namespace proyectoFacturacion {
 		this->Hide();
 	}
 	System::Void ProductoForm::btnProveedorEnProducto_Click(System::Object^ sender, System::EventArgs^ e) {
+		ProveedorForm^ vistaProveedor = gcnew ProveedorForm();
+		vistaProveedor->Show();
+		this->Hide();
+	}
+	System::Void Facturacion::btnProveedorEnFacturacion_Click(System::Object^ sender, System::EventArgs^ e) {
 		ProveedorForm^ vistaProveedor = gcnew ProveedorForm();
 		vistaProveedor->Show();
 		this->Hide();
