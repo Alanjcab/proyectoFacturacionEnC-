@@ -838,19 +838,16 @@ namespace proyectoFacturacion {
 	}
 
 	private: System::Void btnConfirmarCompra_Click(System::Object^ sender, System::EventArgs^ e) {
-
 		if (idClienteSeleccionado == 0) {
 			MessageBox::Show("Tiene que seleccionar un cliente");
 			return;
 		}
-
 		if (tablaFacturacion->Rows->Count == 0) {
 			MessageBox::Show("Tiene que agregar un producto");
 			return;
 		}
 
 		double subtotal = Convert::ToDouble(lbSubTotalNeto->Text);
-
 		double descuentoGeneral = 0;
 
 		if (txtDescuentoTotal->Text != "") {
@@ -868,11 +865,29 @@ namespace proyectoFacturacion {
 
 		int idFactura = factura.guardarFactura();
 
+		for (int i = 0; i < tablaFacturacion->Rows->Count; i++)
+		{
+			int idProducto = Convert::ToInt32(tablaFacturacion->Rows[i]->Cells[0]->Value);
+			int cantidad = Convert::ToInt32(tablaFacturacion->Rows[i]->Cells[4]->Value);
+			double precio = Convert::ToDouble(tablaFacturacion->Rows[i]->Cells[3]->Value);
+			double descuento = Convert::ToDouble(tablaFacturacion->Rows[i]->Cells[5]->Value);
+			double subTotalNeto = Convert::ToDouble(tablaFacturacion->Rows[i]->Cells[6]->Value);
+
+			DetalleFactura detalle(
+				idFactura,
+				idProducto,
+				cantidad,
+				precio,
+				descuento,
+				subTotalNeto
+			);
+			detalle.guardarDetalle();
+		}
+
 		if (idFactura == 0) {
 			MessageBox::Show("No se guardo la factura");
 			return;
 		}
-
 		MessageBox::Show("factura guardada correctamente" + idFactura.ToString());
 	}
 
