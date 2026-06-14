@@ -21,16 +21,40 @@ namespace proyectoFacturacion {
 	/// </summary>
 	public ref class registrarForm : public System::Windows::Forms::Form
 	{
+	private:
+		String^ rolUsuario;
+	private:
+		void permisosRol()
+		{
+			if (rolUsuario == "cajero")
+			{
+				MessageBox::Show("No tenes permiso para acceder a Usuarios.");
+				this->Close();
+				return;
+			}
+			else if (rolUsuario == "deposito")
+			{
+				MessageBox::Show("No tenes permiso para acceder a Usuarios.");
+				this->Close();
+				return;
+			}
+		}
+
 	public:
-		registrarForm(void)
+		registrarForm(String^ rol)
 		{
 			InitializeComponent();
-
+			//uso maxLength para que no pueda ingresar mas de 8 digitos
+			txtDni->MaxLength = 8;
+			txtBuscarDni->MaxLength = 8;
+			
 			comboRolUsuario->Items->Add("admin");
 			comboRolUsuario->Items->Add("cajero");
 			comboRolUsuario->Items->Add("deposito");
 			
 			mostrarUsuariosActivos();
+			rolUsuario = rol;
+			permisosRol();
 			//
 			//TODO: agregar código de constructor aquí
 			//
@@ -597,14 +621,26 @@ namespace proyectoFacturacion {
 	}
 
 	private: System::Void btnRegistrarse_Click(System::Object^ sender, System::EventArgs^ e) {
+		
+		if (txtNombre->Text == "" || txtApellido->Text == "" || txtEdad->Text == "" || txtDni->Text == "" || txtEmail->Text == "" || txtPassword->Text == "") {
+			MessageBox::Show("Complete todos los campos.");
+			return;
+		}
 		std::string nombre = msclr::interop::marshal_as<std::string>(txtNombre->Text);
 		std::string apellido = msclr::interop::marshal_as<std::string>(txtApellido->Text);
+		std::string email = msclr::interop::marshal_as<std::string>(txtEmail->Text);
+
+		if (!txtEmail->Text->Contains("@"))
+		{
+			MessageBox::Show("ingrese un email válido");
+			return;
+		}
 		int edad = System::Convert::ToInt32(txtEdad->Text);
 		int dni = System::Convert::ToInt32(txtDni->Text);
-		std::string email = msclr::interop::marshal_as<std::string>(txtEmail->Text);
 		std::string pass = msclr::interop::marshal_as<std::string>(txtPassword->Text);
+
 		if (comboRolUsuario->SelectedIndex == -1) {
-			MessageBox::Show("Selecciona un rol.");
+			MessageBox::Show("selecciona un rol");
 			return;
 		}
 
@@ -612,15 +648,7 @@ namespace proyectoFacturacion {
 			comboRolUsuario->SelectedItem->ToString()
 		);
 
-		Usuario usuario(
-			nombre,
-			apellido,
-			edad,
-			dni,
-			email,
-			pass,
-			rol
-		);
+		Usuario usuario(nombre,apellido,edad,dni,email,pass,rol);
 
 		if (usuario.insertar()) {
 			txtNombre->Text = "";
@@ -640,12 +668,19 @@ namespace proyectoFacturacion {
 	}
 
 	private: System::Void btnBuscarUsuario_Click(System::Object^ sender, System::EventArgs^ e) {
-
+		if (txtBuscarDni->Text == ""){
+			MessageBox::Show("ingrese un dni para buscar");
+			return;
+		}
 		int dni = Convert::ToInt32(txtBuscarDni->Text);
 
 		Usuario usuario;
 		usuario.buscarUsuarioPorDni(dni);
 
+		if (usuario.getId() == 0){
+			MessageBox::Show("Usuario no encontrado.");
+			return;
+		}
 		idUsuarioSeleccionado = usuario.getId();
 		txtNombre->Text = gcnew String(usuario.getNombre().c_str());
 		txtApellido->Text = gcnew String(usuario.getApellido().c_str());
@@ -666,7 +701,10 @@ namespace proyectoFacturacion {
 
 	}
 	private: System::Void btnActualizarUsuario_Click(System::Object^ sender, System::EventArgs^ e) {
-		
+		if (txtBuscarDni->Text == "") {
+			MessageBox::Show("ingrese un dni para buscar");
+			return;
+		}
 		int id = idUsuarioSeleccionado;
 
 		std::string nombre = msclr::interop::marshal_as<std::string>(txtNombre->Text);
@@ -684,19 +722,14 @@ namespace proyectoFacturacion {
 			comboRolUsuario->SelectedItem->ToString()
 		);
 		Usuario usuario;
-		usuario.actualizarUsuario(
-			id,
-			nombre,
-			apellido,
-			edad,
-			dni,
-			email,
-			rol
-		);
+		usuario.actualizarUsuario(id,nombre,apellido,edad,dni,email,rol);
 		MessageBox::Show("Usuario actualizado");
 	}
 	private: System::Void btnDeshabilitarUsuario_Click(System::Object^ sender, System::EventArgs^ e) {
-		
+		if (txtBuscarDni->Text == "") {
+			MessageBox::Show("ingrese un dni para buscar");
+			return;
+		}
 		int dni = Convert::ToInt32(txtBuscarDni->Text);
 
 		Usuario usuario;
@@ -706,6 +739,10 @@ namespace proyectoFacturacion {
 		MessageBox::Show("Usuario deshabilitado");
 	}
 	private: System::Void bntHabilitarUsuario_Click(System::Object^ sender, System::EventArgs^ e) {
+		if (txtBuscarDni->Text == "") {
+			MessageBox::Show("ingrese un dni para buscar");
+			return;
+		}
 		int dni = Convert::ToInt32(txtBuscarDni->Text);
 
 		Usuario usuario;

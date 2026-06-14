@@ -22,15 +22,9 @@ void Conexion::conectar() {
     connection_properties["OPT_SSL_MODE"] = sql::SSL_MODE_DISABLED;
 
     try {
-        sql::mysql::MySQL_Driver* driver =
-            sql::mysql::get_mysql_driver_instance();
-
+        sql::mysql::MySQL_Driver* driver = sql::mysql::get_mysql_driver_instance();
         con = driver->connect(connection_properties);
         con->setSchema("sistemafacturacion");
-
-        if (con && !con->isClosed()) {
-            std::cout << "Conexion exitosa" << std::endl;
-        }
     }
     catch (sql::SQLException& e) {
         std::cerr << "Error de SQL: " << e.what() << std::endl;

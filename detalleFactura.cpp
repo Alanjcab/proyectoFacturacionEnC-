@@ -23,7 +23,7 @@ DetalleFactura::DetalleFactura(
     this->descuentoProducto = descuentoProducto;
     this->subTotal = subTotal;
 }
-
+//guardo el detalle de la factura
 void DetalleFactura::guardarDetalle() {
     Conexion conexion;
     sql::Connection* con = conexion.getConexion();

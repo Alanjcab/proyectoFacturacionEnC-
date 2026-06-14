@@ -18,12 +18,25 @@ namespace proyectoFacturacion {
 	/// </summary>
 	public ref class ProveedorForm : public System::Windows::Forms::Form
 	{
+	private:
+		String^ rolUsuario;
+
+		void permisosRol() {
+			if (rolUsuario == "deposito")
+			{
+				btnClienteEnProveedor->Enabled = false;
+				btnFacturacionEnProveedor->Enabled = false;
+				btnRegistrarEnProveedor->Enabled = false;
+			}
+		}
 	public:
 		int idProveedorSeleccionado;
-		ProveedorForm(void)
+		ProveedorForm(String^ rol)
 		{
 			InitializeComponent();
 			mostrarProveedoresActivos();
+			rolUsuario = rol;
+			permisosRol();
 			//
 			//TODO: agregar código de constructor aquí
 			//

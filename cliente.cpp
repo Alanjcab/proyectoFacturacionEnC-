@@ -10,6 +10,30 @@
 #include "ProveedorForm.h"
 #include "Facturacion1.h"
 
+//llamo a los botones para ir a otras vistas
+namespace proyectoFacturacion {
+	System::Void ProductoForm::btnClienteEnProducto_Click(System::Object^ sender, System::EventArgs^ e) {
+		clienteForm^ vistaCliente = gcnew clienteForm(rolUsuario);
+		vistaCliente->Show();
+		this->Hide();
+	}
+	System::Void registrarForm::btnClienteEnRegistrar_Click(System::Object^ sender, System::EventArgs^ e) {
+		clienteForm^ vistaCliente = gcnew clienteForm(rolUsuario);
+		vistaCliente->Show();
+		this->Hide();
+	}
+	System::Void ProveedorForm::btnClienteEnProveedor_Click(System::Object^ sender, System::EventArgs^ e) {
+		clienteForm^ vistaCliente = gcnew clienteForm(rolUsuario);
+		vistaCliente->Show();
+		this->Hide();
+	}
+	System::Void Facturacion::btnClienteEnFacturacion_Click(System::Object^ sender, System::EventArgs^ e) {
+		clienteForm^ vistaCliente = gcnew clienteForm(rolUsuario);
+		vistaCliente->Show();
+		this->Hide();
+	}
+}
+
 Cliente::Cliente() {}
 
 Cliente::Cliente(std::string nombre, std::string apellido, int dniCliente, std::string emailCliente) {
@@ -18,31 +42,8 @@ Cliente::Cliente(std::string nombre, std::string apellido, int dniCliente, std::
 	this->dniCliente = dniCliente;
 	this->emailCliente = emailCliente;
 }
-//botones para ir a otras vistas
-namespace proyectoFacturacion {
-	System::Void ProductoForm::btnClienteEnProducto_Click(System::Object^ sender, System::EventArgs^ e) {
-		clienteForm^ vistaCliente = gcnew clienteForm();
-		vistaCliente->Show();
-		this->Hide();
-	}
-	System::Void registrarForm::btnClienteEnRegistrar_Click(System::Object^ sender, System::EventArgs^ e) {
-		clienteForm^ vistaCliente = gcnew clienteForm();
-		vistaCliente->Show();
-		this->Hide();
-	}
-	System::Void ProveedorForm::btnClienteEnProveedor_Click(System::Object^ sender, System::EventArgs^ e) {
-		clienteForm^ vistaCliente = gcnew clienteForm();
-		vistaCliente->Show();
-		this->Hide();
-	}
-	System::Void Facturacion::btnClienteEnFacturacion_Click(System::Object^ sender, System::EventArgs^ e) {
-		clienteForm^ vistaCliente = gcnew clienteForm();
-		vistaCliente->Show();
-		this->Hide();
-	}
-}
 
-
+//getters
 int Cliente::getIdCliente() {
 	return idCliente;
 }
@@ -67,26 +68,26 @@ bool Cliente::getActivo() {
 	return activo;
 }
 
-void Cliente::altaDeCliente() {   //doy de alta al cliente
+//doy de alta al cliente
+void Cliente::altaDeCliente() {   
 	Conexion conexion;
 	sql::Connection* con = conexion.getConexion();
 	try {
 		sql::PreparedStatement* ps = con->prepareStatement(
-			"insert into clientes " "(nombre, apellido, dniCliente, emailCliente) ""values (?,?,?,?)"); //hago el insert en la tabla
+			"insert into clientes " "(nombre, apellido, dniCliente, emailCliente) ""values (?,?,?,?)"); 
 		ps->setString(1, sql::SQLString(nombre));
 		ps->setString(2, sql::SQLString(apellido));
 		ps->setInt(3, dniCliente);
 		ps->setString(4, sql::SQLString(emailCliente));
 		ps->executeUpdate();
 		delete ps;
-		std::cout << "Insert cliente ok" << std::endl;
 	}
 	catch (sql::SQLException& e) {
 		std::cerr << "Error " << e.what() << std::endl;
 	}
 }
-
-void Cliente::buscarCliente(int dniCliente) {  //busco cliente por numero de dni
+//busco cliente por numero de dni
+void Cliente::buscarCliente(int dniCliente) {  
 	Conexion conexion;
 	sql::Connection* con = conexion.getConexion();
 	try {
@@ -95,7 +96,6 @@ void Cliente::buscarCliente(int dniCliente) {  //busco cliente por numero de dni
 
 		ps = con->prepareStatement("select * from clientes where dniCliente = ?");
 		ps->setInt(1, dniCliente);
-
 		rs = ps->executeQuery();
 
 		if (rs->next()) {
@@ -114,8 +114,8 @@ void Cliente::buscarCliente(int dniCliente) {  //busco cliente por numero de dni
 		std::cerr << "Error " << e.what() << std::endl;
 	}
 }
-
-void Cliente::deshabilitarCliente(int dniCliente) {  //deshabilito al cliente por numero de dni
+//deshabilito al cliente por numero de dni
+void Cliente::deshabilitarCliente(int dniCliente) { 
 	Conexion conexion;
 	sql::Connection* con = conexion.getConexion();
 	try {
@@ -123,13 +123,13 @@ void Cliente::deshabilitarCliente(int dniCliente) {  //deshabilito al cliente po
 		ps = con->prepareStatement("update clientes set activo = 0 where dniCliente = ?");
 		ps->setInt(1, dniCliente);
 		ps->executeUpdate();
-		std::cout << "Cliente deshabilitado correctamente" << std::endl;
 	}
 	catch (sql::SQLException& e) {
 		std::cerr << "Error " << e.what() << std::endl;
 	}
 }
-void Cliente::habilitarCliente(int dniCliente) {  //deshabilito al cliente por numero de dni
+//deshabilito al cliente por numero de dni
+void Cliente::habilitarCliente(int dniCliente) {  
 	Conexion conexion;
 	sql::Connection* con = conexion.getConexion();
 	try {
@@ -137,14 +137,14 @@ void Cliente::habilitarCliente(int dniCliente) {  //deshabilito al cliente por n
 		ps = con->prepareStatement("update clientes set activo = 1 where dniCliente = ?");
 		ps->setInt(1, dniCliente);
 		ps->executeUpdate();
-		std::cout << "Cliente habilitado correctamente" << std::endl;
 	}
 	catch (sql::SQLException& e) {
 		std::cerr << "Error " << e.what() << std::endl;
 	}
 }
 
-void Cliente::actualizarCliente(int idCliente, std::string nombre, std::string apellido, int dniCliente, std::string emailCliente) { //actualizo datos de un cliente
+//actualizo datos de un cliente
+void Cliente::actualizarCliente(int idCliente, std::string nombre, std::string apellido, int dniCliente, std::string emailCliente) { 
 	Conexion conexion;
 	sql::Connection* con = conexion.getConexion();
 	try {

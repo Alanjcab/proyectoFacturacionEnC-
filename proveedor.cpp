@@ -12,22 +12,22 @@
 
 namespace proyectoFacturacion {
 	System::Void clienteForm::btnProveedorEnCliente_Click(System::Object^ sender, System::EventArgs^ e) {
-		ProveedorForm^ vistaProveedor = gcnew ProveedorForm();
+		ProveedorForm^ vistaProveedor = gcnew ProveedorForm(rolUsuario);
 		vistaProveedor->Show();
 		this->Hide();
 	}
 	System::Void registrarForm::btnProveedorEnRegistrar_Click(System::Object^ sender, System::EventArgs^ e) {
-		ProveedorForm^ vistaProveedor = gcnew ProveedorForm();
+		ProveedorForm^ vistaProveedor = gcnew ProveedorForm(rolUsuario);
 		vistaProveedor->Show();
 		this->Hide();
 	}
 	System::Void ProductoForm::btnProveedorEnProducto_Click(System::Object^ sender, System::EventArgs^ e) {
-		ProveedorForm^ vistaProveedor = gcnew ProveedorForm();
+		ProveedorForm^ vistaProveedor = gcnew ProveedorForm(rolUsuario);
 		vistaProveedor->Show();
 		this->Hide();
 	}
 	System::Void Facturacion::btnProveedorEnFacturacion_Click(System::Object^ sender, System::EventArgs^ e) {
-		ProveedorForm^ vistaProveedor = gcnew ProveedorForm();
+		ProveedorForm^ vistaProveedor = gcnew ProveedorForm(rolUsuario);
 		vistaProveedor->Show();
 		this->Hide();
 	}
@@ -35,13 +35,14 @@ namespace proyectoFacturacion {
 
 
 
-Proveedor::Proveedor(){}
+Proveedor::Proveedor(){
+}
 Proveedor::Proveedor(std::string nombreProveedor, int cuit, std::string emailProveedor) {
 	this->nombreProveedor = nombreProveedor;
 	this->cuit = cuit;
 	this->emailProveedor = emailProveedor;
 }
-
+//getetrs
 int Proveedor::getIdProveedor() {
 	return idProveedor;
 }
@@ -61,7 +62,8 @@ std::string Proveedor::getEmailProveedor() {
 bool Proveedor::getActivo() {
 	return activo;
 }
-	
+
+//doy de alta el proveedor
 void Proveedor::altaDeProveedor() {
 	Conexion conexion;
 	sql::Connection* con = conexion.getConexion();
@@ -73,13 +75,12 @@ void Proveedor::altaDeProveedor() {
 		ps->setString(3, sql::SQLString(emailProveedor));
 		ps->executeUpdate();
 		delete ps;
-		std::cout << "Insert proveedor ok" << std::endl;
 	}
 	catch (sql::SQLException& e) {
 		std::cerr << "Error " << e.what() << std::endl;
 	}
 }
-
+//busco proveedor por cuit
 void Proveedor::buscarProveedor(int cuit) {
 	Conexion conexion;
 	sql::Connection* con = conexion.getConexion();
@@ -93,9 +94,6 @@ void Proveedor::buscarProveedor(int cuit) {
 		rs = ps->executeQuery();
 
 		if (rs->next()) {
-
-			std::cout << "proveedor encontrado" << std::endl;
-
 			this->idProveedor = rs->getInt("idProveedor");
 			this->nombreProveedor = rs->getString("nombreProveedor");
 			this->cuit = rs->getInt("cuit");
@@ -108,6 +106,7 @@ void Proveedor::buscarProveedor(int cuit) {
 	}
 }
 
+//actualizo daots del proveedor
 void Proveedor::actualizarProveedor(int idProveedor, std::string nombreProveedor, int cuit, std::string emailProveedor) {
 	Conexion conexion;
 	sql::Connection* con = conexion.getConexion();
@@ -126,7 +125,7 @@ void Proveedor::actualizarProveedor(int idProveedor, std::string nombreProveedor
 		std::cerr << "Error " << e.what() << std::endl;
 	}
 }
-
+//deshabilito proveedor por cuit
 void Proveedor::deshabilitarProveedor(int cuit) {
 	Conexion conexion;
 	sql::Connection* con = conexion.getConexion();
@@ -135,13 +134,12 @@ void Proveedor::deshabilitarProveedor(int cuit) {
 		ps = con->prepareStatement("update proveedores set activo = 0 where cuit = ?");
 		ps->setInt(1, cuit);
 		ps->executeUpdate();
-		std::cout << "Proveedor deshabilitado correctamente" << std::endl;
 	}
 	catch (sql::SQLException& e) {
 		std::cerr << "Error " << e.what() << std::endl;
 	}
 }
-
+//habilito proveedor por cuit
 void Proveedor::habilitarProveedor(int cuit) {
 	Conexion conexion;
 	sql::Connection* con = conexion.getConexion();
@@ -150,7 +148,6 @@ void Proveedor::habilitarProveedor(int cuit) {
 		ps = con->prepareStatement("update proveedores set activo = 1 where cuit = ?");
 		ps->setInt(1, cuit);
 		ps->executeUpdate();
-		std::cout << "Proveedor deshabilitado correctamente" << std::endl;
 	}
 	catch (sql::SQLException& e) {
 		std::cerr << "Error " << e.what() << std::endl;

@@ -9,8 +9,32 @@
 #include "ProveedorForm.h"
 #include "Facturacion1.h"
 
-Usuario::Usuario() { 
+//llamo a los botones de las vistas
+namespace proyectoFacturacion {
+    System::Void clienteForm::btnRegistrarEnCliente_Click(System::Object^ sender, System::EventArgs^ e) {
+        registrarForm^ vistaRegistrar = gcnew registrarForm(rolUsuario);
+        vistaRegistrar->Show();
+        this->Hide();
+    }
+    System::Void ProductoForm::btnRegistrarEnProducto_Click(System::Object^ sender, System::EventArgs^ e) {
+        registrarForm^ vistaRegistrar = gcnew registrarForm(rolUsuario);
+        vistaRegistrar->Show();
+        this->Hide();
+    }
+    System::Void ProveedorForm::btnRegistrarEnProveedor_Click(System::Object^ sender, System::EventArgs^ e) {
+        registrarForm^ vistaRegistrar = gcnew registrarForm(rolUsuario);
+        vistaRegistrar->Show();
+        this->Hide();
+    }
+    System::Void Facturacion::btnRegistrarEnFacturacion_Click(System::Object^ sender, System::EventArgs^ e) {
+        registrarForm^ vistaRegistrar = gcnew registrarForm(rolUsuario);
+        vistaRegistrar->Show();
+        this->Hide();
+    }
 
+}
+
+Usuario::Usuario() { 
 }
 Usuario::Usuario(
     std::string nombre,
@@ -30,31 +54,33 @@ Usuario::Usuario(
     this->rol = rol;
 }
 
-namespace proyectoFacturacion {
-    System::Void clienteForm::btnRegistrarEnCliente_Click(System::Object^ sender, System::EventArgs^ e) {
-        registrarForm^ vistaRegistrar = gcnew registrarForm();
-        vistaRegistrar->Show();
-        this->Hide();
-    }
-    System::Void ProductoForm::btnRegistrarEnProducto_Click(System::Object^ sender, System::EventArgs^ e) {
-        registrarForm^ vistaRegistrar = gcnew registrarForm();
-        vistaRegistrar->Show();
-        this->Hide();
-    }
-    System::Void ProveedorForm::btnRegistrarEnProveedor_Click(System::Object^ sender, System::EventArgs^ e) {
-        registrarForm^ vistaRegistrar = gcnew registrarForm();
-        vistaRegistrar->Show();
-        this->Hide();
-    }
-    System::Void Facturacion::btnRegistrarEnFacturacion_Click(System::Object^ sender, System::EventArgs^ e) {
-        registrarForm^ vistaRegistrar = gcnew registrarForm();
-        vistaRegistrar->Show();
-        this->Hide();
-    }
-   
+//gets del usuario
+int Usuario::getId() {
+    return id;
+}
+std::string Usuario::getNombre() {
+    return nombre;
+}
+std::string Usuario::getApellido() {
+    return apellido;
+}
+int Usuario::getEdad() {
+    return edad;
+}
+int Usuario::getDni() {
+    return dni;
+}
+std::string Usuario::getEmail() {
+    return email;
+}
+std::string Usuario::getRol() {
+    return rol;
+}
+bool Usuario::getActivo() {
+    return activo;
 }
 
-//metodo de conexion.h para insertar 
+//metodo para insertar un nuevo usuario
 bool Usuario::insertar() {
     Conexion conexion;
     sql::Connection* con = conexion.getConexion();
@@ -70,7 +96,6 @@ bool Usuario::insertar() {
         ps->setString(7, sql::SQLString(rol));
         ps->executeUpdate();
         delete ps;
-        std::cout << "Insert ok" << std::endl;
         return true;
     }
 
@@ -80,7 +105,7 @@ bool Usuario::insertar() {
     }
 }
 
-//validar usuario
+//valido el usuario
 bool Usuario::validarUsuario(std::string email, std::string pass) {
     Conexion conexion;
     sql::Connection* con = conexion.getConexion();
@@ -106,7 +131,7 @@ bool Usuario::validarUsuario(std::string email, std::string pass) {
         return false;
     }
 }
-//verificar rol
+//verificar rol del usuario
 std::string Usuario::rolUsuario(std::string email, std::string pass) {
     Conexion conexion;
     sql::Connection* con = conexion.getConexion();
@@ -149,9 +174,6 @@ void Usuario::buscarUsuarioPorDni(int dni) {
         rs = ps->executeQuery();
 
         if (rs->next()) {
-
-            std::cout << "usuario encontrad" << std::endl;
-
             this->id = rs->getInt("id");
             this->nombre = rs->getString("nombre");
             this->apellido = rs->getString("apellido");
@@ -161,39 +183,10 @@ void Usuario::buscarUsuarioPorDni(int dni) {
             this->rol = rs->getString("rol");
             this->activo = rs->getBoolean("activo");
         }
-        else {
-            std::cout << "Usuario no encontrado" << std::endl;
-        }
     }
-
     catch (sql::SQLException& e) {
         std::cerr << "Error " << e.what() << std::endl;
     }
-}
-
-int Usuario::getId() {
-    return id;
-}
-std::string Usuario::getNombre() {
-    return nombre;
-}
-std::string Usuario::getApellido() {
-    return apellido;
-}
-int Usuario::getEdad() {
-    return edad;
-}
-int Usuario::getDni() {
-    return dni;
-}
-std::string Usuario::getEmail() {
-    return email;
-}
-std::string Usuario::getRol() {
-    return rol;
-}
-bool Usuario::getActivo() {
-    return activo;
 }
 
 //deshabilitar usuario por dni
@@ -206,7 +199,6 @@ void Usuario::deshabilitarUsuario(int dni) {
         ps = con->prepareStatement("update usuarios set activo = 0 where dni = ?");
         ps->setInt(1, dni);
         ps->executeUpdate();
-        std::cout << "Usuario deshabilitado correctamente" << std::endl;
     }
     catch (sql::SQLException& e) {
         std::cerr << "Error " << e.what() << std::endl;
@@ -214,6 +206,7 @@ void Usuario::deshabilitarUsuario(int dni) {
   
 }
 
+//habilito el usuario por dni
 void Usuario::habilitarUsuario(int dni) {
 
     Conexion conexion;
@@ -223,7 +216,6 @@ void Usuario::habilitarUsuario(int dni) {
         ps = con->prepareStatement("update usuarios set activo = 1 where dni = ?");
         ps->setInt(1, dni);
         ps->executeUpdate();
-        std::cout << "Usuario habilitado correctamente" << std::endl;
     }
     catch (sql::SQLException& e) {
         std::cerr << "Error " << e.what() << std::endl;
@@ -232,12 +224,10 @@ void Usuario::habilitarUsuario(int dni) {
 }
 
 //actualizar usuario
-
 void Usuario::actualizarUsuario(int id,std::string nombre,std::string apellido,int edad,int dni,std::string email,std::string rol) {
     Conexion conexion;
     sql::Connection* con = conexion.getConexion();
     try {
-        
         sql::PreparedStatement* ps;
         ps = con->prepareStatement("update usuarios set nombre = ? ,apellido = ? ,edad = ? ,dni = ? ,email = ? ,rol = ? where id = ?");
         

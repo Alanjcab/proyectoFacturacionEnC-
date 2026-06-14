@@ -6,8 +6,6 @@
 #include <jdbc/cppconn/resultset.h>
 
 
-
-
 namespace proyectoFacturacion {
 
 	using namespace System;
@@ -22,14 +20,24 @@ namespace proyectoFacturacion {
 	/// </summary>
 	public ref class clienteForm : public System::Windows::Forms::Form
 	{
+	private:
+		String^ rolUsuario;
+	private:
+		void permisosRol() {
+			if (rolUsuario == "cajero")
+			{
+				btnProveedorEnCliente->Enabled = false;
+				btnRegistrarEnCliente->Enabled = false;
+			}
+		}
 	public:
 		int idClienteSeleccionado;
-		clienteForm(void)
+		clienteForm(String^ rol)
 		{
 			InitializeComponent();
-
 			mostrarClientesActivos();
-
+			rolUsuario = rol;
+			permisosRol();
 			//
 			//TODO: agregar código de constructor aquí
 			//
@@ -498,6 +506,17 @@ namespace proyectoFacturacion {
 			}
 		}
 	private: System::Void btnRegistrarCliente_Click(System::Object^ sender, System::EventArgs^ e) {
+		//valido que llene los campos
+		if (txtNombreCliente->Text == "" || txtApellidoCliente->Text == "" || txtDniCliente->Text == "" || txtEmailCliente->Text == ""){
+			MessageBox::Show("complete todos los campos");
+			return;
+		}
+		//valido que el mail se cree con @
+		if (!txtEmailCliente->Text->Contains("@")){
+			MessageBox::Show("Ingrese un email válido.");
+			return;
+		}
+
 		std::string nombre = msclr::interop::marshal_as<std::string>(txtNombreCliente->Text);
 		std::string apellido = msclr::interop::marshal_as<std::string>(txtApellidoCliente->Text);
 		int dniCliente = System::Convert::ToInt32(txtDniCliente->Text);
@@ -520,10 +539,20 @@ namespace proyectoFacturacion {
 		MessageBox::Show("Cliente registrado correctamente.");
 	}
 private: System::Void btnBuscarCliente_Click(System::Object^ sender, System::EventArgs^ e) {
+	if (txtBuscarCliente->Text == ""){
+		MessageBox::Show("debe ingresar un dni");
+		return;
+	}
 	int dniCliente = Convert::ToInt32(txtBuscarCliente->Text);
 
 	Cliente cliente;
 	cliente.buscarCliente(dniCliente);
+
+	if (cliente.getIdCliente() == 0)
+	{
+		MessageBox::Show("No se encontro el cliente");
+		return;
+	}
 	idClienteSeleccionado = cliente.getIdCliente();
 
 	txtNombreCliente->Text = gcnew String(cliente.getNombre().c_str());
@@ -542,6 +571,11 @@ private: System::Void btnBuscarCliente_Click(System::Object^ sender, System::Eve
 
 	}
 private: System::Void btnDeshabilitarCliente_Click(System::Object^ sender, System::EventArgs^ e) {
+	if (idClienteSeleccionado == 0){
+		MessageBox::Show("tiene que buscar un cliente");
+		return;
+	}
+
 	int dniCliente = Convert::ToInt32(txtBuscarCliente->Text);
 
 	Cliente cliente;
@@ -558,7 +592,10 @@ private: System::Void btnDeshabilitarCliente_Click(System::Object^ sender, Syste
 	}
 
 private: System::Void bntHabilitarCliente_Click(System::Object^ sender, System::EventArgs^ e) {
-
+	if (idClienteSeleccionado == 0) {
+		MessageBox::Show("tiene que buscar un cliente");
+		return;
+	}
 	int dniCliente = Convert::ToInt32(txtBuscarCliente->Text);
 
 	Cliente cliente;
@@ -575,6 +612,14 @@ private: System::Void bntHabilitarCliente_Click(System::Object^ sender, System::
 }
 
 private: System::Void btnActualizarCliente_Click(System::Object^ sender, System::EventArgs^ e) {
+	if (idClienteSeleccionado == 0) {
+		MessageBox::Show("tiene que buscar un cliente");
+		return;
+	}
+	if (txtNombreCliente->Text == "" ||txtApellidoCliente->Text == "" ||txtDniCliente->Text == "" ||txtEmailCliente->Text == ""){
+		MessageBox::Show("complete todos los campos");
+		return;
+	}
 	int idCliente = idClienteSeleccionado;
 
 	std::string nombre = msclr::interop::marshal_as<std::string>(txtNombreCliente->Text);

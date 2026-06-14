@@ -38,14 +38,30 @@ namespace proyectoFacturacion {
 	private: System::Windows::Forms::Button^ btnProveedorEnFacturacion;
 	private: System::Windows::Forms::Button^ btnRegistrarEnFacturacion;
 
+	private:
+		String^ rolUsuario;
+		void permisosRol() {
+			if (rolUsuario == "cajero")
+			{
+				btnProveedorEnFacturacion->Enabled = false;
+				btnRegistrarEnFacturacion->Enabled = false;
+			}
+			else if (rolUsuario == "deposito") {
+				MessageBox::Show("No tenes permiso para acceder a Usuarios.");
+				this->Close();
+				return;
+			}
+		}
 		    
 	public:
-		Facturacion(void)
+		Facturacion(String^ rol)
 		{
 			InitializeComponent();
 
 			tablaFacturacion->SelectionMode = DataGridViewSelectionMode::FullRowSelect;
 			tablaFacturacion->MultiSelect = false;
+			rolUsuario = rol;
+			permisosRol();
 			//
 			//TODO: agregar código de constructor aquí
 			//
@@ -698,6 +714,10 @@ namespace proyectoFacturacion {
 	}
 
 	private: System::Void btnBuscarCliente_Click(System::Object^ sender, System::EventArgs^ e) {
+		if (txtDniCliente->Text == ""){
+			MessageBox::Show("Ingrese el dni del cliente");
+			return;
+		}
 		int dni = Convert::ToInt32(txtDniCliente->Text);
 
 		Cliente cliente;
@@ -719,6 +739,10 @@ namespace proyectoFacturacion {
 			gcnew String(cliente.getApellido().c_str());
 	}
 	private: System::Void btnBuscarProducto_Click(System::Object^ sender, System::EventArgs^ e) {
+		if (txtCodigoProducto->Text == ""){
+			MessageBox::Show("ingrese el código del producto");
+			return;
+		}
 		int codigo = Convert::ToInt32(txtCodigoProducto->Text);
 
 		Producto producto;
@@ -739,23 +763,32 @@ namespace proyectoFacturacion {
 	}
 	private: System::Void btnAgregar_Click(System::Object^ sender, System::EventArgs^ e) {
 		if (idProductoSeleccionado == 0) {
-			MessageBox::Show("Tiene que buscar un producto");
+			MessageBox::Show("tiene que buscar un producto");
 			return;
 		}
-
+		if (txtCantidadProducto->Text == ""){
+			MessageBox::Show("ingrese una cantidad.");
+			return;
+		}
 		int cantidad = Convert::ToInt32(txtCantidadProducto->Text);
 
 		if (cantidad <= 0) {
-			MessageBox::Show("Ingrese una cantidad válida");
+			MessageBox::Show("ingrese una cantidad válida");
 			return;
 		}
 
 		if (cantidad > stockProductoSeleccionado) {
-			MessageBox::Show("No hay stock suficiente del producto");
+			MessageBox::Show("no hay  stock disponible del producto");
 			return;
 		}
-
+		
 		double descuentoProducto = 0;
+
+		if (descuentoProducto < 0 || descuentoProducto > 100)
+		{
+			MessageBox::Show("El descuento debe estar entre 0 y 100.");
+			return;
+		}
 
 		if (txtDescuentoProducto->Text != "") {
 			descuentoProducto = Convert::ToDouble(txtDescuentoProducto->Text);
@@ -764,7 +797,7 @@ namespace proyectoFacturacion {
 		double subtotalSinDescuento = precioProductoSeleccionado * cantidad;
 		double montoDescuento = subtotalSinDescuento * descuentoProducto / 100;
 		double subtotalFinal = subtotalSinDescuento - montoDescuento;
-
+		//un for para checkear que no se agregue ods veeces el mismo item, y validar que cuando se agrega otro haya stock disp
 		for (int i = 0; i < tablaFacturacion->Rows->Count; i++) {
 
 			int idProductoTabla = Convert::ToInt32(tablaFacturacion->Rows[i]->Cells[0]->Value);
@@ -811,7 +844,7 @@ namespace proyectoFacturacion {
 	//btn para eliminar producto de la tabla
 	private: System::Void button1_Click(System::Object^ sender, System::EventArgs^ e) {
 		if (tablaFacturacion->SelectedRows->Count == 0) {
-			MessageBox::Show("Seleccione un producto de la tabla.");
+			MessageBox::Show("Seleccione un producto de la tabla");
 			return;
 		}
 
@@ -865,6 +898,10 @@ namespace proyectoFacturacion {
 
 		int idFactura = factura.guardarFactura();
 
+		if (idFactura == 0) {
+			MessageBox::Show("No se guardo la factura");
+			return;
+		}
 		for (int i = 0; i < tablaFacturacion->Rows->Count; i++)
 		{
 			int idProducto = Convert::ToInt32(tablaFacturacion->Rows[i]->Cells[0]->Value);
@@ -882,11 +919,6 @@ namespace proyectoFacturacion {
 				subTotalNeto
 			);
 			detalle.guardarDetalle();
-		}
-
-		if (idFactura == 0) {
-			MessageBox::Show("No se guardo la factura");
-			return;
 		}
 		MessageBox::Show("factura guardada correctamente" + idFactura.ToString());
 	}

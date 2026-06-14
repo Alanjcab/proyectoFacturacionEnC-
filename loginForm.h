@@ -172,25 +172,21 @@ namespace proyectoFacturacion {
 
 		if (rol == "admin") { //el usuario con rol "admin" puede ver todas las vistas
 
-			registrarForm^ menuRegistrar = gcnew registrarForm();
-			menuRegistrar->Show();
+			registrarForm^ vistaRegistrar = gcnew registrarForm(gcnew String(rol.c_str()));
+			vistaRegistrar->Show();
 			this->Hide();
-			
-			std::cout << "ingreso exitoso" << std::endl;	
 		}
 		else if(rol == "cajero") {  //abro solo las vistas que puede ver el usuario con rol "cajero"
 
-			clienteForm^ vistaCliente = gcnew clienteForm();
+			clienteForm^ vistaCliente = gcnew clienteForm(gcnew String(rol.c_str()));
 			vistaCliente->Show();
 			this->Hide();
-			std::cout << "ingreso exitoso" << std::endl;
 		}
 		else if (rol == "deposito") {  //abro solo las vistas que peude ver el usuario con rol "deposito"
 
-			ProveedorForm^ vistaProveedor = gcnew ProveedorForm();
+			ProveedorForm^ vistaProveedor = gcnew ProveedorForm(gcnew String(rol.c_str()));
 			vistaProveedor->Show();
 			this->Hide();
-			std::cout << "ingreso exitoso" << std::endl;
 		}
 		 //si el usuario esta inactivo muestrp mensaje
 		else if (rol == "inactivo") {
