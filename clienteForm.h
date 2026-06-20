@@ -535,7 +535,7 @@ namespace proyectoFacturacion {
 		txtApellidoCliente->Text = "";
 		txtDniCliente->Text = "";
 		txtEmailCliente->Text = "";
-
+		mostrarClientesActivos();
 		MessageBox::Show("Cliente registrado correctamente.");
 	}
 private: System::Void btnBuscarCliente_Click(System::Object^ sender, System::EventArgs^ e) {
@@ -636,6 +636,7 @@ private: System::Void btnActualizarCliente_Click(System::Object^ sender, System:
 		dniCliente,
 		emailCliente
 	);
+	mostrarClientesActivos();
 	MessageBox::Show("Cliente actualizado");
 	}
 	   //botones a las demas vistas

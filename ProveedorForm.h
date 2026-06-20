@@ -506,6 +506,8 @@ private: System::Void btnRegistrarProveedor_Click(System::Object^ sender, System
 	txtCuitProveedor->Text = "";
 	txtEmailProveedor->Text = "";
 
+	mostrarProveedoresActivos();
+
 	MessageBox::Show("Cliente registrado correctamente.");
 	}
 
@@ -546,6 +548,7 @@ private: System::Void btnActualizarProveedor_Click(System::Object^ sender, Syste
 		cuit,
 		emailProveedor
 	);
+	mostrarProveedoresActivos();
 	MessageBox::Show("Proveedor actualizado");
 	}
 	private: System::Void btnDeshabilitarProveedor_Click(System::Object^ sender, System::EventArgs^ e) {

@@ -608,6 +608,8 @@ namespace proyectoFacturacion {
 		txtStock->Text = "";
 		cbProveedores->SelectedIndex = -1;
 
+		mostrarProductosActivos();
+
 		MessageBox::Show("Producto registrado correctamente.");
 	}
 	private: System::Void btnBuscarProducto_Click(System::Object^ sender, System::EventArgs^ e) {
@@ -650,6 +652,9 @@ namespace proyectoFacturacion {
 			precio,
 			stock
 		);
+
+		mostrarProductosActivos();
+
 		MessageBox::Show("Producto actualizado");
 	}
 	private: System::Void btnDeshabilitarProducto_Click(System::Object^ sender, System::EventArgs^ e) {

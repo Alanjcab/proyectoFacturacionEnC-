@@ -658,6 +658,7 @@ namespace proyectoFacturacion {
 			txtEmail->Text = "";
 			txtPassword->Text = "";
 			comboRolUsuario->SelectedIndex = -1;
+			mostrarUsuariosActivos();
 			MessageBox::Show("Usuario registrado correctamente.");
 		}
 		else {
@@ -723,6 +724,7 @@ namespace proyectoFacturacion {
 		);
 		Usuario usuario;
 		usuario.actualizarUsuario(id,nombre,apellido,edad,dni,email,rol);
+		mostrarUsuariosActivos();
 		MessageBox::Show("Usuario actualizado");
 	}
 	private: System::Void btnDeshabilitarUsuario_Click(System::Object^ sender, System::EventArgs^ e) {
