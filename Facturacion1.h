@@ -409,42 +409,49 @@ namespace proyectoFacturacion {
 			this->colId->HeaderText = L"ID";
 			this->colId->MinimumWidth = 6;
 			this->colId->Name = L"colId";
+			this->colId->ReadOnly = true;
 			// 
 			// colCodigo
 			// 
 			this->colCodigo->HeaderText = L"Codigo";
 			this->colCodigo->MinimumWidth = 6;
 			this->colCodigo->Name = L"colCodigo";
+			this->colCodigo->ReadOnly = true;
 			// 
 			// ColDescripcion
 			// 
 			this->ColDescripcion->HeaderText = L"Descripcion";
 			this->ColDescripcion->MinimumWidth = 6;
 			this->ColDescripcion->Name = L"ColDescripcion";
+			this->ColDescripcion->ReadOnly = true;
 			// 
 			// ColPrecio
 			// 
 			this->ColPrecio->HeaderText = L"Precio";
 			this->ColPrecio->MinimumWidth = 6;
 			this->ColPrecio->Name = L"ColPrecio";
+			this->ColPrecio->ReadOnly = true;
 			// 
 			// ColCantidad
 			// 
 			this->ColCantidad->HeaderText = L"Cant.";
 			this->ColCantidad->MinimumWidth = 6;
 			this->ColCantidad->Name = L"ColCantidad";
+			this->ColCantidad->ReadOnly = true;
 			// 
 			// ColDescuento
 			// 
 			this->ColDescuento->HeaderText = L"Des. %";
 			this->ColDescuento->MinimumWidth = 6;
 			this->ColDescuento->Name = L"ColDescuento";
+			this->ColDescuento->ReadOnly = true;
 			// 
 			// ColSubtotal
 			// 
 			this->ColSubtotal->HeaderText = L"Subtotal";
 			this->ColSubtotal->MinimumWidth = 6;
 			this->ColSubtotal->Name = L"ColSubtotal";
+			this->ColSubtotal->ReadOnly = true;
 			// 
 			// btnConfirmarCompra
 			// 
@@ -658,6 +665,7 @@ namespace proyectoFacturacion {
 			this->Controls->Add(this->label1);
 			this->Name = L"Facturacion";
 			this->Text = L"REGISTRAR";
+			this->FormClosing += gcnew System::Windows::Forms::FormClosingEventHandler(this, &Facturacion::Facturacion_FormClosing);
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->tablaFacturacion))->EndInit();
 			this->ResumeLayout(false);
 			this->PerformLayout();
@@ -1018,5 +1026,9 @@ namespace proyectoFacturacion {
 	System::Void btnClienteEnFacturacion_Click(System::Object^ sender, System::EventArgs^ e);
 	System::Void btnProductoEnFacturacion_Click(System::Object^ sender, System::EventArgs^ e);
 	System::Void btnProveedorEnFacturacion_Click(System::Object^ sender, System::EventArgs^ e);
+
+	private: System::Void Facturacion_FormClosing(System::Object^ sender, System::Windows::Forms::FormClosingEventArgs^ e) {
+		Application::Exit();
+	}
 };
 }

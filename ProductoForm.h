@@ -514,6 +514,7 @@ namespace proyectoFacturacion {
 			this->Name = L"ProductoForm";
 			this->StartPosition = System::Windows::Forms::FormStartPosition::CenterScreen;
 			this->Text = L"ProductoForm";
+			this->FormClosing += gcnew System::Windows::Forms::FormClosingEventHandler(this, &ProductoForm::ProductoForm_FormClosing);
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->tablaProductos))->EndInit();
 			this->ResumeLayout(false);
 			this->PerformLayout();
@@ -805,6 +806,9 @@ namespace proyectoFacturacion {
 				btnHabilitarProducto->Enabled = true;
 			}
 		}
+	}
+	private: System::Void ProductoForm_FormClosing(System::Object^ sender, System::Windows::Forms::FormClosingEventArgs^ e) {
+		Application::Exit();
 	}
 };
 }

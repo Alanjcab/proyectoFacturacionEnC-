@@ -472,6 +472,7 @@ namespace proyectoFacturacion {
 			this->Name = L"clienteForm";
 			this->StartPosition = System::Windows::Forms::FormStartPosition::CenterScreen;
 			this->Text = L"cliente";
+			this->FormClosing += gcnew System::Windows::Forms::FormClosingEventHandler(this, &clienteForm::clienteForm_FormClosing);
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->tablaClientes))->EndInit();
 			this->ResumeLayout(false);
 			this->PerformLayout();
@@ -714,6 +715,9 @@ private: System::Void btnActualizarCliente_Click(System::Object^ sender, System:
 				bntHabilitarCliente->Enabled = true;
 			}
 		}
+	}
+	private: System::Void clienteForm_FormClosing(System::Object^ sender, System::Windows::Forms::FormClosingEventArgs^ e) {
+		Application::Exit();
 	}
 };
 }

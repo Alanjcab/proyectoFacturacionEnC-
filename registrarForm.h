@@ -583,6 +583,7 @@ namespace proyectoFacturacion {
 			this->Name = L"registrarForm";
 			this->StartPosition = System::Windows::Forms::FormStartPosition::CenterScreen;
 			this->Text = L"registrarForm";
+			this->FormClosing += gcnew System::Windows::Forms::FormClosingEventHandler(this, &registrarForm::registrarForm_FormClosing);
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->tablaUsuarios))->EndInit();
 			this->ResumeLayout(false);
 			this->PerformLayout();
@@ -891,6 +892,9 @@ private: bool validarCamposUsuario(bool validarPassword) {
 				bntHabilitarUsuario->Enabled = true;
 			}
 		}
+	}
+	private: System::Void registrarForm_FormClosing(System::Object^ sender, System::Windows::Forms::FormClosingEventArgs^ e) {
+		Application::Exit();
 	}
 };
 }
