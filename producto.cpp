@@ -157,3 +157,25 @@ void Producto::habilitarProducto(int codigo) {
         std::cerr << "Error " << e.what() << std::endl;
     }
 }
+//para verificar si existe el codgio del porducto que  voy a registrar
+bool Producto::existeProductoPorCodigo(int codigo) {
+    Conexion conexion;
+    sql::Connection* con = conexion.getConexion();
+
+    try {
+        sql::PreparedStatement* ps;
+        ps = con->prepareStatement("select count(*) from productos where codigo = ?");
+        ps->setInt(1, codigo);
+        sql::ResultSet* rs = ps->executeQuery();
+
+        if (rs->next()) {
+            int cantidad = rs->getInt(1);
+            return cantidad > 0;
+        }
+        return false;
+    }
+    catch (sql::SQLException& e) {
+        std::cerr << "Error " << e.what() << std::endl;
+        return true;
+    }
+}

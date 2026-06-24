@@ -290,6 +290,7 @@ namespace proyectoFacturacion {
 			this->tablaProveedor->ScrollBars = System::Windows::Forms::ScrollBars::Vertical;
 			this->tablaProveedor->Size = System::Drawing::Size(890, 93);
 			this->tablaProveedor->TabIndex = 49;
+			this->tablaProveedor->CellContentClick += gcnew System::Windows::Forms::DataGridViewCellEventHandler(this, &ProveedorForm::tablaProveedor_CellContentClick);
 			// 
 			// colId
 			// 
@@ -392,7 +393,7 @@ namespace proyectoFacturacion {
 			this->btnFacturacionEnProveedor->ForeColor = System::Drawing::SystemColors::ButtonHighlight;
 			this->btnFacturacionEnProveedor->Location = System::Drawing::Point(750, 42);
 			this->btnFacturacionEnProveedor->Name = L"btnFacturacionEnProveedor";
-			this->btnFacturacionEnProveedor->Size = System::Drawing::Size(160, 60);
+			this->btnFacturacionEnProveedor->Size = System::Drawing::Size(173, 60);
 			this->btnFacturacionEnProveedor->TabIndex = 55;
 			this->btnFacturacionEnProveedor->Text = L"FACTURACION";
 			this->btnFacturacionEnProveedor->UseVisualStyleBackColor = false;
@@ -460,6 +461,53 @@ namespace proyectoFacturacion {
 
 		}
 #pragma endregion
+		private: void limpiarCamposProveedor() {
+			txtNombreProveedor->Text = "";
+			txtCuitProveedor->Text = "";
+			txtEmailProveedor->Text = "";
+			txtBuscarProveedor->Text = "";
+
+			idProveedorSeleccionado = 0;
+
+			btnActualizarProveedor->Enabled = false;
+			btnDeshabilitarProveedor->Enabled = false;
+			btnHabilitarProveedor->Enabled = false;
+		}
+
+	private: bool validarEmailProveedor(String^ email) {
+		return email->Contains("@") && email->Contains(".");
+	}
+
+	private: bool validarCamposProveedor() {
+		int cuit;
+
+		if (txtNombreProveedor->Text->Trim() == "") {
+			MessageBox::Show("Debe ingresar un nombre");
+			return false;
+		}
+
+		if (txtCuitProveedor->Text->Trim() == "") {
+			MessageBox::Show("Debe ingresar un CUIT");
+			return false;
+		}
+
+		if (!Int32::TryParse(txtCuitProveedor->Text->Trim(), cuit)) {
+			MessageBox::Show("El CUIT debe contener solo números");
+			return false;
+		}
+
+		if (txtEmailProveedor->Text->Trim() == "") {
+			MessageBox::Show("Debe ingresar un email");
+			return false;
+		}
+
+		if (!validarEmailProveedor(txtEmailProveedor->Text->Trim())) {
+			MessageBox::Show("Debe ingresar un email válido");
+			return false;
+		}
+
+		return true;
+	}
 	
 private: void mostrarProveedoresActivos(){
 	tablaProveedor->Rows->Clear();
@@ -490,8 +538,20 @@ private: void mostrarProveedoresActivos(){
 }
 
 private: System::Void btnRegistrarProveedor_Click(System::Object^ sender, System::EventArgs^ e) {
+	if (!validarCamposProveedor()) {
+		return;
+	}
+
 	std::string nombreProveedor = msclr::interop::marshal_as<std::string>(txtNombreProveedor->Text);
 	int cuit = System::Convert::ToInt32(txtCuitProveedor->Text);
+
+	Proveedor proveedorBuscar;
+
+	if (proveedorBuscar.existeProveedorPorCuit(cuit)) {
+		MessageBox::Show("Ya existe un proveedor registrado con ese cuit");
+		return;
+	}
+
 	std::string emailProveedor = msclr::interop::marshal_as<std::string>(txtEmailProveedor->Text);
 
 	Proveedor proveedor(
@@ -501,27 +561,37 @@ private: System::Void btnRegistrarProveedor_Click(System::Object^ sender, System
 	);
 
 	proveedor.altaDeProveedor();
-
-	txtNombreProveedor->Text = "";
-	txtCuitProveedor->Text = "";
-	txtEmailProveedor->Text = "";
-
 	mostrarProveedoresActivos();
-
+	limpiarCamposProveedor();
 	MessageBox::Show("Cliente registrado correctamente.");
 	}
 
 private: System::Void btnBuscarProveedor_Click(System::Object^ sender, System::EventArgs^ e) {
-	
-	int cuit = Convert::ToInt32(txtBuscarProveedor->Text);
+	int cuitBuscar;
 
+	if (txtBuscarProveedor->Text->Trim() == "") {
+		MessageBox::Show("Debe ingresar un CUIT para buscar");
+		return;
+	}
+
+	if (!Int32::TryParse(txtBuscarProveedor->Text->Trim(), cuitBuscar)) {
+		MessageBox::Show("el cuit debe contener solo números");
+		return;
+	}
+	
 	Proveedor proveedor;
-	proveedor.buscarProveedor(cuit);
+	proveedor.buscarProveedor(cuitBuscar);
+	if (proveedor.getIdProveedor() == 0) {
+		MessageBox::Show("No hay un proveedor con ese cuit");
+		return;
+	}
 	idProveedorSeleccionado = proveedor.getIdProveedor();
 
 	txtNombreProveedor->Text = gcnew String(proveedor.getNombreProveedor().c_str());
 	txtCuitProveedor->Text = proveedor.getCuit().ToString();
 	txtEmailProveedor->Text = gcnew String(proveedor.getEmailProveedor().c_str());
+
+	btnActualizarProveedor->Enabled = true;
 
 	if (proveedor.getActivo()) {
 		btnDeshabilitarProveedor->Enabled = true;
@@ -532,8 +602,16 @@ private: System::Void btnBuscarProveedor_Click(System::Object^ sender, System::E
 		btnHabilitarProveedor->Enabled = true;
 	}
 
-	}
+}
 private: System::Void btnActualizarProveedor_Click(System::Object^ sender, System::EventArgs^ e) {
+	if (idProveedorSeleccionado == 0) {
+		MessageBox::Show("Debe seleccionar un proveedor de la tabla");
+		return;
+	}
+
+	if (!validarCamposProveedor()) {
+		return;
+	}
 	int idProveedor = idProveedorSeleccionado;
 
 	std::string nombreProveedor = msclr::interop::marshal_as<std::string>(txtNombreProveedor->Text);
@@ -549,36 +627,36 @@ private: System::Void btnActualizarProveedor_Click(System::Object^ sender, Syste
 		emailProveedor
 	);
 	mostrarProveedoresActivos();
+	limpiarCamposProveedor();
 	MessageBox::Show("Proveedor actualizado");
 	}
 	private: System::Void btnDeshabilitarProveedor_Click(System::Object^ sender, System::EventArgs^ e) {
-		int cuit = Convert::ToInt32(txtBuscarProveedor->Text);
+		if (idProveedorSeleccionado == 0) {
+			MessageBox::Show("Debe seleccionar un proveedor de la tabla");
+			return;
+		}
+		int cuit = Convert::ToInt32(txtCuitProveedor->Text);
 
 		Proveedor proveedor;
 		proveedor.deshabilitarProveedor(cuit);
 
-		MessageBox::Show("Porveedor deshabilitado.");
-
 		mostrarProveedoresActivos();
-
-		txtNombreProveedor->Text = "";
-		txtCuitProveedor->Text = "";
-		txtEmailProveedor->Text = "";
+		limpiarCamposProveedor();
+		MessageBox::Show("Porveedor deshabilitado.");
 	}
 
 	private: System::Void btnHabilitarProveedor_Click(System::Object^ sender, System::EventArgs^ e) {
-		int cuit = Convert::ToInt32(txtBuscarProveedor->Text);
+		if (idProveedorSeleccionado == 0) {
+			MessageBox::Show("Debe seleccionar un proveedor de la tabla");
+			return;
+		}
+		int cuit = Convert::ToInt32(txtCuitProveedor->Text);
 
 		Proveedor proveedor;
 		proveedor.habilitarProveedor(cuit);
-
-		MessageBox::Show("Porveedor habilitado.");
-
 		mostrarProveedoresActivos();
-
-		txtNombreProveedor->Text = "";
-		txtCuitProveedor->Text = "";
-		txtEmailProveedor->Text = "";
+		limpiarCamposProveedor();
+		MessageBox::Show("Porveedor habilitado.");
 	}
 
 	//botones para ir a las demas vistas
@@ -586,5 +664,30 @@ private: System::Void btnActualizarProveedor_Click(System::Object^ sender, Syste
 	System::Void btnProductoEnProveedor_Click(System::Object^ sender, System::EventArgs^ e);
 	System::Void btnFacturacionEnProveedor_Click(System::Object^ sender, System::EventArgs^ e);
 	System::Void btnClienteEnProveedor_Click(System::Object^ sender, System::EventArgs^ e);
+
+	//selecciono desde la tabla y los carga en los txt
+	private: System::Void tablaProveedor_CellContentClick(System::Object^ sender, System::Windows::Forms::DataGridViewCellEventArgs^ e) {
+		if (tablaProveedor->CurrentRow != nullptr) {
+
+			idProveedorSeleccionado = Convert::ToInt32(tablaProveedor->CurrentRow->Cells[0]->Value);
+
+			txtNombreProveedor->Text = tablaProveedor->CurrentRow->Cells[1]->Value->ToString();
+			txtCuitProveedor->Text = tablaProveedor->CurrentRow->Cells[2]->Value->ToString();
+			txtEmailProveedor->Text = tablaProveedor->CurrentRow->Cells[3]->Value->ToString();
+
+			btnActualizarProveedor->Enabled = true;
+
+			String^ estado = tablaProveedor->CurrentRow->Cells[4]->Value->ToString();
+
+			if (estado == "SI") {
+				btnDeshabilitarProveedor->Enabled = true;
+				btnHabilitarProveedor->Enabled = false;
+			}
+			else {
+				btnDeshabilitarProveedor->Enabled = false;
+				btnHabilitarProveedor->Enabled = true;
+			}
+		}
+	}
 };
 }

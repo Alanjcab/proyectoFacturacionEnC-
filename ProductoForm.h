@@ -44,6 +44,7 @@ namespace proyectoFacturacion {
 			mostrarProductosActivos();
 			rolUsuario = rol;
 			permisosRol();
+			limpiarCamposProducto();
 			//
 			//TODO: agregar código de constructor aquí
 			//
@@ -301,6 +302,7 @@ namespace proyectoFacturacion {
 			this->tablaProductos->GridColor = System::Drawing::SystemColors::ActiveCaptionText;
 			this->tablaProductos->Location = System::Drawing::Point(153, 491);
 			this->tablaProductos->Name = L"tablaProductos";
+			this->tablaProductos->ReadOnly = true;
 			this->tablaProductos->RowHeadersWidth = 51;
 			dataGridViewCellStyle2->BackColor = System::Drawing::Color::White;
 			dataGridViewCellStyle2->Font = (gcnew System::Drawing::Font(L"Microsoft YaHei", 7.8F, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
@@ -311,6 +313,7 @@ namespace proyectoFacturacion {
 			this->tablaProductos->ScrollBars = System::Windows::Forms::ScrollBars::Vertical;
 			this->tablaProductos->Size = System::Drawing::Size(881, 106);
 			this->tablaProductos->TabIndex = 60;
+			this->tablaProductos->CellContentClick += gcnew System::Windows::Forms::DataGridViewCellEventHandler(this, &ProductoForm::tablaProductos_CellContentClick);
 			// 
 			// colId
 			// 
@@ -325,6 +328,7 @@ namespace proyectoFacturacion {
 			this->ColCodigo->HeaderText = L"Codigo";
 			this->ColCodigo->MinimumWidth = 6;
 			this->ColCodigo->Name = L"ColCodigo";
+			this->ColCodigo->ReadOnly = true;
 			// 
 			// colDescripcion
 			// 
@@ -347,12 +351,14 @@ namespace proyectoFacturacion {
 			this->ColStock->HeaderText = L"Stock";
 			this->ColStock->MinimumWidth = 6;
 			this->ColStock->Name = L"ColStock";
+			this->ColStock->ReadOnly = true;
 			// 
 			// CoProveedor
 			// 
 			this->CoProveedor->HeaderText = L"Proveedor";
 			this->CoProveedor->MinimumWidth = 6;
 			this->CoProveedor->Name = L"CoProveedor";
+			this->CoProveedor->ReadOnly = true;
 			// 
 			// colEstado
 			// 
@@ -457,7 +463,7 @@ namespace proyectoFacturacion {
 			this->btnFacturacionEnProducto->ForeColor = System::Drawing::SystemColors::ButtonHighlight;
 			this->btnFacturacionEnProducto->Location = System::Drawing::Point(745, 12);
 			this->btnFacturacionEnProducto->Name = L"btnFacturacionEnProducto";
-			this->btnFacturacionEnProducto->Size = System::Drawing::Size(160, 60);
+			this->btnFacturacionEnProducto->Size = System::Drawing::Size(173, 60);
 			this->btnFacturacionEnProducto->TabIndex = 70;
 			this->btnFacturacionEnProducto->Text = L"FACTURACION";
 			this->btnFacturacionEnProducto->UseVisualStyleBackColor = false;
@@ -514,6 +520,72 @@ namespace proyectoFacturacion {
 
 		}
 #pragma endregion
+
+	private: void limpiarCamposProducto() {
+		txtCodigo->Text = "";
+		txtDescripcion->Text = "";
+		txtPrecio->Text = "";
+		txtStock->Text = "";
+		txtBuscarProducto->Text = "";
+
+		cbProveedores->SelectedIndex = -1;
+
+		idProductoSeleccionado = 0;
+
+		btnActualizarProducto->Enabled = false;
+		btnDeshabilitarProducto->Enabled = false;
+		btnHabilitarProducto->Enabled = false;
+	}
+
+	private: bool validarCamposProducto(bool validarProveedor) {
+
+		int codigo;
+		double precio;
+		int stock;
+
+		if (txtCodigo->Text->Trim() == "") {
+			MessageBox::Show("Debe ingresar un código");
+			return false;
+		}
+		if (!Int32::TryParse(txtCodigo->Text->Trim(), codigo)) {
+			MessageBox::Show("El código debe contener solo números");
+			return false;
+		}
+		if (txtDescripcion->Text->Trim() == "") {
+			MessageBox::Show("Debe ingresar una descripción");
+			return false;
+		}
+		if (txtPrecio->Text->Trim() == "") {
+			MessageBox::Show("Debe ingresar un precio");
+			return false;
+		}
+		if (!Double::TryParse(txtPrecio->Text->Trim(), precio)) {
+			MessageBox::Show("El precio debe ser numérico");
+			return false;
+		}
+		if (precio <= 0) {
+			MessageBox::Show("El precio debe ser mayor a cero");
+			return false;
+		}
+		if (txtStock->Text->Trim() == "") {
+			MessageBox::Show("Debe ingresar stock");
+			return false;
+		}
+		if (!Int32::TryParse(txtStock->Text->Trim(), stock)) {
+			MessageBox::Show("El stock debe contener solo números");
+			return false;
+		}
+		if (stock < 0) {
+			MessageBox::Show("El stock no puede ser negativo");
+			return false;
+		}
+		if (validarProveedor && cbProveedores->SelectedIndex == -1) {
+			MessageBox::Show("Debe seleccionar un proveedor");
+			return false;
+		}
+		return true;
+	}
+
 	private: void mostrarProductosActivos() {
 				
 		tablaProductos->Rows->Clear();
@@ -575,13 +647,18 @@ namespace proyectoFacturacion {
 	private: System::Void cbProveedores_SelectedIndexChanged(System::Object^ sender, System::EventArgs^ e) {
 	}
 	private: System::Void btnRegistrarProveedor_Click(System::Object^ sender, System::EventArgs^ e) {
+		if (!validarCamposProducto(true)) {
+			return;
+		}
+		int codigo = System::Convert::ToInt32(txtCodigo->Text);
 
-		if (cbProveedores->SelectedIndex == -1) {  //para verificar que seleccione un proveedor
-			MessageBox::Show("Seleccione un proveedor.");
+		Producto productoBuscar;
+
+		if (productoBuscar.existeProductoPorCodigo(codigo)) {
+			MessageBox::Show("Ya existe un producto registrado con ese código.");
 			return;
 		}
 
-		int codigo = System::Convert::ToInt32(txtCodigo->Text);
 		std::string descripcion = msclr::interop::marshal_as<std::string>(txtDescripcion->Text);
 		double precio = System::Convert::ToDouble(txtPrecio->Text);
 		int stock = System::Convert::ToInt32(txtStock->Text);
@@ -602,22 +679,29 @@ namespace proyectoFacturacion {
 
 		producto.altaProducto();
 
-		txtCodigo->Text = "";
-		txtDescripcion->Text = "";
-		txtPrecio->Text = "";
-		txtStock->Text = "";
-		cbProveedores->SelectedIndex = -1;
-
 		mostrarProductosActivos();
+		limpiarCamposProducto();
 
 		MessageBox::Show("Producto registrado correctamente.");
 	}
 	private: System::Void btnBuscarProducto_Click(System::Object^ sender, System::EventArgs^ e) {
-		int codigo = Convert::ToInt32(txtBuscarProducto->Text);
+		int codigo;
 
+		if (txtBuscarProducto->Text->Trim() == "") {
+			MessageBox::Show("ingrese un codigo para buscar");
+			return;
+		}
+		if (!Int32::TryParse(txtBuscarProducto->Text->Trim(), codigo)) {
+			MessageBox::Show("el codigo debe contener solo numeros");
+			return;
+		}
 		Producto producto;
 		producto.buscarProducto(codigo);
 
+		if (producto.getIdProducto() == 0) {
+			MessageBox::Show("Producto no encontrado");
+			return;
+		}
 		idProductoSeleccionado = producto.getIdProducto();
 
 		txtCodigo->Text = producto.getCodigo().ToString();
@@ -625,6 +709,8 @@ namespace proyectoFacturacion {
 		txtPrecio->Text = producto.getPrecio().ToString();
 		txtStock->Text = producto.getStock().ToString();
 		cbProveedores->Text = gcnew String(producto.getNombreProveedor().c_str());
+
+		btnActualizarProducto->Enabled = true;
 
 		if (producto.getActivo()) {
 			btnDeshabilitarProducto->Enabled = true;
@@ -637,6 +723,14 @@ namespace proyectoFacturacion {
 	}
 
 	private: System::Void btnActualizarProducto_Click(System::Object^ sender, System::EventArgs^ e) {
+		if (idProductoSeleccionado == 0) {
+			MessageBox::Show("Debe seleccionar un producto de la tabla");
+			return;
+		}
+
+		if (!validarCamposProducto(false)) {
+			return;
+		}
 		int idProducto = idProductoSeleccionado;
 
 		int codigo = Convert::ToInt32(txtCodigo->Text);
@@ -652,38 +746,35 @@ namespace proyectoFacturacion {
 			precio,
 			stock
 		);
-
 		mostrarProductosActivos();
-
+		limpiarCamposProducto();
 		MessageBox::Show("Producto actualizado");
 	}
 	private: System::Void btnDeshabilitarProducto_Click(System::Object^ sender, System::EventArgs^ e) {
-		int codigo = Convert::ToInt32(txtBuscarProducto->Text);
+		if (idProductoSeleccionado == 0) {
+			MessageBox::Show("Debe seleccionar un producto de la tabla");
+			return;
+		}
+		int codigo = Convert::ToInt32(txtCodigo->Text);
 
 		Producto producto;
 		producto.deshabilitarProducto(codigo);
+		limpiarCamposProducto();
 		mostrarProductosActivos();
 		MessageBox::Show("Porducto deshabilitado.");
-
-		txtCodigo->Text = "";
-		txtDescripcion->Text = "";
-		txtPrecio->Text = "";
-		txtStock->Text = "";
-		cbProveedores->SelectedIndex = -1;
 	}
 	private: System::Void btnHabilitarProducto_Click(System::Object^ sender, System::EventArgs^ e) {
-		int codigo = Convert::ToInt32(txtBuscarProducto->Text);
+		if (idProductoSeleccionado == 0) {
+			MessageBox::Show("Debe seleccionar un producto de la tabla");
+			return;
+		}
+		int codigo = Convert::ToInt32(txtCodigo->Text);
 
 		Producto producto;
 		producto.habilitarProducto(codigo);
+		limpiarCamposProducto();
 		mostrarProductosActivos();
 		MessageBox::Show("Porducto habilitado.");
-
-		txtCodigo->Text = "";
-		txtDescripcion->Text = "";
-		txtPrecio->Text = "";
-		txtStock->Text = "";
-		cbProveedores->SelectedIndex = -1;
 	}
 	System::Void btnClienteEnProducto_Click(System::Object^ sender, System::EventArgs^ e);
 	System::Void btnRegistrarEnProducto_Click(System::Object^ sender, System::EventArgs^ e);
@@ -691,5 +782,29 @@ namespace proyectoFacturacion {
 	System::Void btnFacturacionEnProducto_Click(System::Object^ sender, System::EventArgs^ e);
 
 
+	private: System::Void tablaProductos_CellContentClick(System::Object^ sender, System::Windows::Forms::DataGridViewCellEventArgs^ e) {
+		if (tablaProductos->CurrentRow != nullptr) {
+
+			idProductoSeleccionado = Convert::ToInt32(tablaProductos->CurrentRow->Cells[0]->Value);
+
+			txtCodigo->Text = tablaProductos->CurrentRow->Cells[1]->Value->ToString();
+			txtDescripcion->Text = tablaProductos->CurrentRow->Cells[2]->Value->ToString();
+			txtPrecio->Text = tablaProductos->CurrentRow->Cells[3]->Value->ToString();
+			txtStock->Text = tablaProductos->CurrentRow->Cells[4]->Value->ToString();
+
+			btnActualizarProducto->Enabled = true;
+
+			String^ estado = tablaProductos->CurrentRow->Cells[6]->Value->ToString();
+
+			if (estado == "SI") {
+				btnDeshabilitarProducto->Enabled = true;
+				btnHabilitarProducto->Enabled = false;
+			}
+			else {
+				btnDeshabilitarProducto->Enabled = false;
+				btnHabilitarProducto->Enabled = true;
+			}
+		}
+	}
 };
 }

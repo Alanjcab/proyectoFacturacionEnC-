@@ -588,7 +588,12 @@ private: System::Void btnBuscarCliente_Click(System::Object^ sender, System::Eve
 		MessageBox::Show("debe ingresar un dni");
 		return;
 	}
-	int dniCliente = Convert::ToInt32(txtBuscarCliente->Text);
+	int dniCliente;
+
+	if (!Int32::TryParse(txtBuscarCliente->Text->Trim(), dniCliente)) {
+		MessageBox::Show("el dni debe ser solo numeros");
+		return;
+	}
 
 	Cliente cliente;
 	cliente.buscarCliente(dniCliente);
@@ -618,12 +623,12 @@ private: System::Void btnBuscarCliente_Click(System::Object^ sender, System::Eve
 
 	}
 private: System::Void btnDeshabilitarCliente_Click(System::Object^ sender, System::EventArgs^ e) {
-	if (idClienteSeleccionado == 0){
-		MessageBox::Show("tiene que buscar un cliente");
+	if (idClienteSeleccionado == 0) {
+		MessageBox::Show("Tiene que seleccionar un cliente");
 		return;
 	}
 
-	int dniCliente = Convert::ToInt32(txtBuscarCliente->Text);
+	int dniCliente = Convert::ToInt32(txtDniCliente->Text);
 
 	Cliente cliente;
 	cliente.deshabilitarCliente(dniCliente);
@@ -636,10 +641,11 @@ private: System::Void btnDeshabilitarCliente_Click(System::Object^ sender, Syste
 
 private: System::Void bntHabilitarCliente_Click(System::Object^ sender, System::EventArgs^ e) {
 	if (idClienteSeleccionado == 0) {
-		MessageBox::Show("tiene que buscar un cliente");
+		MessageBox::Show("Tiene que seleccionar un cliente");
 		return;
 	}
-	int dniCliente = Convert::ToInt32(txtBuscarCliente->Text);
+
+	int dniCliente = Convert::ToInt32(txtDniCliente->Text);
 
 	Cliente cliente;
 	cliente.habilitarCliente(dniCliente);
@@ -694,8 +700,6 @@ private: System::Void btnActualizarCliente_Click(System::Object^ sender, System:
 			txtApellidoCliente->Text = tablaClientes->CurrentRow->Cells[2]->Value->ToString();
 			txtDniCliente->Text = tablaClientes->CurrentRow->Cells[3]->Value->ToString();
 			txtEmailCliente->Text = tablaClientes->CurrentRow->Cells[4]->Value->ToString();
-
-			txtBuscarCliente->Text = tablaClientes->CurrentRow->Cells[3]->Value->ToString();
 
 			btnActualizarCliente->Enabled = true;
 

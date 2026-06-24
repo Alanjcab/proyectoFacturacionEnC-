@@ -194,9 +194,9 @@ namespace proyectoFacturacion {
 			this->btnBuscarCliente->Font = (gcnew System::Drawing::Font(L"Microsoft YaHei", 7.8F, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
 			this->btnBuscarCliente->ForeColor = System::Drawing::Color::White;
-			this->btnBuscarCliente->Location = System::Drawing::Point(234, 114);
+			this->btnBuscarCliente->Location = System::Drawing::Point(116, 214);
 			this->btnBuscarCliente->Name = L"btnBuscarCliente";
-			this->btnBuscarCliente->Size = System::Drawing::Size(80, 35);
+			this->btnBuscarCliente->Size = System::Drawing::Size(94, 35);
 			this->btnBuscarCliente->TabIndex = 2;
 			this->btnBuscarCliente->Text = L"BUSCAR";
 			this->btnBuscarCliente->UseVisualStyleBackColor = false;
@@ -279,9 +279,9 @@ namespace proyectoFacturacion {
 			this->btnBuscarProducto->Font = (gcnew System::Drawing::Font(L"Microsoft YaHei", 7.8F, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
 			this->btnBuscarProducto->ForeColor = System::Drawing::Color::White;
-			this->btnBuscarProducto->Location = System::Drawing::Point(525, 117);
+			this->btnBuscarProducto->Location = System::Drawing::Point(525, 116);
 			this->btnBuscarProducto->Name = L"btnBuscarProducto";
-			this->btnBuscarProducto->Size = System::Drawing::Size(80, 35);
+			this->btnBuscarProducto->Size = System::Drawing::Size(93, 35);
 			this->btnBuscarProducto->TabIndex = 11;
 			this->btnBuscarProducto->Text = L"BUSCAR";
 			this->btnBuscarProducto->UseVisualStyleBackColor = false;
@@ -303,7 +303,7 @@ namespace proyectoFacturacion {
 			this->btnAgregar->ForeColor = System::Drawing::Color::White;
 			this->btnAgregar->Location = System::Drawing::Point(505, 259);
 			this->btnAgregar->Name = L"btnAgregar";
-			this->btnAgregar->Size = System::Drawing::Size(100, 35);
+			this->btnAgregar->Size = System::Drawing::Size(113, 35);
 			this->btnAgregar->TabIndex = 13;
 			this->btnAgregar->Text = L"AGREGAR";
 			this->btnAgregar->UseVisualStyleBackColor = false;
@@ -398,6 +398,7 @@ namespace proyectoFacturacion {
 			});
 			this->tablaFacturacion->Location = System::Drawing::Point(12, 328);
 			this->tablaFacturacion->Name = L"tablaFacturacion";
+			this->tablaFacturacion->ReadOnly = true;
 			this->tablaFacturacion->RowHeadersWidth = 51;
 			this->tablaFacturacion->RowTemplate->Height = 24;
 			this->tablaFacturacion->Size = System::Drawing::Size(843, 313);
@@ -674,17 +675,45 @@ namespace proyectoFacturacion {
 			}
 			subtotalNeto += Convert::ToDouble(tablaFacturacion->Rows[i]->Cells[6]->Value);
 		}
+
 		lbSubTotalNeto->Text = subtotalNeto.ToString();
 
-		double descuentoTotal = 0;
+		int descuentoTotal = 0;
 
-		if (txtDescuentoTotal->Text != "") {
-			descuentoTotal = Convert::ToDouble(txtDescuentoTotal->Text);
+		if (txtDescuentoTotal->Text->Trim() != "") {
+			descuentoTotal = Convert::ToInt32(txtDescuentoTotal->Text);
 		}
+
 		double total = subtotalNeto - (subtotalNeto * descuentoTotal / 100);
 
 		lbTotal->Text = total.ToString();
 	}
+
+	private: void limpiarFactura() {
+		txtDniCliente->Text = "";
+		lbNombreCliente->Text = L"                                 ";
+		lbApellidoCliente->Text = L"                                 ";
+
+		txtCodigoProducto->Text = "";
+		txtDescuentoProducto->Text = "";
+		txtCantidadProducto->Text = "";
+
+		lbDescripcionProducto->Text = L"                                                   ";
+		lbPrecioProducto->Text = L"                                                   ";
+		lbStockProducto->Text = L"                                                   ";
+
+		txtDescuentoTotal->Text = "";
+		lbSubTotalNeto->Text = L"                  ";
+		lbTotal->Text = L"                     ";
+
+		tablaFacturacion->Rows->Clear();
+
+		idClienteSeleccionado = 0;
+		idProductoSeleccionado = 0;
+		stockProductoSeleccionado = 0;
+		precioProductoSeleccionado = 0;
+	}
+
 	//calculo el total general de la facturs
 	private: void calcularTotalFinal()
 	{
@@ -718,7 +747,12 @@ namespace proyectoFacturacion {
 			MessageBox::Show("Ingrese el dni del cliente");
 			return;
 		}
-		int dni = Convert::ToInt32(txtDniCliente->Text);
+		int dni;
+
+		if (!Int32::TryParse(txtDniCliente->Text, dni)) {
+			MessageBox::Show("Ingrese un dni valido");
+			return;
+		}
 
 		Cliente cliente;
 
@@ -743,7 +777,12 @@ namespace proyectoFacturacion {
 			MessageBox::Show("ingrese el código del producto");
 			return;
 		}
-		int codigo = Convert::ToInt32(txtCodigoProducto->Text);
+		int codigo;
+
+		if (!Int32::TryParse(txtCodigoProducto->Text, codigo)) {
+			MessageBox::Show("Ingrese un código valido.");
+			return;
+		}
 
 		Producto producto;
 		producto.buscarProducto(codigo);
@@ -762,18 +801,23 @@ namespace proyectoFacturacion {
 		lbStockProducto->Text = producto.getStock().ToString();
 	}
 	private: System::Void btnAgregar_Click(System::Object^ sender, System::EventArgs^ e) {
-		if (idProductoSeleccionado == 0) {
-			MessageBox::Show("tiene que buscar un producto");
+		if (idProductoSeleccionado == 0 || txtCodigoProducto->Text->Trim() == "") {
+			MessageBox::Show("Tiene que buscar un producto");
 			return;
 		}
-		if (txtCantidadProducto->Text == ""){
+		if (txtCantidadProducto->Text->Trim() == ""){
 			MessageBox::Show("ingrese una cantidad.");
 			return;
 		}
-		int cantidad = Convert::ToInt32(txtCantidadProducto->Text);
+		int cantidad;
+
+		if (!Int32::TryParse(txtCantidadProducto->Text, cantidad)) {
+			MessageBox::Show("Ingrese una cantidad valida.");
+			return;
+		}
 
 		if (cantidad <= 0) {
-			MessageBox::Show("ingrese una cantidad válida");
+			MessageBox::Show("ingrese una cantidad valida");
 			return;
 		}
 
@@ -784,14 +828,17 @@ namespace proyectoFacturacion {
 		
 		double descuentoProducto = 0;
 
-		if (descuentoProducto < 0 || descuentoProducto > 100)
-		{
-			MessageBox::Show("El descuento debe estar entre 0 y 100.");
-			return;
-		}
+		if (txtDescuentoProducto->Text->Trim() != "") {
 
-		if (txtDescuentoProducto->Text != "") {
-			descuentoProducto = Convert::ToDouble(txtDescuentoProducto->Text);
+			if (!Double::TryParse(txtDescuentoProducto->Text, descuentoProducto)) {
+				MessageBox::Show("ingrese un descuento valido");
+				return;
+			}
+
+			if (descuentoProducto < 0 || descuentoProducto > 100) {
+				MessageBox::Show("el descuento debe estar entre 0 y 100");
+				return;
+			}
 		}
 
 		double subtotalSinDescuento = precioProductoSeleccionado * cantidad;
@@ -800,25 +847,51 @@ namespace proyectoFacturacion {
 		//un for para checkear que no se agregue ods veeces el mismo item, y validar que cuando se agrega otro haya stock disp
 		for (int i = 0; i < tablaFacturacion->Rows->Count; i++) {
 
-			int idProductoTabla = Convert::ToInt32(tablaFacturacion->Rows[i]->Cells[0]->Value);
+			if (tablaFacturacion->Rows[i]->IsNewRow ||
+				tablaFacturacion->Rows[i]->Cells[0]->Value == nullptr) {
+				continue;
+			}
+			int idProductoTabla =
+				Convert::ToInt32(tablaFacturacion->Rows[i]->Cells[0]->Value);
 
 			if (idProductoTabla == idProductoSeleccionado) {
-				int cantidadActual = Convert::ToInt32(tablaFacturacion->Rows[i]->Cells[4]->Value);
+
+				int cantidadActual =
+					Convert::ToInt32(tablaFacturacion->Rows[i]->Cells[4]->Value);
 
 				int nuevaCantidad = cantidadActual + cantidad;
 
 				if (nuevaCantidad > stockProductoSeleccionado) {
-					MessageBox::Show("No hay stock suficiente del prodcuto");
+					MessageBox::Show("Producto sin stock");
 					return;
 				}
 
-				double nuevoSubtotalSinDescuento = precioProductoSeleccionado * nuevaCantidad;
-				double nuevoMontoDescuento = nuevoSubtotalSinDescuento * descuentoProducto / 100;
-				double nuevoSubtotalFinal = nuevoSubtotalSinDescuento - nuevoMontoDescuento;
+				double subtotalAnterior =
+					Convert::ToDouble(tablaFacturacion->Rows[i]->Cells[6]->Value);
+
+				double subtotalNuevoSinDescuento =
+					precioProductoSeleccionado * cantidad;
+
+				double montoDescuentoNuevo =
+					subtotalNuevoSinDescuento * descuentoProducto / 100;
+
+				double subtotalNuevoFinal =
+					subtotalNuevoSinDescuento - montoDescuentoNuevo;
+
+				double nuevoSubtotalFinal =
+					subtotalAnterior + subtotalNuevoFinal;
 
 				tablaFacturacion->Rows[i]->Cells[4]->Value = nuevaCantidad;
 				tablaFacturacion->Rows[i]->Cells[5]->Value = descuentoProducto;
 				tablaFacturacion->Rows[i]->Cells[6]->Value = nuevoSubtotalFinal;
+
+				idProductoSeleccionado = 0;
+				stockProductoSeleccionado = 0;
+				precioProductoSeleccionado = 0;
+
+				lbDescripcionProducto->Text = "         ";
+				lbPrecioProducto->Text = "         ";
+				lbStockProducto->Text = "         ";
 
 				recalcularTotales();
 				return;
@@ -839,12 +912,20 @@ namespace proyectoFacturacion {
 		txtDescuentoProducto->Text = "";
 		txtCantidadProducto->Text = "";
 
+		idProductoSeleccionado = 0;
+		stockProductoSeleccionado = 0;
+		precioProductoSeleccionado = 0;
+
+		lbDescripcionProducto->Text = "         ";
+		lbPrecioProducto->Text = "         ";
+		lbStockProducto->Text = "         ";
+
 		recalcularTotales();
 	}
 	//btn para eliminar producto de la tabla
 	private: System::Void button1_Click(System::Object^ sender, System::EventArgs^ e) {
 		if (tablaFacturacion->SelectedRows->Count == 0) {
-			MessageBox::Show("Seleccione un producto de la tabla");
+			MessageBox::Show("seleccione un producto de la tabla");
 			return;
 		}
 
@@ -855,19 +936,27 @@ namespace proyectoFacturacion {
 		recalcularTotales();
 	}
 	private: System::Void txtDescuentoTotal_TextChanged(System::Object^ sender, System::EventArgs^ e) {
-		recalcularTotales();
 
-		if (txtDescuentoTotal->Text == "")
+		if (txtDescuentoTotal->Text->Trim() == "") {
+			recalcularTotales();
 			return;
-
-		double descuento = Convert::ToDouble(txtDescuentoTotal->Text);
-
-		if (descuento > 100) {
-			MessageBox::Show("Ingrese un valor de descuento valido");
-			txtDescuentoTotal->Text = "";
-			txtDescuentoTotal->SelectionStart =
-			txtDescuentoTotal->Text->Length;
 		}
+		int descuento;
+		if (!Int32::TryParse(txtDescuentoTotal->Text->Trim(), descuento)) {
+			MessageBox::Show("Ingrese un descuento válido");
+			txtDescuentoTotal->Text = "";
+			txtDescuentoTotal->SelectionStart = txtDescuentoTotal->Text->Length;
+			recalcularTotales();
+			return;
+		}
+		if (descuento < 0 || descuento > 100) {
+			MessageBox::Show("El descuento debe estar entre 0 y 100");
+			txtDescuentoTotal->Text = "";
+			txtDescuentoTotal->SelectionStart = txtDescuentoTotal->Text->Length;
+			recalcularTotales();
+			return;
+		}
+		recalcularTotales();
 	}
 
 	private: System::Void btnConfirmarCompra_Click(System::Object^ sender, System::EventArgs^ e) {
@@ -920,7 +1009,8 @@ namespace proyectoFacturacion {
 			);
 			detalle.guardarDetalle();
 		}
-		MessageBox::Show("factura guardada correctamente" + idFactura.ToString());
+		MessageBox::Show("factura guardada correctamente ID: " + idFactura.ToString());
+		limpiarFactura();
 	}
 
 	//boton a las demas vistas

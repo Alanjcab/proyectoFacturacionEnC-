@@ -153,4 +153,24 @@ void Proveedor::habilitarProveedor(int cuit) {
 		std::cerr << "Error " << e.what() << std::endl;
 	}
 }
+//veo si existe el cuit del proveedor al registrar
+bool Proveedor::existeProveedorPorCuit(int cuit) {
+	Conexion conexion;
+	sql::Connection* con = conexion.getConexion();
 
+	try {
+		sql::PreparedStatement* ps;
+		ps = con->prepareStatement("select count(*) from proveedores where cuit = ?");
+		ps->setInt(1, cuit);
+		sql::ResultSet* rs = ps->executeQuery();
+		if (rs->next()) {
+			int cantidad = rs->getInt(1);
+			return cantidad > 0;
+		}
+		return false;
+	}
+	catch (sql::SQLException& e) {
+		std::cerr << "Error " << e.what() << std::endl;
+		return true;
+	}
+}

@@ -26,6 +26,7 @@ class Producto {
 
 		void altaProducto();
 		void buscarProducto(int codigo);
+		bool existeProductoPorCodigo(int codigo);
 		void actualizarProducto(int idProducto, std::string descripcion, double precio,int stock);
 		void deshabilitarProducto(int codigo);
 		void habilitarProducto(int codigo);

@@ -631,11 +631,11 @@ private: bool validarCamposUsuario(bool validarPassword) {
 		return false;
 	}
 	if (!Int32::TryParse(txtEdad->Text->Trim(), edad)) {
-		MessageBox::Show("La edad acepta solo números");
+		MessageBox::Show("La edad acepta solo numeros");
 		return false;
 	}
 	if (edad <= 0 || edad > 120) {
-		MessageBox::Show("ingrese una edad válida");
+		MessageBox::Show("ingrese una edad valida");
 		return false;
 	}
 	if (txtDni->Text->Trim() == "") {
@@ -643,7 +643,7 @@ private: bool validarCamposUsuario(bool validarPassword) {
 		return false;
 	}
 	if (!Int32::TryParse(txtDni->Text->Trim(), dni)) {
-		MessageBox::Show("dl dni acepta solo números");
+		MessageBox::Show("dl dni acepta solo numeros");
 		return false;
 	}
 	if (txtEmail->Text->Trim() == "") {
@@ -651,7 +651,7 @@ private: bool validarCamposUsuario(bool validarPassword) {
 		return false;
 	}
 	if (!validarEmail(txtEmail->Text->Trim())) {
-		MessageBox::Show("debe ingresar un email válido");
+		MessageBox::Show("debe ingresar un email valido");
 		return false;
 	}
 	if (validarPassword && txtPassword->Text->Trim() == "") {
@@ -796,10 +796,7 @@ private: bool validarCamposUsuario(bool validarPassword) {
 		if (!validarCamposUsuario(false)) {
 			return;
 		}
-		if (txtBuscarDni->Text == "") {
-			MessageBox::Show("ingrese un dni para buscar");
-			return;
-		}
+		
 		int id = idUsuarioSeleccionado;
 
 		std::string nombre = msclr::interop::marshal_as<std::string>(txtNombre->Text);
@@ -834,18 +831,15 @@ private: bool validarCamposUsuario(bool validarPassword) {
 			MessageBox::Show("no se puede deshabilitar si el usuario es administrador");
 			return;
 		}
-		if (txtBuscarDni->Text == "") {
-			MessageBox::Show("ingrese un dni para buscar");
-			return;
-		}
-		int dni = Convert::ToInt32(txtBuscarDni->Text);
+
+		int dni = Convert::ToInt32(txtDni->Text);
 
 		Usuario usuario;
 		usuario.deshabilitarUsuario(dni);
 
 		mostrarUsuariosActivos();
 		limpiarCamposUsuario();
-		
+
 		MessageBox::Show("Usuario deshabilitado");
 	}
 	private: System::Void bntHabilitarUsuario_Click(System::Object^ sender, System::EventArgs^ e) {
@@ -853,18 +847,15 @@ private: bool validarCamposUsuario(bool validarPassword) {
 			MessageBox::Show("seleccine un usuario de la tabla");
 			return;
 		}
-		if (txtBuscarDni->Text == "") {
-			MessageBox::Show("ingrese un dni para buscar");
-			return;
-		}
-		int dni = Convert::ToInt32(txtBuscarDni->Text);
+
+		int dni = Convert::ToInt32(txtDni->Text);
 
 		Usuario usuario;
 		usuario.habilitarUsuario(dni);
 
 		mostrarUsuariosActivos();
 		limpiarCamposUsuario();
-		
+
 		MessageBox::Show("Usuario habilitado");
 	}
 
@@ -888,8 +879,6 @@ private: bool validarCamposUsuario(bool validarPassword) {
 			comboRolUsuario->Text = fila->Cells[6]->Value->ToString();
 
 			btnActualizarUsuario->Enabled = true;
-
-			txtBuscarDni->Text = fila->Cells[4]->Value->ToString();
 
 			String^ estado = fila->Cells[7]->Value->ToString();
 
