@@ -455,6 +455,7 @@ namespace proyectoFacturacion {
 			this->Name = L"ProveedorForm";
 			this->StartPosition = System::Windows::Forms::FormStartPosition::CenterScreen;
 			this->Text = L"ProveedorForm";
+			this->FormClosed += gcnew System::Windows::Forms::FormClosedEventHandler(this, &ProveedorForm::ProveedorForm_FormClosed);
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->tablaProveedor))->EndInit();
 			this->ResumeLayout(false);
 			this->PerformLayout();
@@ -688,6 +689,9 @@ private: System::Void btnActualizarProveedor_Click(System::Object^ sender, Syste
 				btnHabilitarProveedor->Enabled = true;
 			}
 		}
+	}
+	private: System::Void ProveedorForm_FormClosed(System::Object^ sender, System::Windows::Forms::FormClosedEventArgs^ e) {
+		Application::Exit();
 	}
 };
 }

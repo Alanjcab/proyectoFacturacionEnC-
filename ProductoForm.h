@@ -173,7 +173,7 @@ namespace proyectoFacturacion {
 			this->label16->Font = (gcnew System::Drawing::Font(L"Microsoft YaHei", 10.2F, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
 			this->label16->ForeColor = System::Drawing::SystemColors::ButtonHighlight;
-			this->label16->Location = System::Drawing::Point(400, 174);
+			this->label16->Location = System::Drawing::Point(418, 109);
 			this->label16->Name = L"label16";
 			this->label16->Size = System::Drawing::Size(213, 24);
 			this->label16->TabIndex = 40;
@@ -185,7 +185,7 @@ namespace proyectoFacturacion {
 			this->btnRegistrarProveedor->Font = (gcnew System::Drawing::Font(L"Microsoft YaHei", 9, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
 			this->btnRegistrarProveedor->ForeColor = System::Drawing::SystemColors::ButtonHighlight;
-			this->btnRegistrarProveedor->Location = System::Drawing::Point(449, 393);
+			this->btnRegistrarProveedor->Location = System::Drawing::Point(467, 328);
 			this->btnRegistrarProveedor->Name = L"btnRegistrarProveedor";
 			this->btnRegistrarProveedor->Size = System::Drawing::Size(129, 35);
 			this->btnRegistrarProveedor->TabIndex = 49;
@@ -196,7 +196,7 @@ namespace proyectoFacturacion {
 			// txtCodigo
 			// 
 			this->txtCodigo->BorderStyle = System::Windows::Forms::BorderStyle::FixedSingle;
-			this->txtCodigo->Location = System::Drawing::Point(430, 221);
+			this->txtCodigo->Location = System::Drawing::Point(448, 156);
 			this->txtCodigo->Name = L"txtCodigo";
 			this->txtCodigo->Size = System::Drawing::Size(173, 22);
 			this->txtCodigo->TabIndex = 50;
@@ -204,7 +204,7 @@ namespace proyectoFacturacion {
 			// label1
 			// 
 			this->label1->AutoSize = true;
-			this->label1->Location = System::Drawing::Point(370, 227);
+			this->label1->Location = System::Drawing::Point(388, 162);
 			this->label1->Name = L"label1";
 			this->label1->Size = System::Drawing::Size(54, 16);
 			this->label1->TabIndex = 51;
@@ -213,7 +213,7 @@ namespace proyectoFacturacion {
 			// label2
 			// 
 			this->label2->AutoSize = true;
-			this->label2->Location = System::Drawing::Point(365, 291);
+			this->label2->Location = System::Drawing::Point(383, 226);
 			this->label2->Name = L"label2";
 			this->label2->Size = System::Drawing::Size(49, 16);
 			this->label2->TabIndex = 52;
@@ -222,7 +222,7 @@ namespace proyectoFacturacion {
 			// label3
 			// 
 			this->label3->AutoSize = true;
-			this->label3->Location = System::Drawing::Point(370, 329);
+			this->label3->Location = System::Drawing::Point(388, 264);
 			this->label3->Name = L"label3";
 			this->label3->Size = System::Drawing::Size(44, 16);
 			this->label3->TabIndex = 53;
@@ -231,7 +231,7 @@ namespace proyectoFacturacion {
 			// label4
 			// 
 			this->label4->AutoSize = true;
-			this->label4->Location = System::Drawing::Point(342, 255);
+			this->label4->Location = System::Drawing::Point(360, 190);
 			this->label4->Name = L"label4";
 			this->label4->Size = System::Drawing::Size(82, 16);
 			this->label4->TabIndex = 54;
@@ -240,7 +240,7 @@ namespace proyectoFacturacion {
 			// txtStock
 			// 
 			this->txtStock->BorderStyle = System::Windows::Forms::BorderStyle::FixedSingle;
-			this->txtStock->Location = System::Drawing::Point(430, 327);
+			this->txtStock->Location = System::Drawing::Point(448, 262);
 			this->txtStock->Name = L"txtStock";
 			this->txtStock->Size = System::Drawing::Size(173, 22);
 			this->txtStock->TabIndex = 55;
@@ -248,7 +248,7 @@ namespace proyectoFacturacion {
 			// txtPrecio
 			// 
 			this->txtPrecio->BorderStyle = System::Windows::Forms::BorderStyle::FixedSingle;
-			this->txtPrecio->Location = System::Drawing::Point(430, 289);
+			this->txtPrecio->Location = System::Drawing::Point(448, 224);
 			this->txtPrecio->Name = L"txtPrecio";
 			this->txtPrecio->Size = System::Drawing::Size(173, 22);
 			this->txtPrecio->TabIndex = 56;
@@ -256,7 +256,7 @@ namespace proyectoFacturacion {
 			// txtDescripcion
 			// 
 			this->txtDescripcion->BorderStyle = System::Windows::Forms::BorderStyle::FixedSingle;
-			this->txtDescripcion->Location = System::Drawing::Point(430, 255);
+			this->txtDescripcion->Location = System::Drawing::Point(448, 190);
 			this->txtDescripcion->Name = L"txtDescripcion";
 			this->txtDescripcion->Size = System::Drawing::Size(173, 22);
 			this->txtDescripcion->TabIndex = 57;
@@ -264,7 +264,7 @@ namespace proyectoFacturacion {
 			// label5
 			// 
 			this->label5->AutoSize = true;
-			this->label5->Location = System::Drawing::Point(278, 360);
+			this->label5->Location = System::Drawing::Point(296, 295);
 			this->label5->Name = L"label5";
 			this->label5->Size = System::Drawing::Size(136, 16);
 			this->label5->TabIndex = 58;
@@ -273,7 +273,7 @@ namespace proyectoFacturacion {
 			// cbProveedores
 			// 
 			this->cbProveedores->FormattingEnabled = true;
-			this->cbProveedores->Location = System::Drawing::Point(430, 360);
+			this->cbProveedores->Location = System::Drawing::Point(448, 295);
 			this->cbProveedores->Name = L"cbProveedores";
 			this->cbProveedores->Size = System::Drawing::Size(173, 24);
 			this->cbProveedores->TabIndex = 59;
@@ -282,8 +282,11 @@ namespace proyectoFacturacion {
 			// tablaProductos
 			// 
 			this->tablaProductos->AllowUserToAddRows = false;
+			this->tablaProductos->AllowUserToDeleteRows = false;
+			this->tablaProductos->AllowUserToResizeColumns = false;
 			this->tablaProductos->AutoSizeColumnsMode = System::Windows::Forms::DataGridViewAutoSizeColumnsMode::Fill;
 			this->tablaProductos->BackgroundColor = System::Drawing::SystemColors::ButtonHighlight;
+			this->tablaProductos->BorderStyle = System::Windows::Forms::BorderStyle::None;
 			dataGridViewCellStyle1->Alignment = System::Windows::Forms::DataGridViewContentAlignment::MiddleLeft;
 			dataGridViewCellStyle1->BackColor = System::Drawing::Color::Teal;
 			dataGridViewCellStyle1->Font = (gcnew System::Drawing::Font(L"Microsoft YaHei", 7.8F, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
@@ -300,9 +303,11 @@ namespace proyectoFacturacion {
 			});
 			this->tablaProductos->EnableHeadersVisualStyles = false;
 			this->tablaProductos->GridColor = System::Drawing::SystemColors::ActiveCaptionText;
-			this->tablaProductos->Location = System::Drawing::Point(153, 491);
+			this->tablaProductos->Location = System::Drawing::Point(27, 422);
+			this->tablaProductos->MultiSelect = false;
 			this->tablaProductos->Name = L"tablaProductos";
 			this->tablaProductos->ReadOnly = true;
+			this->tablaProductos->RowHeadersVisible = false;
 			this->tablaProductos->RowHeadersWidth = 51;
 			dataGridViewCellStyle2->BackColor = System::Drawing::Color::White;
 			dataGridViewCellStyle2->Font = (gcnew System::Drawing::Font(L"Microsoft YaHei", 7.8F, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
@@ -311,7 +316,7 @@ namespace proyectoFacturacion {
 			this->tablaProductos->RowsDefaultCellStyle = dataGridViewCellStyle2;
 			this->tablaProductos->RowTemplate->Height = 24;
 			this->tablaProductos->ScrollBars = System::Windows::Forms::ScrollBars::Vertical;
-			this->tablaProductos->Size = System::Drawing::Size(881, 106);
+			this->tablaProductos->Size = System::Drawing::Size(1130, 207);
 			this->tablaProductos->TabIndex = 60;
 			this->tablaProductos->CellContentClick += gcnew System::Windows::Forms::DataGridViewCellEventHandler(this, &ProductoForm::tablaProductos_CellContentClick);
 			// 
@@ -374,9 +379,9 @@ namespace proyectoFacturacion {
 			this->btnBuscarProducto->Font = (gcnew System::Drawing::Font(L"Microsoft YaHei", 9, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
 			this->btnBuscarProducto->ForeColor = System::Drawing::SystemColors::ButtonHighlight;
-			this->btnBuscarProducto->Location = System::Drawing::Point(345, 445);
+			this->btnBuscarProducto->Location = System::Drawing::Point(219, 367);
 			this->btnBuscarProducto->Name = L"btnBuscarProducto";
-			this->btnBuscarProducto->Size = System::Drawing::Size(70, 31);
+			this->btnBuscarProducto->Size = System::Drawing::Size(83, 35);
 			this->btnBuscarProducto->TabIndex = 61;
 			this->btnBuscarProducto->Text = L"Buscar";
 			this->btnBuscarProducto->UseVisualStyleBackColor = false;
@@ -385,7 +390,7 @@ namespace proyectoFacturacion {
 			// txtBuscarProducto
 			// 
 			this->txtBuscarProducto->BorderStyle = System::Windows::Forms::BorderStyle::FixedSingle;
-			this->txtBuscarProducto->Location = System::Drawing::Point(153, 451);
+			this->txtBuscarProducto->Location = System::Drawing::Point(27, 377);
 			this->txtBuscarProducto->Name = L"txtBuscarProducto";
 			this->txtBuscarProducto->Size = System::Drawing::Size(173, 22);
 			this->txtBuscarProducto->TabIndex = 62;
@@ -393,7 +398,7 @@ namespace proyectoFacturacion {
 			// label6
 			// 
 			this->label6->AutoSize = true;
-			this->label6->Location = System::Drawing::Point(150, 421);
+			this->label6->Location = System::Drawing::Point(24, 347);
 			this->label6->Name = L"label6";
 			this->label6->Size = System::Drawing::Size(132, 16);
 			this->label6->TabIndex = 63;
@@ -405,7 +410,7 @@ namespace proyectoFacturacion {
 			this->btnDeshabilitarProducto->Font = (gcnew System::Drawing::Font(L"Microsoft YaHei", 9, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
 			this->btnDeshabilitarProducto->ForeColor = System::Drawing::SystemColors::ButtonHighlight;
-			this->btnDeshabilitarProducto->Location = System::Drawing::Point(639, 310);
+			this->btnDeshabilitarProducto->Location = System::Drawing::Point(657, 245);
 			this->btnDeshabilitarProducto->Name = L"btnDeshabilitarProducto";
 			this->btnDeshabilitarProducto->Size = System::Drawing::Size(129, 35);
 			this->btnDeshabilitarProducto->TabIndex = 65;
@@ -419,7 +424,7 @@ namespace proyectoFacturacion {
 			this->btnActualizarProducto->Font = (gcnew System::Drawing::Font(L"Microsoft YaHei", 9, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
 			this->btnActualizarProducto->ForeColor = System::Drawing::SystemColors::ButtonHighlight;
-			this->btnActualizarProducto->Location = System::Drawing::Point(639, 269);
+			this->btnActualizarProducto->Location = System::Drawing::Point(657, 204);
 			this->btnActualizarProducto->Name = L"btnActualizarProducto";
 			this->btnActualizarProducto->Size = System::Drawing::Size(129, 35);
 			this->btnActualizarProducto->TabIndex = 66;
@@ -475,7 +480,7 @@ namespace proyectoFacturacion {
 			this->btnHabilitarProducto->Font = (gcnew System::Drawing::Font(L"Microsoft YaHei", 9, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
 			this->btnHabilitarProducto->ForeColor = System::Drawing::SystemColors::ButtonHighlight;
-			this->btnHabilitarProducto->Location = System::Drawing::Point(639, 353);
+			this->btnHabilitarProducto->Location = System::Drawing::Point(657, 288);
 			this->btnHabilitarProducto->Name = L"btnHabilitarProducto";
 			this->btnHabilitarProducto->Size = System::Drawing::Size(129, 35);
 			this->btnHabilitarProducto->TabIndex = 71;
@@ -514,7 +519,7 @@ namespace proyectoFacturacion {
 			this->Name = L"ProductoForm";
 			this->StartPosition = System::Windows::Forms::FormStartPosition::CenterScreen;
 			this->Text = L"ProductoForm";
-			this->FormClosing += gcnew System::Windows::Forms::FormClosingEventHandler(this, &ProductoForm::ProductoForm_FormClosing);
+			this->FormClosed += gcnew System::Windows::Forms::FormClosedEventHandler(this, &ProductoForm::ProductoForm_FormClosed);
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->tablaProductos))->EndInit();
 			this->ResumeLayout(false);
 			this->PerformLayout();
@@ -807,7 +812,8 @@ namespace proyectoFacturacion {
 			}
 		}
 	}
-	private: System::Void ProductoForm_FormClosing(System::Object^ sender, System::Windows::Forms::FormClosingEventArgs^ e) {
+	
+	private: System::Void ProductoForm_FormClosed(System::Object^ sender, System::Windows::Forms::FormClosedEventArgs^ e) {
 		Application::Exit();
 	}
 };

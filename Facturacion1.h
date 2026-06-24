@@ -665,7 +665,7 @@ namespace proyectoFacturacion {
 			this->Controls->Add(this->label1);
 			this->Name = L"Facturacion";
 			this->Text = L"REGISTRAR";
-			this->FormClosing += gcnew System::Windows::Forms::FormClosingEventHandler(this, &Facturacion::Facturacion_FormClosing);
+			this->FormClosed += gcnew System::Windows::Forms::FormClosedEventHandler(this, &Facturacion::Facturacion_FormClosed);
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->tablaFacturacion))->EndInit();
 			this->ResumeLayout(false);
 			this->PerformLayout();
@@ -1027,7 +1027,8 @@ namespace proyectoFacturacion {
 	System::Void btnProductoEnFacturacion_Click(System::Object^ sender, System::EventArgs^ e);
 	System::Void btnProveedorEnFacturacion_Click(System::Object^ sender, System::EventArgs^ e);
 
-	private: System::Void Facturacion_FormClosing(System::Object^ sender, System::Windows::Forms::FormClosingEventArgs^ e) {
+	//evento para que la vista no quede corriendo
+	private: System::Void Facturacion_FormClosed(System::Object^ sender, System::Windows::Forms::FormClosedEventArgs^ e) {
 		Application::Exit();
 	}
 };

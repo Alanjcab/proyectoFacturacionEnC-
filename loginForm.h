@@ -148,7 +148,7 @@ namespace proyectoFacturacion {
 			this->Name = L"loginForm";
 			this->StartPosition = System::Windows::Forms::FormStartPosition::CenterScreen;
 			this->Text = L"loginForm";
-			this->FormClosing += gcnew System::Windows::Forms::FormClosingEventHandler(this, &loginForm::loginForm_FormClosing);
+			this->FormClosed += gcnew System::Windows::Forms::FormClosedEventHandler(this, &loginForm::loginForm_FormClosed);
 			this->ResumeLayout(false);
 			this->PerformLayout();
 
@@ -197,9 +197,8 @@ namespace proyectoFacturacion {
 			MessageBox::Show("No se pudo hacer el login. Necesita registrarse");
 		}
 	}
-
-	
-	private: System::Void loginForm_FormClosing(System::Object^ sender, System::Windows::Forms::FormClosingEventArgs^ e) {
+	//evento para que la vista no quede corriendo
+	private: System::Void loginForm_FormClosed(System::Object^ sender, System::Windows::Forms::FormClosedEventArgs^ e) {
 		Application::Exit();
 	}
 };
