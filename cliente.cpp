@@ -164,3 +164,23 @@ void Cliente::actualizarCliente(int idCliente, std::string nombre, std::string a
 	}
 }
 
+bool Cliente::existeClientePorDni(int dni) {
+	Conexion conexion;
+	sql::Connection* con = conexion.getConexion();
+	try {
+		sql::PreparedStatement* ps;
+		ps = con->prepareStatement("select count(*) from clientes where dniCliente = ?");
+		ps->setInt(1, dni);
+		sql::ResultSet* rs = ps->executeQuery();
+		if (rs->next()) {
+			int cantidad = rs->getInt(1);
+			return cantidad > 0;
+		}
+		return false;
+	}
+	catch (sql::SQLException& e) {
+		std::cerr << "Error " << e.what() << std::endl;
+		return true;
+	}
+}
+

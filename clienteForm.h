@@ -385,6 +385,7 @@ namespace proyectoFacturacion {
 			this->tablaClientes->ScrollBars = System::Windows::Forms::ScrollBars::Vertical;
 			this->tablaClientes->Size = System::Drawing::Size(881, 123);
 			this->tablaClientes->TabIndex = 43;
+			this->tablaClientes->CellContentClick += gcnew System::Windows::Forms::DataGridViewCellEventHandler(this, &clienteForm::tablaClientes_CellContentClick);
 			// 
 			// btnProveedorEnCliente
 			// 
@@ -477,6 +478,55 @@ namespace proyectoFacturacion {
 
 		}
 #pragma endregion
+		//limpio los campos del cliente
+	private: void limpiarCamposCliente() {
+		txtNombreCliente->Text = "";
+		txtApellidoCliente->Text = "";
+		txtDniCliente->Text = "";
+		txtEmailCliente->Text = "";
+		txtBuscarCliente->Text = "";
+
+		idClienteSeleccionado = 0;
+
+		btnActualizarCliente->Enabled = false;
+		btnDeshabilitarCliente->Enabled = false;
+		bntHabilitarCliente->Enabled = false;
+	}
+	//valido el mail
+	private: bool validarEmailCliente(String^ email) {
+		return email->Contains("@") && email->Contains(".");
+	}
+	//valido los campos del client
+	private: bool validarCamposCliente() {
+
+		int dni;
+
+		if (txtNombreCliente->Text->Trim() == "") {
+			MessageBox::Show("debe ingresar un nombre");
+			return false;
+		}
+		if (txtApellidoCliente->Text->Trim() == "") {
+			MessageBox::Show("debe ingresar un apellido");
+			return false;
+		}
+		if (txtDniCliente->Text->Trim() == "") {
+			MessageBox::Show("Debe ingresar un dni");
+			return false;
+		}
+		if (!Int32::TryParse(txtDniCliente->Text->Trim(), dni)) {
+			MessageBox::Show("El dni debe contener solo números");
+			return false;
+		}
+		if (txtEmailCliente->Text->Trim() == "") {
+			MessageBox::Show("debe ingresar un email");
+			return false;
+		}
+		if (!validarEmailCliente(txtEmailCliente->Text->Trim())) {
+			MessageBox::Show("debe ingresar un email válido");
+			return false;
+		}
+		return true;
+	}
 		private: void mostrarClientesActivos() {
 			tablaClientes->Rows->Clear();
 			Conexion conexion;
@@ -506,20 +556,18 @@ namespace proyectoFacturacion {
 			}
 		}
 	private: System::Void btnRegistrarCliente_Click(System::Object^ sender, System::EventArgs^ e) {
-		//valido que llene los campos
-		if (txtNombreCliente->Text == "" || txtApellidoCliente->Text == "" || txtDniCliente->Text == "" || txtEmailCliente->Text == ""){
-			MessageBox::Show("complete todos los campos");
+		if (!validarCamposCliente()) {
 			return;
 		}
-		//valido que el mail se cree con @
-		if (!txtEmailCliente->Text->Contains("@")){
-			MessageBox::Show("Ingrese un email válido.");
-			return;
-		}
-
 		std::string nombre = msclr::interop::marshal_as<std::string>(txtNombreCliente->Text);
 		std::string apellido = msclr::interop::marshal_as<std::string>(txtApellidoCliente->Text);
 		int dniCliente = System::Convert::ToInt32(txtDniCliente->Text);
+
+		Cliente clienteBuscar;
+		if (clienteBuscar.existeClientePorDni(dniCliente)) {
+			MessageBox::Show("hay un cliente registrado con ese dni");
+			return;
+		}
 		std::string emailCliente = msclr::interop::marshal_as<std::string>(txtEmailCliente->Text);
 
 		Cliente cliente(
@@ -531,11 +579,8 @@ namespace proyectoFacturacion {
 
 		cliente.altaDeCliente();
 
-		txtNombreCliente->Text = "";
-		txtApellidoCliente->Text = "";
-		txtDniCliente->Text = "";
-		txtEmailCliente->Text = "";
 		mostrarClientesActivos();
+		limpiarCamposCliente();
 		MessageBox::Show("Cliente registrado correctamente.");
 	}
 private: System::Void btnBuscarCliente_Click(System::Object^ sender, System::EventArgs^ e) {
@@ -560,6 +605,8 @@ private: System::Void btnBuscarCliente_Click(System::Object^ sender, System::Eve
 	txtDniCliente->Text = cliente.getDniCliente().ToString();
 	txtEmailCliente->Text = gcnew String(cliente.getEmailCliente().c_str());
 
+	btnActualizarCliente->Enabled = true;
+
 	if (cliente.getActivo()) {
 		btnDeshabilitarCliente->Enabled = true;
 		bntHabilitarCliente->Enabled = false;
@@ -581,14 +628,10 @@ private: System::Void btnDeshabilitarCliente_Click(System::Object^ sender, Syste
 	Cliente cliente;
 	cliente.deshabilitarCliente(dniCliente);
 
-	mostrarClientesActivos();  //vuelvo a llamar al metodto de mostrar clientes para que actualice la tabla
+	mostrarClientesActivos();
+	limpiarCamposCliente();
 
 	MessageBox::Show("Cliente deshabilitado.");
-
-	txtNombreCliente->Text = "";
-	txtApellidoCliente->Text = "";
-	txtDniCliente->Text = "";
-	txtEmailCliente->Text = "";
 	}
 
 private: System::Void bntHabilitarCliente_Click(System::Object^ sender, System::EventArgs^ e) {
@@ -602,22 +645,18 @@ private: System::Void bntHabilitarCliente_Click(System::Object^ sender, System::
 	cliente.habilitarCliente(dniCliente);
 
 	mostrarClientesActivos();
+	limpiarCamposCliente();
 
 	MessageBox::Show("Cliente habilitado.");
-
-	txtNombreCliente->Text = "";
-	txtApellidoCliente->Text = "";
-	txtDniCliente->Text = "";
-	txtEmailCliente->Text = "";
 }
 
 private: System::Void btnActualizarCliente_Click(System::Object^ sender, System::EventArgs^ e) {
 	if (idClienteSeleccionado == 0) {
-		MessageBox::Show("tiene que buscar un cliente");
+		MessageBox::Show("Debe seleccionar un cliente de la tabla");
 		return;
 	}
-	if (txtNombreCliente->Text == "" ||txtApellidoCliente->Text == "" ||txtDniCliente->Text == "" ||txtEmailCliente->Text == ""){
-		MessageBox::Show("complete todos los campos");
+
+	if (!validarCamposCliente()) {
 		return;
 	}
 	int idCliente = idClienteSeleccionado;
@@ -637,6 +676,7 @@ private: System::Void btnActualizarCliente_Click(System::Object^ sender, System:
 		emailCliente
 	);
 	mostrarClientesActivos();
+	limpiarCamposCliente();
 	MessageBox::Show("Cliente actualizado");
 	}
 	   //botones a las demas vistas
@@ -644,5 +684,32 @@ private: System::Void btnActualizarCliente_Click(System::Object^ sender, System:
 	   System::Void btnRegistrarEnCliente_Click(System::Object^ sender, System::EventArgs^ e);
 	   System::Void btnProveedorEnCliente_Click(System::Object^ sender, System::EventArgs^ e);
 	   System::Void btnFacturacionEnCliente_Click(System::Object^ sender, System::EventArgs^ e);
+
+	private: System::Void tablaClientes_CellContentClick(System::Object^ sender, System::Windows::Forms::DataGridViewCellEventArgs^ e) {
+		if (tablaClientes->CurrentRow != nullptr) {
+
+			idClienteSeleccionado = Convert::ToInt32(tablaClientes->CurrentRow->Cells[0]->Value);
+
+			txtNombreCliente->Text = tablaClientes->CurrentRow->Cells[1]->Value->ToString();
+			txtApellidoCliente->Text = tablaClientes->CurrentRow->Cells[2]->Value->ToString();
+			txtDniCliente->Text = tablaClientes->CurrentRow->Cells[3]->Value->ToString();
+			txtEmailCliente->Text = tablaClientes->CurrentRow->Cells[4]->Value->ToString();
+
+			txtBuscarCliente->Text = tablaClientes->CurrentRow->Cells[3]->Value->ToString();
+
+			btnActualizarCliente->Enabled = true;
+
+			String^ estado = tablaClientes->CurrentRow->Cells[5]->Value->ToString();
+
+			if (estado == "SI") {
+				btnDeshabilitarCliente->Enabled = true;
+				bntHabilitarCliente->Enabled = false;
+			}
+			else {
+				btnDeshabilitarCliente->Enabled = false;
+				bntHabilitarCliente->Enabled = true;
+			}
+		}
+	}
 };
 }

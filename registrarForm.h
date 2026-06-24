@@ -408,6 +408,7 @@ namespace proyectoFacturacion {
 			this->tablaUsuarios->ScrollBars = System::Windows::Forms::ScrollBars::Vertical;
 			this->tablaUsuarios->Size = System::Drawing::Size(882, 114);
 			this->tablaUsuarios->TabIndex = 39;
+			this->tablaUsuarios->CellContentClick += gcnew System::Windows::Forms::DataGridViewCellEventHandler(this, &registrarForm::tablaUsuarios_CellContentClick);
 			// 
 			// colId
 			// 
@@ -588,6 +589,82 @@ namespace proyectoFacturacion {
 
 		}
 #pragma endregion
+		//borro loscampos
+		private: void limpiarCamposUsuario() {
+			txtNombre->Text = "";
+			txtApellido->Text = "";
+			txtEdad->Text = "";
+			txtDni->Text = "";
+			txtEmail->Text = "";
+			txtPassword->Text = "";
+			txtBuscarDni->Text = "";
+
+			comboRolUsuario->SelectedIndex = -1;
+
+			idUsuarioSeleccionado = 0;
+
+			btnActualizarUsuario->Enabled = false;
+			btnDeshabilitarUsuario->Enabled = false;
+			bntHabilitarUsuario->Enabled = false;
+		}
+
+	//metodo para validr los campos del usuario
+			   private: bool validarEmail(String^ email) {
+				   return email->Contains("@") && email->Contains(".");
+			   }
+
+private: bool validarCamposUsuario(bool validarPassword) {
+
+	int edad;
+	int dni;
+
+	if (txtNombre->Text->Trim() == "") {
+		MessageBox::Show("debe ingresar un nombre");
+		return false;
+	}
+	if (txtApellido->Text->Trim() == "") {
+		MessageBox::Show("debe ingresar un apellido");
+		return false;
+	}
+	if (txtEdad->Text->Trim() == "") {
+		MessageBox::Show("debe ingresar una edad");
+		return false;
+	}
+	if (!Int32::TryParse(txtEdad->Text->Trim(), edad)) {
+		MessageBox::Show("La edad acepta solo números");
+		return false;
+	}
+	if (edad <= 0 || edad > 120) {
+		MessageBox::Show("ingrese una edad válida");
+		return false;
+	}
+	if (txtDni->Text->Trim() == "") {
+		MessageBox::Show("debe ingresar un dni");
+		return false;
+	}
+	if (!Int32::TryParse(txtDni->Text->Trim(), dni)) {
+		MessageBox::Show("dl dni acepta solo números");
+		return false;
+	}
+	if (txtEmail->Text->Trim() == "") {
+		MessageBox::Show("debe ingresar un email");
+		return false;
+	}
+	if (!validarEmail(txtEmail->Text->Trim())) {
+		MessageBox::Show("debe ingresar un email válido");
+		return false;
+	}
+	if (validarPassword && txtPassword->Text->Trim() == "") {
+		MessageBox::Show("debe ingresar una contraseña");
+		return false;
+	}
+	if (comboRolUsuario->SelectedIndex == -1) {
+		MessageBox::Show("debe seleccionar un rol");
+		return false;
+	}
+	return true;
+}
+
 		//muestro los usuarios activos en mi tabla de usuarios
 	private: void mostrarUsuariosActivos() {
 		tablaUsuarios->Rows->Clear();
@@ -621,9 +698,11 @@ namespace proyectoFacturacion {
 	}
 
 	private: System::Void btnRegistrarse_Click(System::Object^ sender, System::EventArgs^ e) {
-		
+		if (!validarCamposUsuario(true)) {
+			return;
+		}
 		if (txtNombre->Text == "" || txtApellido->Text == "" || txtEdad->Text == "" || txtDni->Text == "" || txtEmail->Text == "" || txtPassword->Text == "") {
-			MessageBox::Show("Complete todos los campos.");
+			MessageBox::Show("complete todos los campos");
 			return;
 		}
 		std::string nombre = msclr::interop::marshal_as<std::string>(txtNombre->Text);
@@ -651,15 +730,9 @@ namespace proyectoFacturacion {
 		Usuario usuario(nombre,apellido,edad,dni,email,pass,rol);
 
 		if (usuario.insertar()) {
-			txtNombre->Text = "";
-			txtApellido->Text = "";
-			txtEdad->Text = "";
-			txtDni->Text = "";
-			txtEmail->Text = "";
-			txtPassword->Text = "";
-			comboRolUsuario->SelectedIndex = -1;
 			mostrarUsuariosActivos();
-			MessageBox::Show("Usuario registrado correctamente.");
+			limpiarCamposUsuario();
+			MessageBox::Show("usuario registrado correctamente.");
 		}
 		else {
 			MessageBox::Show("El dni ya existe o hay un error al registrar.");
@@ -669,6 +742,17 @@ namespace proyectoFacturacion {
 	}
 
 	private: System::Void btnBuscarUsuario_Click(System::Object^ sender, System::EventArgs^ e) {
+		int dniBuscar;
+
+		if (txtBuscarDni->Text->Trim() == "") {
+			MessageBox::Show("ingrese un dni para buscar");
+			return;
+		}
+
+		if (!Int32::TryParse(txtBuscarDni->Text->Trim(), dniBuscar)) {
+			MessageBox::Show("El dni acepta solo numeros");
+			return;
+		}
 		if (txtBuscarDni->Text == ""){
 			MessageBox::Show("ingrese un dni para buscar");
 			return;
@@ -691,6 +775,8 @@ namespace proyectoFacturacion {
 		comboRolUsuario->SelectedItem = gcnew String(usuario.getRol().c_str());
 
 		//depende del estado del ususario muetro los botones
+		btnActualizarUsuario->Enabled = true;
+
 		if (usuario.getActivo()) {
 			btnDeshabilitarUsuario->Enabled = true;
 			bntHabilitarUsuario->Enabled = false;
@@ -702,6 +788,14 @@ namespace proyectoFacturacion {
 
 	}
 	private: System::Void btnActualizarUsuario_Click(System::Object^ sender, System::EventArgs^ e) {
+		if (idUsuarioSeleccionado == 0) {
+			MessageBox::Show("seleccione un usuario de la tabla");
+			return;
+		}
+
+		if (!validarCamposUsuario(false)) {
+			return;
+		}
 		if (txtBuscarDni->Text == "") {
 			MessageBox::Show("ingrese un dni para buscar");
 			return;
@@ -724,10 +818,22 @@ namespace proyectoFacturacion {
 		);
 		Usuario usuario;
 		usuario.actualizarUsuario(id,nombre,apellido,edad,dni,email,rol);
+		
 		mostrarUsuariosActivos();
+		limpiarCamposUsuario();
+		
 		MessageBox::Show("Usuario actualizado");
 	}
 	private: System::Void btnDeshabilitarUsuario_Click(System::Object^ sender, System::EventArgs^ e) {
+		if (idUsuarioSeleccionado == 0) {
+			MessageBox::Show("seleccione un usuario de la tabla");
+			return;
+		}
+
+		if (comboRolUsuario->Text == "admin") {
+			MessageBox::Show("no se puede deshabilitar si el usuario es administrador");
+			return;
+		}
 		if (txtBuscarDni->Text == "") {
 			MessageBox::Show("ingrese un dni para buscar");
 			return;
@@ -738,9 +844,15 @@ namespace proyectoFacturacion {
 		usuario.deshabilitarUsuario(dni);
 
 		mostrarUsuariosActivos();
+		limpiarCamposUsuario();
+		
 		MessageBox::Show("Usuario deshabilitado");
 	}
 	private: System::Void bntHabilitarUsuario_Click(System::Object^ sender, System::EventArgs^ e) {
+		if (idUsuarioSeleccionado == 0) {
+			MessageBox::Show("seleccine un usuario de la tabla");
+			return;
+		}
 		if (txtBuscarDni->Text == "") {
 			MessageBox::Show("ingrese un dni para buscar");
 			return;
@@ -751,6 +863,8 @@ namespace proyectoFacturacion {
 		usuario.habilitarUsuario(dni);
 
 		mostrarUsuariosActivos();
+		limpiarCamposUsuario();
+		
 		MessageBox::Show("Usuario habilitado");
 	}
 
@@ -758,5 +872,36 @@ namespace proyectoFacturacion {
 	System::Void btnProductoEnRegistrar_Click(System::Object^ sender, System::EventArgs^ e);
 	System::Void btnProveedorEnRegistrar_Click(System::Object^ sender, System::EventArgs^ e);
 	System::Void btnFacturacionEnRegistrar_Click(System::Object^ sender, System::EventArgs^ e);
+
+	private: System::Void tablaUsuarios_CellContentClick(System::Object^ sender, System::Windows::Forms::DataGridViewCellEventArgs^ e) {
+		if (e->RowIndex >= 0) {
+
+			DataGridViewRow^ fila = tablaUsuarios->Rows[e->RowIndex];
+
+			idUsuarioSeleccionado = Convert::ToInt32(fila->Cells[0]->Value);
+
+			txtNombre->Text = fila->Cells[1]->Value->ToString();
+			txtApellido->Text = fila->Cells[2]->Value->ToString();
+			txtEdad->Text = fila->Cells[3]->Value->ToString();
+			txtDni->Text = fila->Cells[4]->Value->ToString();
+			txtEmail->Text = fila->Cells[5]->Value->ToString();
+			comboRolUsuario->Text = fila->Cells[6]->Value->ToString();
+
+			btnActualizarUsuario->Enabled = true;
+
+			txtBuscarDni->Text = fila->Cells[4]->Value->ToString();
+
+			String^ estado = fila->Cells[7]->Value->ToString();
+
+			if (estado == "SI") {
+				btnDeshabilitarUsuario->Enabled = true;
+				bntHabilitarUsuario->Enabled = false;
+			}
+			else {
+				btnDeshabilitarUsuario->Enabled = false;
+				bntHabilitarUsuario->Enabled = true;
+			}
+		}
+	}
 };
 }

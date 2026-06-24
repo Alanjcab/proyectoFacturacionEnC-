@@ -20,6 +20,7 @@ public:
 	bool getActivo();
 	void altaDeCliente();
 	void buscarCliente(int dni);
+	bool existeClientePorDni(int dni);
 	void deshabilitarCliente(int dni);
 	void habilitarCliente(int dni);
 	void actualizarCliente(int idCliente, std::string nombre, std::string apellido, int dniCliente, std::string emailCliente);
